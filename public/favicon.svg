@@ -4,16 +4,12 @@
   
   <!-- Group shifted to center inside 32x32 -->
   <g transform="translate(3, 4)">
-    <!-- Official Proper Unbent Material Infinity -->
+    <!-- Official Proper Unbent Mathematical Infinity -->
     <path d="M18.6 6.62c-1.44 0-2.8.56-3.77 1.53L12 10.66 9.17 8.15C8.2 7.18 6.84 6.62 5.4 6.62 2.42 6.62 0 9.04 0 12.02s2.42 5.4 5.4 5.4c1.44 0 2.8-.56 3.77-1.53L12 13.38l2.83 2.51c.97.97 2.33 1.53 3.77 1.53 2.98 0 5.4-2.42 5.4-5.4s-2.42-5.4-5.4-5.4zm0 8.8c-1.03 0-1.95-.42-2.61-1.07L12 10.66l-3.99 3.69c-.66.65-1.58 1.07-2.61 1.07-2.02 0-3.66-1.64-3.66-3.4 0-1.76 1.64-3.4 3.66-3.4 1.03 0 1.95.42 2.61 1.07L12 13.38l3.99-3.69c.66-.65 1.58-1.07 2.61-1.07 2.02 0 3.66 1.64 3.66 3.4 0 1.76-1.64 3.4-3.66 3.4z" 
           fill="#ffffff"/>
     
-    <!-- Cute Bow Tie Knot on Right Side Loop -->
-    <path d="M 21.5,13 L 20,16.5 M 22.5,13 L 24,16.5" stroke="#f43f5e" stroke-width="1.1" stroke-linecap="round"/>
-    <path d="M 22,12 L 18.8,9.5 C 18.4,9.2 18,9.6 18,12 C 18,14.4 18.4,14.8 18.8,14.5 Z" 
-          fill="#f43f5e" stroke="#ffffff" stroke-width="0.7"/>
-    <path d="M 22,12 L 25.2,9.5 C 25.6,9.2 26,9.6 26,12 C 26,14.4 25.6,14.8 25.2,14.5 Z" 
-          fill="#f43f5e" stroke="#ffffff" stroke-width="0.7"/>
-    <circle cx="22" cy="12" r="1.2" fill="#ffffff"/>
+    <!-- Reddish Heart on Right Loop (slight down from previous position) -->
+    <path d="M 21.2,12.2 C 20.3,10.8 18.5,11.2 18.1,12.5 C 17.5,14.5 20.2,16.8 21.2,17.8 C 22.2,16.8 24.9,14.5 24.3,12.5 C 23.9,11.2 22.1,10.8 21.2,12.2 Z" 
+          fill="#e11d48" stroke="#ffffff" stroke-width="0.8" stroke-linejoin="round"/>
   </g>
 </svg>
