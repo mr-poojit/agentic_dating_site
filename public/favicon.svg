@@ -1,45 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 32" fill="none">
-  <!-- Solid Black Background -->
-  <rect width="48" height="32" rx="10" fill="#000000"/>
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Solid Black Rounded Background -->
+  <rect width="32" height="32" rx="8" fill="#000000"/>
+  
   <defs>
-    <!-- Left Loop: Golden Amber to Warm Tangerine Flame Ribbon -->
-    <linearGradient id="favGoldFlame" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fde047"/>
-      <stop offset="30%" stop-color="#f59e0b"/>
-      <stop offset="70%" stop-color="#ea580c"/>
-      <stop offset="100%" stop-color="#e11d48"/>
-    </linearGradient>
-
-    <!-- Right Loop: Fiery Magenta / Crimson to Ruby Rose -->
-    <linearGradient id="favCrimsonFlame" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ea580c"/>
-      <stop offset="25%" stop-color="#f43f5e"/>
-      <stop offset="70%" stop-color="#e11d48"/>
+    <!-- Reddish to Pinkish Gradient for Heart Border Outline -->
+    <linearGradient id="favHeartBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e"/>
       <stop offset="100%" stop-color="#fb7185"/>
-    </linearGradient>
-
-    <!-- Inner Core White Shimmer -->
-    <linearGradient id="favShimmer" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
-      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.3"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.8"/>
     </linearGradient>
   </defs>
 
-  <g transform="translate(1, 1)">
-    <!-- 1. LEFT GOLDEN LOOP: Infinity loop curves up-left, sweeps down and passes through center -->
-    <path d="M 23,15 C 18,7 9.5,7 4.5,12 C -0.5,17 2.5,23.5 9,24 C 15.5,24.5 19.5,19 23,15" 
-          stroke="url(#favGoldFlame)" stroke-width="2.6" stroke-linecap="round" fill="none"/>
-    <path d="M 23,15 C 18,7 9.5,7 4.5,12 C -0.5,17 2.5,23.5 9,24 C 15.5,24.5 19.5,19 23,15" 
-          stroke="url(#favShimmer)" stroke-width="0.9" stroke-linecap="round" fill="none"/>
-
-    <!-- 2. RIGHT CRIMSON LOOP TO HEART: From center crossing up-right, looping around to form the full heart -->
-    <!-- The outer top curve of the right loop arching over -->
-    <path d="M 23,15 C 27,10 33,8.5 38.5,11.5 C 41.5,13.5 42,17 38.5,20.5 L 37.2,21.8 C 36.8,21.5 35.8,18 37.2,15.5 C 38.8,12.5 42.5,12.5 44,15.5 C 45.2,17.8 44.5,21.2 38,27.5 C 32,21.5 30.5,17.5 32.2,15.2 C 33.8,13 37.2,13.5 37.5,17" 
-          stroke="url(#favCrimsonFlame)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    <!-- Delicate white neon filament highlight tracing the heart curves -->
-    <path d="M 23,15 C 27,10 33,8.5 38.5,11.5 C 41.5,13.5 42,17 38.5,20.5 L 37.2,21.8 C 36.8,21.5 35.8,18 37.2,15.5 C 38.8,12.5 42.5,12.5 44,15.5 C 45.2,17.8 44.5,21.2 38,27.5 C 32,21.5 30.5,17.5 32.2,15.2 C 33.8,13 37.2,13.5 37.5,17" 
-          stroke="#ffffff" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6"/>
+  <!-- Group shifted to center inside 32x32 -->
+  <g transform="translate(3, 4)">
+    <!-- Official Proper Unbent Mathematical Infinity -->
+    <path d="M18.6 6.62c-1.44 0-2.8.56-3.77 1.53L12 10.66 9.17 8.15C8.2 7.18 6.84 6.62 5.4 6.62 2.42 6.62 0 9.04 0 12.02s2.42 5.4 5.4 5.4c1.44 0 2.8-.56 3.77-1.53L12 13.38l2.83 2.51c.97.97 2.33 1.53 3.77 1.53 2.98 0 5.4-2.42 5.4-5.4s-2.42-5.4-5.4-5.4zm0 8.8c-1.03 0-1.95-.42-2.61-1.07L12 10.66l-3.99 3.69c-.66.65-1.58 1.07-2.61 1.07-2.02 0-3.66-1.64-3.66-3.4 0-1.76 1.64-3.4 3.66-3.4 1.03 0 1.95.42 2.61 1.07L12 13.38l3.99-3.69c.66-.65 1.58-1.07 2.61-1.07 2.02 0 3.66 1.64 3.66 3.4 0 1.76-1.64 3.4-3.66 3.4z" 
+          fill="#ffffff"/>
+    
+    <!-- Hollow / Empty Heart with Reddish-Pinkish Gradient Border -->
+    <path d="M 21.2,12.2 C 20.3,10.8 18.5,11.2 18.1,12.5 C 17.5,14.5 20.2,16.8 21.2,17.8 C 22.2,16.8 24.9,14.5 24.3,12.5 C 23.9,11.2 22.1,10.8 21.2,12.2 Z" 
+          fill="none" stroke="url(#favHeartBorder)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 </svg>

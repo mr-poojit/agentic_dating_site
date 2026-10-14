@@ -161,44 +161,22 @@
     <div class="h-20 max-w-[1240px] mx-auto px-margin-md lg:px-margin-lg flex items-center justify-between gap-space-md">
       <!-- Logo & Brand: WOVEN with Pure Black Background Infinity & Right Bow Tie -->
       <div class="flex items-center gap-3 cursor-pointer group" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-        <div class="w-11 h-11 rounded-xl bg-black flex items-center justify-center p-1.5 shadow-sm group-hover:scale-105 transition-transform">
-          <svg viewBox="0 0 50 34" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+        <div class="w-10 h-10 rounded-xl bg-black flex items-center justify-center p-1.5 shadow-sm group-hover:scale-105 transition-transform">
+          <svg viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
             <defs>
-              <!-- Left Loop: Golden Amber to Warm Flame Ribbon (matching reference image) -->
-              <linearGradient id="logoGoldFlame" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#fef08a"/>
-                <stop offset="25%" stop-color="#f59e0b"/>
-                <stop offset="70%" stop-color="#ea580c"/>
-                <stop offset="100%" stop-color="#e11d48"/>
-              </linearGradient>
-
-              <!-- Right Loop: Fiery Magenta / Crimson to Ruby Rose (matching reference image) -->
-              <linearGradient id="logoCrimsonFlame" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ea580c"/>
-                <stop offset="20%" stop-color="#f43f5e"/>
-                <stop offset="70%" stop-color="#e11d48"/>
+              <!-- Reddish to Pinkish Gradient for Heart Border -->
+              <linearGradient id="navHeartBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f43f5e"/>
                 <stop offset="100%" stop-color="#fb7185"/>
               </linearGradient>
-
-              <!-- Inner Core Shimmer -->
-              <linearGradient id="logoShimmer" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-                <stop offset="50%" stop-color="#ffffff" stop-opacity="0.3"/>
-                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.85"/>
-              </linearGradient>
             </defs>
-
-            <!-- 1. LEFT GOLDEN LOOP: Infinity curve in golden amber flame -->
-            <path d="M 24,16 C 18.5,7.5 9.5,7.5 4.5,12.5 C -0.5,17.5 2.5,24.5 9.5,25 C 16.5,25.5 20.5,19.5 24,16" 
-                  stroke="url(#logoGoldFlame)" stroke-width="2.8" stroke-linecap="round" fill="none"/>
-            <path d="M 24,16 C 18.5,7.5 9.5,7.5 4.5,12.5 C -0.5,17.5 2.5,24.5 9.5,25 C 16.5,25.5 20.5,19.5 24,16" 
-                  stroke="url(#logoShimmer)" stroke-width="1" stroke-linecap="round" fill="none"/>
-
-            <!-- 2. RIGHT CRIMSON HEART LOOP: Sweeps up-right and loops into heart at bottom-right -->
-            <path d="M 24,16 C 28.5,10.5 35,9 41,12 C 44.5,14 45,18 41,22 L 39.5,23.5 C 39,23 37.8,19 39.5,16.5 C 41.2,13.2 45.2,13.2 47,16.5 C 48.2,19 47.5,22.8 40.5,29.5 C 34,23 32.5,18.8 34.2,16.2 C 36,13.8 39.5,14.5 39.8,18.2" 
-                  stroke="url(#logoCrimsonFlame)" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            <path d="M 24,16 C 28.5,10.5 35,9 41,12 C 44.5,14 45,18 41,22 L 39.5,23.5 C 39,23 37.8,19 39.5,16.5 C 41.2,13.2 45.2,13.2 47,16.5 C 48.2,19 47.5,22.8 40.5,29.5 C 34,23 32.5,18.8 34.2,16.2 C 36,13.8 39.5,14.5 39.8,18.2" 
-                  stroke="#ffffff" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6"/>
+            <!-- Official Proper Unbent Mathematical Infinity (Exact standard geometry) -->
+            <path d="M18.6 6.62c-1.44 0-2.8.56-3.77 1.53L12 10.66 9.17 8.15C8.2 7.18 6.84 6.62 5.4 6.62 2.42 6.62 0 9.04 0 12.02s2.42 5.4 5.4 5.4c1.44 0 2.8-.56 3.77-1.53L12 13.38l2.83 2.51c.97.97 2.33 1.53 3.77 1.53 2.98 0 5.4-2.42 5.4-5.4s-2.42-5.4-5.4-5.4zm0 8.8c-1.03 0-1.95-.42-2.61-1.07L12 10.66l-3.99 3.69c-.66.65-1.58 1.07-2.61 1.07-2.02 0-3.66-1.64-3.66-3.4 0-1.76 1.64-3.4 3.66-3.4 1.03 0 1.95.42 2.61 1.07L12 13.38l3.99-3.69c.66-.65 1.58-1.07 2.61-1.07 2.02 0 3.66 1.64 3.66 3.4 0 1.76-1.64 3.4-3.66 3.4z" 
+                  fill="#ffffff"/>
+            
+            <!-- Heart with Reddish-Pinkish Border and Empty / Transparent Inside -->
+            <path d="M 21.2,12.2 C 20.3,10.8 18.5,11.2 18.1,12.5 C 17.5,14.5 20.2,16.8 21.2,17.8 C 22.2,16.8 24.9,14.5 24.3,12.5 C 23.9,11.2 22.1,10.8 21.2,12.2 Z" 
+                  fill="none" stroke="url(#navHeartBorder)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <div class="flex flex-col">
@@ -776,27 +754,19 @@
       <div class="flex flex-col items-center md:items-start gap-space-xs">
         <div class="flex items-center gap-2.5">
           <div class="w-8 h-8 rounded-lg bg-black flex items-center justify-center p-1 shadow-sm">
-            <svg viewBox="0 0 50 34" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+            <svg viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
               <defs>
-                <linearGradient id="footerGoldFlame" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#fef08a"/>
-                  <stop offset="25%" stop-color="#f59e0b"/>
-                  <stop offset="70%" stop-color="#ea580c"/>
-                  <stop offset="100%" stop-color="#e11d48"/>
-                </linearGradient>
-                <linearGradient id="footerCrimsonFlame" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ea580c"/>
-                  <stop offset="20%" stop-color="#f43f5e"/>
-                  <stop offset="70%" stop-color="#e11d48"/>
+                <linearGradient id="footerHeartBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#f43f5e"/>
                   <stop offset="100%" stop-color="#fb7185"/>
                 </linearGradient>
               </defs>
-              <!-- Left Golden Amber Flame Loop -->
-              <path d="M 24,16 C 18.5,7.5 9.5,7.5 4.5,12.5 C -0.5,17.5 2.5,24.5 9.5,25 C 16.5,25.5 20.5,19.5 24,16" 
-                    stroke="url(#footerGoldFlame)" stroke-width="2.8" stroke-linecap="round" fill="none"/>
-              <!-- Right Crimson Heart Loop -->
-              <path d="M 24,16 C 28.5,10.5 35,9 41,12 C 44.5,14 45,18 41,22 L 39.5,23.5 C 39,23 37.8,19 39.5,16.5 C 41.2,13.2 45.2,13.2 47,16.5 C 48.2,19 47.5,22.8 40.5,29.5 C 34,23 32.5,18.8 34.2,16.2 C 36,13.8 39.5,14.5 39.8,18.2" 
-                    stroke="url(#footerCrimsonFlame)" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <!-- Official Proper Unbent Mathematical Infinity (Exact standard geometry) -->
+              <path d="M18.6 6.62c-1.44 0-2.8.56-3.77 1.53L12 10.66 9.17 8.15C8.2 7.18 6.84 6.62 5.4 6.62 2.42 6.62 0 9.04 0 12.02s2.42 5.4 5.4 5.4c1.44 0 2.8-.56 3.77-1.53L12 13.38l2.83 2.51c.97.97 2.33 1.53 3.77 1.53 2.98 0 5.4-2.42 5.4-5.4s-2.42-5.4-5.4-5.4zm0 8.8c-1.03 0-1.95-.42-2.61-1.07L12 10.66l-3.99 3.69c-.66.65-1.58 1.07-2.61 1.07-2.02 0-3.66-1.64-3.66-3.4 0-1.76 1.64-3.4 3.66-3.4 1.03 0 1.95.42 2.61 1.07L12 13.38l3.99-3.69c.66-.65 1.58-1.07 2.61-1.07 2.02 0 3.66 1.64 3.66 3.4 0 1.76-1.64 3.4-3.66 3.4z" 
+                    fill="#ffffff"/>
+              <!-- Heart with Reddish-Pinkish Border and Empty / Transparent Inside -->
+              <path d="M 21.2,12.2 C 20.3,10.8 18.5,11.2 18.1,12.5 C 17.5,14.5 20.2,16.8 21.2,17.8 C 22.2,16.8 24.9,14.5 24.3,12.5 C 23.9,11.2 22.1,10.8 21.2,12.2 Z" 
+                    fill="none" stroke="url(#footerHeartBorder)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
           <span class="font-headline-sm text-headline-sm text-white font-black tracking-tight">
