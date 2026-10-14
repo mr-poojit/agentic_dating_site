@@ -1,4 +1,4 @@
-// server.js — ENTWINED Autonomous Agentic Dating Server
+// server.js — Woven Autonomous Agentic Dating Server
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
