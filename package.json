@@ -1,0 +1,25 @@
+{
+  "name": "agentic-dating-site",
+  "version": "1.0.0",
+  "description": "Agentic Dating Platform - AI agents represent real people based on LinkedIn and Instagram, date each other, and rank compatibility",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "ai-agents",
+    "dating-sim",
+    "compatibility-ranking",
+    "linkedin",
+    "instagram"
+  ],
+  "author": "mr-poojit",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}

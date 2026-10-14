@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synthetica Cupid — Autonomous Agentic Dating Platform</title>
+  <meta name="description" content="An agentic dating platform where AI agents analyze real LinkedIn and Instagram profiles, date on each person's behalf, and rank mutual compatibility.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+  <!-- Ambient background glow elements -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Header -->
+  <header class="navbar" id="main-header">
+    <div class="nav-container">
+      <div class="brand" id="brand-logo">
+        <div class="brand-badge">
+          <span class="brand-spark">✨</span>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">SYNTHETICA<span class="accent-text">CUPID</span></span>
+          <span class="brand-tagline">Autonomous Agentic Dating</span>
+        </div>
+      </div>
+
+      <nav class="nav-tabs" role="tablist">
+        <button class="nav-tab active" data-tab="profiles" id="tab-btn-profiles" role="tab">
+          <span class="tab-icon">👥</span>
+          <span class="tab-label">25+ Real People</span>
+          <span class="pill-count">26</span>
+        </button>
+        <button class="nav-tab" data-tab="arena" id="tab-btn-arena" role="tab">
+          <span class="tab-icon">🍷</span>
+          <span class="tab-label">Watch Agents Date</span>
+          <span class="live-dot" title="Live Agent Dating Sim"></span>
+        </button>
+        <button class="nav-tab" data-tab="rankings" id="tab-btn-rankings" role="tab">
+          <span class="tab-icon">🏆</span>
+          <span class="tab-label">Compatibility Rankings</span>
+        </button>
+        <button class="nav-tab nav-tab-cta" data-tab="analyze" id="tab-btn-analyze" role="tab">
+          <span class="tab-icon">⚡</span>
+          <span class="tab-label">Add Person (Links)</span>
+        </button>
+      </nav>
+
+      <div class="header-actions">
+        <button class="sound-toggle-btn" id="btn-toggle-sound" title="Toggle Ambient Audio Chimes">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <a href="#quick-demo" class="btn btn-sm btn-outline" id="btn-quick-run-demo">
+          ⚡ 1-Click Demo
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-content">
+    
+    <!-- Hero Banner -->
+    <section class="hero-strip" id="hero-banner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="pulse-indicator"></span> 
+          <span>Autonomous Dating Harness · Official LinkedIn + Instagram Analysis</span>
+        </div>
+        <h1 class="hero-title">Your Agent Dates for You. <span class="gradient-text">The Agents Date Each Other.</span></h1>
+        <p class="hero-subtitle">
+          Each person is represented by an AI agent trained exclusively on two official sources: 
+          their <strong>LinkedIn</strong> (career ethos & ambition) and their public <strong>Instagram</strong> (aesthetic & lifestyle). 
+          Watch them go out, test values, and compute mutual rankings.
+        </p>
+        
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">26</span>
+            <span class="stat-label">Verified Real People</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">52</span>
+            <span class="stat-label">Official Social Profiles</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">325</span>
+            <span class="stat-label">Pairwise Agent Dates</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Autonomous Synthesis</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 1: PROFILES ROSTER -->
+    <section class="tab-panel active" id="panel-profiles" role="tabpanel">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title">Real People & Agent Analysis</h2>
+          <p class="panel-desc">26 verified public leaders and creators. Click any profile to inspect the agent's extraction of their needs, hobbies, and interests from LinkedIn and Instagram.</p>
+        </div>
+        <div class="filter-controls">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="input-search-profiles" placeholder="Search by name, role, city...">
+          </div>
+          <div class="filter-pills" id="filter-pills-container">
+            <button class="pill active" data-filter="all">All (26)</button>
+            <button class="pill" data-filter="founders">Founders & CEOs</button>
+            <button class="pill" data-filter="tech">AI & Tech</button>
+            <button class="pill" data-filter="creators">Creators & Culture</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profiles Grid -->
+      <div class="profiles-grid" id="profiles-grid">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- TAB 2: AGENT DATE ARENA -->
+    <section class="tab-panel" id="panel-arena" role="tabpanel">
+      <div class="arena-container">
+        <!-- Arena Control Header -->
+        <div class="arena-header">
+          <div class="arena-title-group">
+            <div class="live-pill">
+              <span class="pulse-dot"></span> LIVE DATE THEATER
+            </div>
+            <h2 class="arena-title">Autonomous Date in Progress</h2>
+            <p class="arena-venue" id="arena-venue-text">
+              📍 <span id="venue-name">The Presidio Glass House</span> · <span id="venue-city">San Francisco</span> 
+              <span class="venue-vibe" id="venue-vibe">(Floor-to-ceiling glass, fog rolling through Monterey pines, glowing amber hearth)</span>
+            </p>
+          </div>
+
+          <div class="arena-selectors">
+            <div class="select-agent-wrapper">
+              <label for="select-agent-1">Agent 1</label>
+              <select id="select-agent-1" class="agent-dropdown"></select>
+            </div>
+            <div class="vs-badge">VS</div>
+            <div class="select-agent-wrapper">
+              <label for="select-agent-2">Agent 2</label>
+              <select id="select-agent-2" class="agent-dropdown"></select>
+            </div>
+            <button class="btn btn-primary" id="btn-start-date">
+              <span>▶ Run Live Date</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- The Date Stage (Visual Bistro Lounge) -->
+        <div class="date-stage">
+          <!-- Person 1 Avatar Pod -->
+          <div class="agent-pod pod-left" id="pod-agent-1">
+            <div class="pod-avatar-wrapper">
+              <img src="" alt="" class="pod-avatar" id="pod-1-avatar">
+              <span class="pod-status-badge" id="pod-1-status">Speaking</span>
+            </div>
+            <div class="pod-info">
+              <h3 class="pod-name" id="pod-1-name">Sam Altman</h3>
+              <p class="pod-role" id="pod-1-role">CEO at OpenAI</p>
+              <div class="pod-social-badges">
+                <span class="mini-badge">💼 LinkedIn Analyzed</span>
+                <span class="mini-badge">📸 Instagram Analyzed</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Central Chemistry & Audio Visualizer -->
+          <div class="stage-center">
+            <div class="chemistry-meter-container">
+              <div class="chemistry-label">MUTUAL CHEMISTRY</div>
+              <div class="chemistry-gauge">
+                <div class="chemistry-bar" id="chemistry-bar" style="width: 50%;"></div>
+              </div>
+              <div class="chemistry-value" id="chemistry-value">75%</div>
+            </div>
+
+            <div class="playback-controls">
+              <button class="control-btn" id="btn-date-play-pause" title="Play/Pause Date">⏸</button>
+              <button class="control-btn" id="btn-date-step" title="Next Line">⏭</button>
+              <button class="control-btn" id="btn-date-replay" title="Replay Date">🔄</button>
+              <div class="speed-toggle">
+                <button class="speed-btn active" data-speed="1">1x</button>
+                <button class="speed-btn" data-speed="2">2x</button>
+                <button class="speed-btn" data-speed="0">Instant</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Person 2 Avatar Pod -->
+          <div class="agent-pod pod-right" id="pod-agent-2">
+            <div class="pod-avatar-wrapper">
+              <img src="" alt="" class="pod-avatar" id="pod-2-avatar">
+              <span class="pod-status-badge" id="pod-2-status">Listening</span>
+            </div>
+            <div class="pod-info">
+              <h3 class="pod-name" id="pod-2-name">Mira Murati</h3>
+              <p class="pod-role" id="pod-2-role">AI Founder & Technologist</p>
+              <div class="pod-social-badges">
+                <span class="mini-badge">💼 LinkedIn Analyzed</span>
+                <span class="mini-badge">📸 Instagram Analyzed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Dialogue & Agent Thought Stream -->
+        <div class="dialogue-card">
+          <div class="dialogue-card-header">
+            <div class="dialogue-header-left">
+              <span class="dialogue-stream-title">🎙️ Live Conversation & Cognition Feed</span>
+              <span class="dialogue-counter" id="dialogue-counter">Turn 1 of 6</span>
+            </div>
+            <div class="dialogue-legend">
+              <span class="legend-item"><span class="legend-dot dot-thought"></span> Internal Agent Monologue</span>
+              <span class="legend-item"><span class="legend-dot dot-speech"></span> Spoken Dialogue</span>
+            </div>
+          </div>
+
+          <div class="dialogue-feed" id="dialogue-feed">
+            <!-- Rendered line by line with thinking bubbles -->
+          </div>
+
+          <!-- Post-Date Verdict Banner -->
+          <div class="verdict-banner" id="verdict-banner" style="display: none;">
+            <div class="verdict-icon">💖</div>
+            <div class="verdict-body">
+              <h4 class="verdict-title" id="verdict-title">Date Completed · Second Date Guaranteed!</h4>
+              <p class="verdict-desc" id="verdict-desc">
+                High alignment between Sam's Big Sur aesthetic and Mira's classical precision. Both agents independently voted for a follow-up date.
+              </p>
+            </div>
+            <div class="verdict-score" id="verdict-final-score">96% Fit</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: RANKINGS MATRIX -->
+    <section class="tab-panel" id="panel-rankings" role="tabpanel">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title">Compatibility Rankings</h2>
+          <p class="panel-desc">For every person in the network, the dating harness evaluates all candidates and ranks who fits them best based on LinkedIn career synergy and Instagram lifestyle harmony.</p>
+        </div>
+
+        <!-- Person Selector for Rankings -->
+        <div class="rankings-selector-wrapper">
+          <label for="select-ranking-person" class="ranking-label">Show Rankings For:</label>
+          <select id="select-ranking-person" class="agent-dropdown person-picker"></select>
+        </div>
+      </div>
+
+      <!-- Selected Person Summary Bar -->
+      <div class="person-ranking-hero" id="person-ranking-hero">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Rankings Table / Card List -->
+      <div class="rankings-table-container">
+        <table class="rankings-table">
+          <thead>
+            <tr>
+              <th style="width: 80px;">Rank</th>
+              <th>Candidate</th>
+              <th>Official Links</th>
+              <th style="width: 140px;">Fit Score</th>
+              <th>Synergy Breakdown (LinkedIn + Instagram)</th>
+              <th style="width: 150px;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="rankings-table-body">
+            <!-- Dynamic rows -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Top Power Matches Across Network -->
+      <div class="power-matches-section">
+        <h3 class="section-heading">🔥 Top 5 Power Matches Across the Network</h3>
+        <div class="power-matches-grid" id="power-matches-grid">
+          <!-- Top pairs preview -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: ADD PERSON & LIVE ANALYZE -->
+    <section class="tab-panel" id="panel-analyze" role="tabpanel">
+      <div class="analyzer-container">
+        <div class="analyzer-card">
+          <div class="analyzer-header">
+            <span class="analyzer-badge">⚡ Live Extraction Pipeline</span>
+            <h2 class="analyzer-title">Deploy a New Person into the Dating Network</h2>
+            <p class="analyzer-subtitle">
+              Input any person's name, public LinkedIn profile, and public Instagram handle. 
+              Our agent scraping pipeline will read both profiles, distill their needs, hobbies, and interests, and immediately rank them against all 26 existing candidates.
+            </p>
+          </div>
+
+          <form id="form-add-person" class="analyzer-form">
+            <div class="form-group">
+              <label for="input-person-name">Full Name <span class="required">*</span></label>
+              <input type="text" id="input-person-name" placeholder="e.g. Elena Rostova" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="input-person-linkedin">
+                  Official LinkedIn Public Profile <span class="required">*</span>
+                </label>
+                <div class="input-with-icon">
+                  <span class="input-icon">💼</span>
+                  <input type="url" id="input-person-linkedin" placeholder="https://www.linkedin.com/in/elena-rostova" required>
+                </div>
+                <span class="form-hint">Extracts career ethos, professional ambition, leadership style</span>
+              </div>
+
+              <div class="form-group">
+                <label for="input-person-instagram">
+                  Official Public Instagram Profile <span class="required">*</span>
+                </label>
+                <div class="input-with-icon">
+                  <span class="input-icon">📸</span>
+                  <input type="url" id="input-person-instagram" placeholder="https://www.instagram.com/elenarostova" required>
+                </div>
+                <span class="form-hint">Extracts aesthetic vibe, travel spots, weekend rituals, culinary taste</span>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary btn-lg" id="btn-submit-scrape">
+                <span class="btn-spinner" id="scrape-spinner" style="display: none;">⏳</span>
+                <span id="btn-submit-text">🚀 Scrape, Analyze & Deploy Agent</span>
+              </button>
+              <button type="button" class="btn btn-secondary" id="btn-autofill-sample">
+                <span>🪄 Fill Sample URLs</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Terminal Log Output -->
+          <div class="scraper-terminal" id="scraper-terminal" style="display: none;">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <span class="terminal-title">AGENT SCRAPER ENGINE · REAL-TIME STREAMS</span>
+            </div>
+            <div class="terminal-body" id="terminal-log-stream">
+              <!-- Logs stream in real time -->
+            </div>
+          </div>
+
+          <!-- Dynamic Result Preview -->
+          <div class="new-agent-result" id="new-agent-result" style="display: none;">
+            <!-- Rendered after successful scrape -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: PROFILE INSPECTION DETAILS -->
+  <div class="modal-backdrop" id="profile-modal" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-badge">
+          <span>AI AGENT PERSONA BLUEPRINT</span>
+        </div>
+        <button class="modal-close-btn" id="btn-close-modal">✕</button>
+      </div>
+
+      <div class="modal-content" id="modal-profile-content">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="brand-title">SYNTHETICA<span class="accent-text">CUPID</span></span>
+        <p class="footer-tagline">The agentic dating site where agents date on real people's behalf based exclusively on LinkedIn and Instagram.</p>
+      </div>
+      <div class="footer-meta">
+        <div class="footer-links">
+          <span>Official 25+ Real People Roster</span> · 
+          <span>Autonomous Date Theater</span> · 
+          <span>25x25 Match Rankings</span>
+        </div>
+        <p class="footer-copy">© 2026 Synthetica Cupid. Built for the 3-hour agentic dating benchmark.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
