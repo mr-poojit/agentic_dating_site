@@ -81,7 +81,6 @@ async function initAura() {
   }
 
   console.log(`Loaded ${candidates.length} candidates.`);
-  renderLeaderboard();
   renderCandidate(0);
 }
 
@@ -209,74 +208,12 @@ function renderCandidate(index) {
       consensusEl.innerHTML = `<span class="material-symbols-outlined text-purple-700 text-[16px]">celebration</span> Both autonomous agents agree: ${c.dialogue?.consensus || c.consensus || 'High physical & intellectual chemistry'}`;
     }
 
-    // Update active highlight on candidate cards
-    document.querySelectorAll('.candidate-card').forEach((el, i) => {
-      const statusText = el.querySelector('.active-status-text');
-      if (i === index) {
-        el.classList.add('border-indigo-600', 'ring-2', 'ring-indigo-200', 'shadow-lg');
-        el.classList.remove('border-slate-200/80');
-        if (statusText) {
-          statusText.className = "active-status-text font-label-sm text-label-sm text-indigo-600 font-bold flex items-center gap-0.5";
-          statusText.innerHTML = '<span class="material-symbols-outlined text-[14px]">play_circle</span> Active In Date';
-        }
-      } else {
-        el.classList.remove('border-indigo-600', 'ring-2', 'ring-indigo-200', 'shadow-lg');
-        el.classList.add('border-slate-200/80');
-        if (statusText) {
-          statusText.className = "active-status-text font-label-sm text-label-sm text-slate-500 font-medium";
-          statusText.textContent = 'Click to Swap';
-        }
-      }
-    });
-
     if (card) {
       card.style.opacity = '1';
       card.style.transform = 'scale(1)';
     }
     if (chat) chat.style.opacity = '1';
   }, 160);
-}
-
-// Render candidate leaderboard
-function renderLeaderboard() {
-  const container = document.getElementById('candidateCardsContainer');
-  if (!container) return;
-
-  container.innerHTML = candidates.map((c, idx) => {
-    const isCustom = c.isUserCustom || c.rankPill?.includes('YOUR PROFILE');
-    const borderClass = isCustom 
-      ? 'border-2 border-purple-600 ring-2 ring-purple-300 shadow-xl bg-gradient-to-br from-indigo-50/70 via-purple-50/50 to-pink-50/40'
-      : (idx === currentIndex ? 'border-2 border-indigo-600 ring-2 ring-indigo-200 shadow-md' : 'border border-slate-200/80 hover:border-purple-300');
-    
-    const pillBadge = isCustom
-      ? `<span class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-label-sm text-[11px] font-extrabold shadow-sm">⭐ YOUR PROFILE</span>`
-      : `<span class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full ${idx === 0 ? 'bg-indigo-600 text-white' : 'bg-purple-100 text-purple-900'} font-label-sm text-[11px] font-extrabold shadow-sm">${c.rankPill || c.rank || `#${idx + 1} MATCH`}</span>`;
-
-    return `
-    <div class="candidate-card bg-white rounded-2xl p-space-sm shadow-md ${borderClass} flex flex-col relative group hover:shadow-xl transition-all cursor-pointer" data-candidate-id="${idx}" onclick="selectCandidate(${idx})">
-      <div class="relative h-44 rounded-xl overflow-hidden mb-space-xs">
-        <img alt="${c.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${c.image || c.avatar}"/>
-        ${pillBadge}
-        <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded-full bg-slate-900/80 text-white font-label-sm text-[11px] font-bold backdrop-blur-sm">${c.resonance || '94%'} Sync</span>
-      </div>
-      <div class="px-space-xs pb-space-xs flex flex-col flex-1 justify-between">
-        <div>
-          <div class="flex items-center justify-between">
-            <h4 class="font-headline-sm text-headline-sm font-bold text-slate-900 leading-snug">${c.nameAge || c.name}</h4>
-            ${isCustom ? '<span class="text-[9px] font-black px-1.5 py-0.5 rounded-full bg-purple-100 text-purple-800 border border-purple-200">YOU</span>' : ''}
-          </div>
-          <p class="font-body-sm text-body-sm text-slate-500 truncate mt-0.5">${c.role}</p>
-        </div>
-        <div class="mt-space-sm pt-space-xs flex items-center justify-between border-t border-slate-100">
-          <span class="active-status-text font-label-sm text-label-sm ${idx === currentIndex ? 'text-indigo-600 font-bold' : 'text-slate-500 font-medium'}">
-            ${idx === currentIndex ? '<span class="material-symbols-outlined text-[14px]">play_circle</span> Active In Date' : 'Click to Swap'}
-          </span>
-          <span class="material-symbols-outlined text-slate-400 group-hover:text-purple-600 text-[18px]">swap_horiz</span>
-        </div>
-      </div>
-    </div>
-    `;
-  }).join('');
 }
 
 // Select candidate card
@@ -326,22 +263,43 @@ async function startIngestionProcess() {
   const percentEl = document.getElementById('ingestionPercent');
   const barFill = document.getElementById('progressBarFill');
   const subStatus = document.getElementById('ingestionSubStatus');
+  const avatarImg = document.getElementById('decodingAvatarImg');
+  const laser = document.getElementById('scannerLaser');
+  const logEl = document.getElementById('decodingLog');
+  const nameBadge = document.getElementById('decodingCandidateName');
+  const linksSummary = document.getElementById('decodingLinksSummary');
+  const statusPill = document.getElementById('decodingStatusPill');
 
   if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
 
-  [1, 2, 3, 4].forEach(i => {
-    const step = document.getElementById(`stepItem${i}`);
-    if (step) {
-      step.classList.add('opacity-40');
-      step.querySelector('.step-check')?.classList.add('hidden');
-    }
-  });
-
-  const step1 = document.getElementById('stepItem1');
-  if (step1) step1.classList.remove('opacity-40');
-  if (barFill) barFill.style.width = '25%';
-  if (percentEl) percentEl.textContent = '25%';
-  if (subStatus) subStatus.textContent = `Connecting to LinkedIn: ${li}...`;
+  if (nameBadge) {
+    nameBadge.innerHTML = `<span>${inferredName}</span><span class="material-symbols-outlined text-cyan-400 text-[18px]">verified</span>`;
+  }
+  if (linksSummary) {
+    linksSummary.textContent = `${ig.replace('https://', '').replace('http://', '')} • ${li.replace('https://', '').replace('http://', '')}`;
+  }
+  if (avatarImg) {
+    avatarImg.style.filter = 'blur(16px) contrast(140%)';
+  }
+  if (laser) {
+    laser.style.display = 'block';
+    laser.style.top = '15%';
+  }
+  if (statusPill) {
+    statusPill.className = "absolute bottom-1.5 inset-x-2 text-[9px] font-mono font-black text-center py-0.5 rounded bg-black/80 text-cyan-300 border border-cyan-500/30 backdrop-blur-xs";
+    statusPill.textContent = "BIOMETRIC_DECODE: ACTIVE";
+  }
+  if (logEl) {
+    logEl.innerHTML = `
+      <div class="text-cyan-400 flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
+        <span>> [SOCKET_OPEN] Scraping daemon connected to official endpoints...</span>
+      </div>
+    `;
+  }
+  if (barFill) barFill.style.width = '15%';
+  if (percentEl) percentEl.textContent = '15%';
+  if (subStatus) subStatus.textContent = `Connecting to ${li}...`;
 
   const scrapePromise = fetch('/api/scrape', {
     method: 'POST',
@@ -350,34 +308,61 @@ async function startIngestionProcess() {
   }).catch(() => null);
 
   setTimeout(() => {
-    document.getElementById('stepItem1')?.querySelector('.step-check')?.classList.remove('hidden');
-    document.getElementById('stepItem2')?.classList.remove('opacity-40');
-    if (barFill) barFill.style.width = '55%';
-    if (percentEl) percentEl.textContent = '55%';
-    if (subStatus) subStatus.textContent = `Analyzing somatic aesthetic rhythms on ${ig}...`;
+    if (barFill) barFill.style.width = '35%';
+    if (percentEl) percentEl.textContent = '35%';
+    if (subStatus) subStatus.textContent = 'Decoding LinkedIn career vector and intellectual boundaries...';
+    if (avatarImg) avatarImg.style.filter = 'blur(11px) contrast(125%)';
+    if (laser) laser.style.top = '45%';
+    if (logEl) {
+      logEl.innerHTML += `<div class="text-indigo-300">> [LINKEDIN_VECTOR] Ambition index, work cadence & intellectual ethos extracted</div>`;
+      logEl.scrollTop = logEl.scrollHeight;
+    }
 
     setTimeout(() => {
-      document.getElementById('stepItem2')?.querySelector('.step-check')?.classList.remove('hidden');
-      document.getElementById('stepItem3')?.classList.remove('opacity-40');
-      if (barFill) barFill.style.width = '80%';
-      if (percentEl) percentEl.textContent = '80%';
-      if (subStatus) subStatus.textContent = 'Synthesizing emotional tensor, core needs, and conversation cadence...';
+      if (barFill) barFill.style.width = '65%';
+      if (percentEl) percentEl.textContent = '65%';
+      if (subStatus) subStatus.textContent = `Analyzing somatic aesthetic vibes and frequency on ${ig}...`;
+      if (avatarImg) avatarImg.style.filter = 'blur(6px) contrast(115%)';
+      if (laser) laser.style.top = '75%';
+      if (logEl) {
+        logEl.innerHTML += `<div class="text-pink-300">> [INSTAGRAM_SOMATIC] Color frequencies, weekend rhythm & presence tokens resolved</div>`;
+        logEl.scrollTop = logEl.scrollHeight;
+      }
 
-      setTimeout(async () => {
-        document.getElementById('stepItem3')?.querySelector('.step-check')?.classList.remove('hidden');
-        document.getElementById('stepItem4')?.classList.remove('opacity-40');
-        if (barFill) barFill.style.width = '100%';
-        if (percentEl) percentEl.textContent = '100%';
-        if (subStatus) subStatus.textContent = `Deploying ${inferredName}'s proxy into Cohort #142! Running 25 speed dates...`;
+      setTimeout(() => {
+        if (barFill) barFill.style.width = '85%';
+        if (percentEl) percentEl.textContent = '85%';
+        if (subStatus) subStatus.textContent = 'Synthesizing conversational tensor & psychometric weights...';
+        if (avatarImg) avatarImg.style.filter = 'blur(2.5px) contrast(105%)';
+        if (laser) laser.style.top = '30%';
+        if (logEl) {
+          logEl.innerHTML += `<div class="text-purple-300">> [AI_SYNTHESIZER] Background Claude/GPT-4o neural matchmaking weights calibrated</div>`;
+          logEl.scrollTop = logEl.scrollHeight;
+        }
 
-        const apiRes = await scrapePromise;
-        const apiData = apiRes ? await apiRes.json().catch(() => null) : null;
-
-        setTimeout(() => {
-          document.getElementById('stepItem4')?.querySelector('.step-check')?.classList.remove('hidden');
+        setTimeout(async () => {
+          const apiRes = await scrapePromise;
+          const apiData = apiRes ? await apiRes.json().catch(() => null) : null;
 
           const finalName = apiData?.profile?.name || inferredName;
           const userAvatar = apiData?.profile?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80";
+
+          if (avatarImg) {
+            avatarImg.src = userAvatar;
+            avatarImg.style.filter = 'blur(0px) contrast(100%)';
+          }
+          if (laser) laser.style.display = 'none';
+          if (statusPill) {
+            statusPill.className = "absolute bottom-1.5 inset-x-2 text-[9px] font-mono font-black text-center py-0.5 rounded bg-emerald-500 text-white shadow-md";
+            statusPill.textContent = "✦ AGENT SYNTHESIZED & CERTIFIED";
+          }
+          if (barFill) barFill.style.width = '100%';
+          if (percentEl) percentEl.textContent = '100%';
+          if (subStatus) subStatus.textContent = `Deployment complete! ${finalName}'s proxy is active in Date Chamber.`;
+          if (logEl) {
+            logEl.innerHTML += `<div class="text-emerald-400 font-bold">> [SUCCESS] Persona certified! Ready for speed date protocol</div>`;
+            logEl.scrollTop = logEl.scrollHeight;
+          }
 
           const newCand = apiData?.auraCandidate || {
             id: apiData?.profile?.id || `user-custom-${Date.now()}`,
@@ -418,8 +403,8 @@ async function startIngestionProcess() {
               round: `Round 1 of 26: Autonomous Speed-Date with Top Match`,
               turn: "Turn 6 of 8 • Active Convergence",
               userMsg1: `Reviewing your two profiles, your professional focus paired with intentional downtime shows deep balance. What is essential for you in partnership?`,
-              matchAgentName: `${candidates[0]?.name || 'Maya'}'s Proxy`,
-              matchAvatar: (candidates[0]?.name || 'M').charAt(0),
+              matchAgentName: `${candidates[0]?.name || 'Candidate'}'s Proxy`,
+              matchAvatar: (candidates[0]?.name || 'C').charAt(0),
               matchMsg: `Authentic presence and mutual autonomy. When two people have their own passions, coming together is effortless.`,
               userMsg2: `Complete resonance. High standards, shared laughter, zero pretense. Match confirmed.`,
               consensus: `Both autonomous proxies agree: Electric Chemistry (96% Harmonic Sync)`
@@ -441,20 +426,19 @@ async function startIngestionProcess() {
           };
 
           updateUserProxyLabels();
-          renderLeaderboard();
           renderCandidate(0);
 
           setTimeout(() => {
             if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
-            showToast(`✨ ${finalName}'s profile added to Verified Roster & Proxy deployed!`);
-            const rosterEl = document.getElementById('cohort-roster');
-            if (rosterEl) rosterEl.scrollIntoView({ behavior: 'smooth' });
-          }, 650);
+            showToast(`✨ ${finalName}'s AI Proxy is live in the Date Chamber!`);
+            const chamberEl = document.getElementById('live-speed-date-section');
+            if (chamberEl) chamberEl.scrollIntoView({ behavior: 'smooth' });
+          }, 850);
 
-        }, 600);
-      }, 600);
-    }, 600);
-  }, 600);
+        }, 700);
+      }, 700);
+    }, 700);
+  }, 500);
 }
 
 // Meetup Modal
