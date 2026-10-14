@@ -1,20 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
   <!-- Solid Black Rounded Background -->
-  <rect width="64" height="64" rx="16" fill="#000000"/>
+  <rect width="32" height="32" rx="8" fill="#000000"/>
   
-  <!-- Classic Symmetrical White Infinity Symbol -->
-  <path d="M 28,32 C 20,22 8,22 4,32 C 0,42 12,42 28,32 C 44,22 56,22 52,32 C 48,42 36,42 28,32 Z" 
-        stroke="#ffffff" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  
-  <!-- Cute Bow Tie Knot on Right Side Loop -->
-  <!-- Left Wing -->
-  <path d="M 50.5,32 L 44,27 C 43.2,26.4 42.5,27.2 42.5,32 C 42.5,36.8 43.2,37.6 44,37 Z" 
-        fill="#f43f5e" stroke="#ffffff" stroke-width="1.2"/>
-  <!-- Right Wing -->
-  <path d="M 50.5,32 L 57,27 C 57.8,26.4 58.5,27.2 58.5,32 C 58.5,36.8 57.8,37.6 57,37 Z" 
-        fill="#f43f5e" stroke="#ffffff" stroke-width="1.2"/>
-  <!-- Center Knot -->
-  <rect x="49" y="29.2" width="3" height="5.6" rx="1.5" fill="#ffffff"/>
-  <!-- Ribbon Tails -->
-  <path d="M 49.5,34 L 46.5,41 M 51.5,34 L 54.5,41" stroke="#f43f5e" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Group shifted to center inside 32x32 -->
+  <g transform="translate(3, 4)">
+    <!-- Official Proper Unbent Material Infinity -->
+    <path d="M18.6 6.62c-1.44 0-2.8.56-3.77 1.53L12 10.66 9.17 8.15C8.2 7.18 6.84 6.62 5.4 6.62 2.42 6.62 0 9.04 0 12.02s2.42 5.4 5.4 5.4c1.44 0 2.8-.56 3.77-1.53L12 13.38l2.83 2.51c.97.97 2.33 1.53 3.77 1.53 2.98 0 5.4-2.42 5.4-5.4s-2.42-5.4-5.4-5.4zm0 8.8c-1.03 0-1.95-.42-2.61-1.07L12 10.66l-3.99 3.69c-.66.65-1.58 1.07-2.61 1.07-2.02 0-3.66-1.64-3.66-3.4 0-1.76 1.64-3.4 3.66-3.4 1.03 0 1.95.42 2.61 1.07L12 13.38l3.99-3.69c.66-.65 1.58-1.07 2.61-1.07 2.02 0 3.66 1.64 3.66 3.4 0 1.76-1.64 3.4-3.66 3.4z" 
+          fill="#ffffff"/>
+    
+    <!-- Cute Bow Tie Knot on Right Side Loop -->
+    <path d="M 21.5,13 L 20,16.5 M 22.5,13 L 24,16.5" stroke="#f43f5e" stroke-width="1.1" stroke-linecap="round"/>
+    <path d="M 22,12 L 18.8,9.5 C 18.4,9.2 18,9.6 18,12 C 18,14.4 18.4,14.8 18.8,14.5 Z" 
+          fill="#f43f5e" stroke="#ffffff" stroke-width="0.7"/>
+    <path d="M 22,12 L 25.2,9.5 C 25.6,9.2 26,9.6 26,12 C 26,14.4 25.6,14.8 25.2,14.5 Z" 
+          fill="#f43f5e" stroke="#ffffff" stroke-width="0.7"/>
+    <circle cx="22" cy="12" r="1.2" fill="#ffffff"/>
+  </g>
 </svg>
