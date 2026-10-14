@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Solid Black Rounded Background -->
+  <rect width="64" height="64" rx="16" fill="#000000"/>
+  
+  <!-- Classic Symmetrical White Infinity Symbol -->
+  <path d="M 28,32 C 20,22 8,22 4,32 C 0,42 12,42 28,32 C 44,22 56,22 52,32 C 48,42 36,42 28,32 Z" 
+        stroke="#ffffff" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Cute Bow Tie Knot on Right Side Loop -->
+  <!-- Left Wing -->
+  <path d="M 50.5,32 L 44,27 C 43.2,26.4 42.5,27.2 42.5,32 C 42.5,36.8 43.2,37.6 44,37 Z" 
+        fill="#f43f5e" stroke="#ffffff" stroke-width="1.2"/>
+  <!-- Right Wing -->
+  <path d="M 50.5,32 L 57,27 C 57.8,26.4 58.5,27.2 58.5,32 C 58.5,36.8 57.8,37.6 57,37 Z" 
+        fill="#f43f5e" stroke="#ffffff" stroke-width="1.2"/>
+  <!-- Center Knot -->
+  <rect x="49" y="29.2" width="3" height="5.6" rx="1.5" fill="#ffffff"/>
+  <!-- Ribbon Tails -->
+  <path d="M 49.5,34 L 46.5,41 M 51.5,34 L 54.5,41" stroke="#f43f5e" stroke-width="1.8" stroke-linecap="round"/>
+</svg>
