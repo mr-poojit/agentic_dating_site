@@ -2,3 +2,8 @@ node_modules/
 .DS_Store
 *.log
 .env
+
+# Sensitive Stitch designs and API scripts
+stitch_designs/
+scripts/stitch-client.js
+scripts/download-stitch-screens.js

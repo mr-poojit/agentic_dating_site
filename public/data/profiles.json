@@ -2,7 +2,7 @@
   {
     "id": "sam-altman",
     "name": "Sam Altman",
-    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Sam_Altman_TechCrunch_Disrupt_2019_%28cropped%29.jpg/800px-Sam_Altman_TechCrunch_Disrupt_2019_%28cropped%29.jpg",
     "role": "CEO at OpenAI",
     "location": "San Francisco, CA",
     "gender": "male",
@@ -68,7 +68,7 @@
   {
     "id": "mira-murati",
     "name": "Mira Murati",
-    "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&h=400&q=80",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Mira_Murati_2023.jpg/800px-Mira_Murati_2023.jpg",
     "role": "AI Founder & Technologist (ex-CTO OpenAI)",
     "location": "San Francisco & New York",
     "gender": "female",
@@ -133,7 +133,7 @@
   {
     "id": "alexis-ohanian",
     "name": "Alexis Ohanian",
-    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=400&q=80",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Alexis_Ohanian_by_Gage_Skidmore.jpg/800px-Alexis_Ohanian_by_Gage_Skidmore.jpg",
     "role": "Founder at Seven Seven Six · Co-Founder Reddit",
     "location": "Miami & Los Angeles",
     "gender": "male",
@@ -197,7 +197,7 @@
   {
     "id": "marques-brownlee",
     "name": "Marques Brownlee",
-    "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&h=400&q=80",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Marques_Brownlee_2022_%28cropped%29.jpg/800px-Marques_Brownlee_2022_%28cropped%29.jpg",
     "role": "Creator, Producer & Pro Ultimate Frisbee Player",
     "location": "New Jersey & New York",
     "gender": "male",
@@ -261,7 +261,7 @@
   {
     "id": "whitney-wolfe-herd",
     "name": "Whitney Wolfe Herd",
-    "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&h=400&q=80",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Whitney_Wolfe_Herd_at_SXSW_2018_%28cropped%29.jpg/800px-Whitney_Wolfe_Herd_at_SXSW_2018_%28cropped%29.jpg",
     "role": "Founder & Executive Chair at Bumble",
     "location": "Austin, TX",
     "gender": "female",
@@ -325,7 +325,7 @@
   {
     "id": "brian-chesky",
     "name": "Brian Chesky",
-    "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&h=400&q=80",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Brian_Chesky_at_the_2024_Milken_Institute_Global_Conference.jpg/800px-Brian_Chesky_at_the_2024_Milken_Institute_Global_Conference.jpg",
     "role": "Co-Founder & CEO at Airbnb",
     "location": "San Francisco, CA",
     "gender": "male",
@@ -389,7 +389,7 @@
   {
     "id": "sara-blakely",
     "name": "Sara Blakely",
-    "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&h=400&q=80",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sara_Blakely_2012.jpg/800px-Sara_Blakely_2012.jpg",
     "role": "Founder at Spanx · Investor & Philanthropist",
     "location": "Atlanta, GA",
     "gender": "female",
@@ -453,7 +453,7 @@
   {
     "id": "pieter-levels",
     "name": "Pieter Levels",
-    "avatar": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=400&h=400&q=80",
+    "avatar": "https://avatars.githubusercontent.com/u/1089209?v=4",
     "role": "Solo Founder (NomadList, RemoteOK, PhotoAI)",
     "location": "Amsterdam & Digital Nomad",
     "gender": "male",
@@ -517,7 +517,7 @@
   {
     "id": "melanie-perkins",
     "name": "Melanie Perkins",
-    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Melanie_Perkins_Canva_%28cropped%29.jpg/800px-Melanie_Perkins_Canva_%28cropped%29.jpg",
     "role": "Co-Founder & CEO at Canva",
     "location": "Sydney, Australia",
     "gender": "female",
@@ -581,7 +581,7 @@
   {
     "id": "lex-fridman",
     "name": "Lex Fridman",
-    "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&h=400&q=80",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Lex_Fridman_2021.jpg/800px-Lex_Fridman_2021.jpg",
     "role": "AI Researcher at MIT · Host of Lex Fridman Podcast",
     "location": "Austin, TX & Boston, MA",
     "gender": "male",
@@ -645,7 +645,7 @@
   {
     "id": "sophia-amoruso",
     "name": "Sophia Amoruso",
-    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sophia_Amoruso_2014.jpg/800px-Sophia_Amoruso_2014.jpg",
     "role": "Founder at Trust Fund & Girlboss · Author",
     "location": "Los Angeles & New York",
     "gender": "female",
@@ -709,7 +709,7 @@
   {
     "id": "guillermo-rauch",
     "name": "Guillermo Rauch",
-    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=400&q=80",
+    "avatar": "https://avatars.githubusercontent.com/u/13041?v=4",
     "role": "CEO & Founder at Vercel",
     "location": "San Francisco, CA",
     "gender": "male",
@@ -773,7 +773,7 @@
   {
     "id": "payal-kadakia",
     "name": "Payal Kadakia",
-    "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&h=400&q=80",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Payal_Kadakia_2018.jpg/800px-Payal_Kadakia_2018.jpg",
     "role": "Founder at ClassPass · Author & Dancer",
     "location": "Los Angeles & New York",
     "gender": "female",
@@ -837,7 +837,7 @@
   {
     "id": "gary-vaynerchuk",
     "name": "Gary Vaynerchuk",
-    "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&h=400&q=80",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Gary_Vaynerchuk_2017.jpg/800px-Gary_Vaynerchuk_2017.jpg",
     "role": "Chairman of VaynerX & CEO of VaynerMedia",
     "location": "New York, NY",
     "gender": "male",
@@ -901,7 +901,7 @@
   {
     "id": "reshma-saujani",
     "name": "Reshma Saujani",
-    "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&h=400&q=80",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Reshma_Saujani_by_Gage_Skidmore.jpg/800px-Reshma_Saujani_by_Gage_Skidmore.jpg",
     "role": "Founder at Girls Who Code & Moms First",
     "location": "New York, NY",
     "gender": "female",
@@ -965,7 +965,7 @@
   {
     "id": "reid-hoffman",
     "name": "Reid Hoffman",
-    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=400&q=80",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Reid_Hoffman_2013.jpg/800px-Reid_Hoffman_2013.jpg",
     "role": "Co-Founder at LinkedIn · Partner at Greylock",
     "location": "Palo Alto & San Francisco",
     "gender": "male",
@@ -1029,7 +1029,7 @@
   {
     "id": "emily-weiss",
     "name": "Emily Weiss",
-    "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&h=400&q=80",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Emily_Weiss_2018.jpg/800px-Emily_Weiss_2018.jpg",
     "role": "Founder at Glossier & Into The Gloss",
     "location": "New York, NY",
     "gender": "female",
@@ -1221,7 +1221,7 @@
   {
     "id": "austin-russell",
     "name": "Austin Russell",
-    "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&h=400&q=80",
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Austin_Russell_%28cropped%29.jpg/800px-Austin_Russell_%28cropped%29.jpg",
     "role": "Founder & CEO at Luminar Technologies",
     "location": "Orlando, FL & Palo Alto, CA",
     "gender": "male",

@@ -53,6 +53,16 @@ graph TD
 | 24 | **Tim Cook** | CEO at Apple | [linkedin.com/in/tim-cook-apple](https://www.linkedin.com/in/tim-cook-apple) | [instagram.com/tim_cook](https://www.instagram.com/tim_cook) |
 | 25 | **Jensen Huang** | Founder & CEO at NVIDIA | [linkedin.com/in/jenhsunhuang](https://www.linkedin.com/in/jenhsunhuang) | [instagram.com/jensenhuang](https://www.instagram.com/jensenhuang) |
 | 26 | **Andrew Ng** | Founder DeepLearning.AI · Coursera | [linkedin.com/in/andrewyng](https://www.linkedin.com/in/andrewyng) | [instagram.com/andrew_y_ng](https://www.instagram.com/andrew_y_ng) |
+---
+
+## 🎨 Stitch Project Integration (`projects/14594821312072082520`)
+
+Pulled directly from the Stitch MCP Server (`https://stitch.googleapis.com/mcp`):
+- **Arena & Live Dates**: [`/stitch/autonomous-dating-arena.html`](http://localhost:3000/stitch/autonomous-dating-arena.html)
+- **Personality Dossiers**: [`/stitch/agent-personality-dossiers.html`](http://localhost:3000/stitch/agent-personality-dossiers.html)
+- **Compatibility Matrix**: [`/stitch/compatibility-matrix-rankings.html`](http://localhost:3000/stitch/compatibility-matrix-rankings.html)
+- **Data Ingestion Terminal**: [`/stitch/data-ingestion-tech-terminal.html`](http://localhost:3000/stitch/data-ingestion-tech-terminal.html)
+- **Aura Luxury Ember Theme**: [`/stitch/aura-autonomous-agent-dating-magnetic-ember-velvet-rose.html`](http://localhost:3000/stitch/aura-autonomous-agent-dating-magnetic-ember-velvet-rose.html)
 
 ---
 

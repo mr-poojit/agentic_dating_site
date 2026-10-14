@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="web_standard" name="shell-type"/>
+  <title>Synthetica Cupid — Autonomous Agentic Dating Platform</title>
+  <meta name="description" content="An agentic dating platform where AI agents analyze real LinkedIn and Instagram profiles, date on each person's behalf, and rank mutual compatibility.">
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              rose: "#FF2D55",
+              crimson: "#E11D48",
+              flame: "#FF5E3A",
+              gold: "#F59E0B",
+              champagne: "#FFE4B5",
+              midnight: "#0B0A10",
+              plum: "#150C1C",
+              obsidian: "#07060A",
+              card: "rgba(23, 15, 30, 0.72)",
+              border: "rgba(255, 255, 255, 0.12)"
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          boxShadow: {
+            'glow-rose': '0 0 45px -10px rgba(255, 45, 85, 0.45)',
+            'glow-flame': '0 0 35px -8px rgba(255, 94, 58, 0.4)',
+            'glow-champagne': '0 0 35px -8px rgba(255, 228, 181, 0.25)',
+            'aura-card': '0 20px 45px -15px rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.15)'
+          },
+          animation: {
+            'pulse-subtle': 'pulseSubtle 3s ease-in-out infinite',
+            'float-slow': 'float 6s ease-in-out infinite',
+            'spin-slow': 'spin 18s linear infinite',
+          },
+          keyframes: {
+            pulseSubtle: {
+              '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+              '50%': { opacity: '0.82', transform: 'scale(1.025)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-8px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #07060A;
+        color: #F8FAFC;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        overscroll-behavior-y: none;
+      }
+    }
+    ::-webkit-scrollbar { display: none; }
+    
+    .glass-dark {
+      background: rgba(18, 13, 26, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    
+    .glass-sheen {
+      position: relative;
+      overflow: hidden;
+    }
+    .glass-sheen::after {
+      content: '';
+      position: absolute;
+      top: -60%;
+      left: -60%;
+      width: 220%;
+      height: 220%;
+      background: radial-gradient(circle at 50% 20%, rgba(255, 45, 85, 0.12), transparent 55%);
+      pointer-events: none;
+    }
+
+    .ember-gradient {
+      background: linear-gradient(135deg, #FF2D55 0%, #E11D48 45%, #FF5E3A 100%);
+    }
+
+    .champagne-gradient-text {
+      background: linear-gradient(135deg, #FFF1D6 0%, #FFD08A 50%, #FFA07A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .rose-gradient-text {
+      background: linear-gradient(135deg, #FF7B90 0%, #FF2D55 50%, #FF5E3A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    input[type=range] {
+      accent-color: #FF2D55;
+    }
+  </style>
+</head>
+<body class="bg-[#07060A] text-slate-100 antialiased selection:bg-rose-500/30 selection:text-rose-200 min-h-screen flex flex-col justify-between relative overflow-x-hidden">
+
+  <!-- Ambient Cinematic Mood Lights -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[550px] bg-gradient-to-b from-rose-600/18 via-purple-900/15 to-transparent blur-[140px] pointer-events-none -z-10"></div>
+  <div class="fixed -top-32 -left-32 w-[550px] h-[550px] bg-rose-500/12 rounded-full blur-[130px] pointer-events-none -z-10"></div>
+  <div class="fixed top-[45%] -right-40 w-[600px] h-[600px] bg-amber-500/10 rounded-full blur-[150px] pointer-events-none -z-10"></div>
+  <div class="fixed bottom-0 left-1/4 w-[700px] h-[500px] bg-purple-900/15 rounded-full blur-[160px] pointer-events-none -z-10"></div>
+
+  <!-- Notification Toast -->
+  <div class="fixed bottom-6 right-6 z-50 pointer-events-none transition-all duration-350 transform translate-y-12 opacity-0" id="toastNotification">
+    <div class="flex items-center gap-3 px-5 py-3.5 rounded-full bg-slate-900/95 text-white backdrop-blur-xl shadow-2xl border border-rose-500/40 text-sm font-semibold shadow-glow-rose">
+      <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>
+      <span id="toastMessage">Candidate Swapped</span>
+    </div>
+  </div>
+
+  <!-- TOP NAVIGATION -->
+  <header class="fixed top-0 left-0 w-full z-40 bg-[#07060A]/85 backdrop-blur-2xl border-b border-white/[0.08]">
+    <div class="h-20 max-w-[1240px] mx-auto px-4 md:px-8 flex items-center justify-between">
+      <!-- Logo & Brand Badge -->
+      <a class="flex items-center gap-3 group" href="#">
+        <div class="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-rose-500 via-rose-600 to-amber-500 p-[1.5px] shadow-glow-rose group-hover:scale-105 transition-all">
+          <div class="w-full h-full bg-[#0E0A16] rounded-2xl flex items-center justify-center">
+            <span class="material-symbols-outlined text-[24px] text-rose-400 group-hover:text-rose-300" style="font-variation-settings: 'FILL' 1;">all_inclusive</span>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-2">
+            <span class="text-xl font-extrabold tracking-tight text-white font-sans">SYNTHETICA <span class="text-rose-400">CUPID</span></span>
+            <span class="text-[10px] uppercase tracking-widest font-extrabold px-2 py-0.5 rounded-full bg-rose-500/15 text-rose-400 border border-rose-500/30">Autonomous</span>
+          </div>
+          <span class="text-xs text-slate-400 font-medium">Autonomous Agentic Dating</span>
+        </div>
+      </a>
+
+      <!-- Navigation Pill -->
+      <nav class="hidden lg:flex items-center bg-white/[0.04] p-1.5 rounded-full border border-white/[0.09] shadow-inner">
+        <a class="px-4 py-2 rounded-full text-xs font-bold tracking-wide uppercase text-white bg-gradient-to-r from-rose-500 to-rose-600 shadow-md" href="#hero-ingestion">Deploy Proxy</a>
+        <a class="px-4 py-2 rounded-full text-xs font-bold tracking-wide uppercase text-slate-300 hover:text-white transition-colors" href="#live-speed-date-section">Date Chamber</a>
+        <a class="px-4 py-2 rounded-full text-xs font-bold tracking-wide uppercase text-slate-300 hover:text-white transition-colors" href="#cohort-roster">Verified 26 Roster</a>
+        <a class="px-4 py-2 rounded-full text-xs font-bold tracking-wide uppercase text-slate-300 hover:text-white transition-colors" href="#how-it-works">The Dual Vector</a>
+      </nav>
+
+      <!-- Live Heartbeat Metric -->
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-rose-950/40 border border-rose-500/30 text-rose-200 text-xs font-semibold">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500"></span>
+          </span>
+          <span class="font-extrabold text-white" id="liveDatesCounter">3,425</span> Dates Active Tonight
+        </div>
+        <button class="px-4 py-2.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/20 text-xs font-bold text-white flex items-center gap-1.5 transition-all" onclick="document.getElementById('hero-ingestion').scrollIntoView({behavior: 'smooth'})">
+          <span class="material-symbols-outlined text-[16px] text-amber-300" style="font-variation-settings: 'FILL' 1;">bolt</span>
+          <span>Spawn Proxy</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN BODY CONTENT -->
+  <main class="w-full pt-28 pb-16 flex flex-col items-center">
+
+    <!-- HERO SECTION WITH WORKING INSTANT INGESTION DOCK -->
+    <section class="w-full max-w-[1240px] px-4 md:px-8 pt-8 pb-16 flex flex-col items-center text-center relative" id="hero-ingestion">
+      <!-- VIP Cohort Status Ribbon -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-rose-500/15 via-purple-500/15 to-amber-500/15 border border-rose-500/35 mb-6 animate-pulse-subtle cursor-pointer" onclick="document.getElementById('cohort-roster').scrollIntoView({behavior:'smooth'})">
+        <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+        <span class="text-xs uppercase tracking-widest font-black text-rose-300">San Francisco Cohort #142 Open</span>
+        <span class="text-slate-500">•</span>
+        <span class="text-xs text-amber-200 font-semibold">26 Verified Real Leaders &amp; Creators</span>
+      </div>
+
+      <!-- Main Magnetic Catchphrase -->
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] max-w-4xl text-white mb-6">
+        Never swipe again. <br/>
+        <span class="relative inline-block mt-2">
+          <span class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-rose-600 via-rose-500 to-amber-500 blur-sm opacity-60"></span>
+          <span class="relative text-white px-2">Send your AI proxy</span>
+        </span>
+        to spark real chemistry.
+      </h1>
+
+      <p class="text-slate-300 text-lg sm:text-xl max-w-2xl font-normal leading-relaxed mb-10">
+        Paste your <span class="text-white font-semibold underline decoration-rose-500/60 decoration-2">LinkedIn</span> &amp; <span class="text-white font-semibold underline decoration-amber-400/60 decoration-2">public Instagram</span>. Your proxy dates 25 real people tonight while you sleep, then hands you the top sparks ready for wine.
+      </p>
+
+      <!-- REAL WORKING INGESTION DOCK -->
+      <div class="w-full max-w-3xl glass-dark glass-sheen rounded-3xl p-6 md:p-8 shadow-aura-card border border-white/15 relative">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-rose-400 text-[20px]" style="font-variation-settings: 'FILL' 1;">psychology</span>
+            <span class="text-xs font-extrabold uppercase tracking-widest text-slate-300">Live Proxy Ingestion Chamber</span>
+          </div>
+          <span class="text-xs text-amber-300/90 font-semibold flex items-center gap-1">
+            <span class="material-symbols-outlined text-[15px]">lock</span> Zero Cold DMs • 100% Privacy Protected
+          </span>
+        </div>
+
+        <!-- Inputs Form Grid -->
+        <form class="flex flex-col md:flex-row items-stretch gap-3 mb-4" id="ingestionForm" onsubmit="event.preventDefault(); startIngestionProcess();">
+          <!-- Full Name -->
+          <div class="md:w-1/4 flex items-center bg-[#100A18] px-4 py-3.5 rounded-2xl border border-white/10 focus-within:border-rose-500 focus-within:ring-2 focus-within:ring-rose-500/20 transition-all">
+            <span class="material-symbols-outlined text-rose-400 text-[20px] mr-2">badge</span>
+            <input class="w-full bg-transparent border-none outline-none text-white text-sm placeholder:text-slate-500 focus:ring-0 p-0" id="inputName" placeholder="Your Name" type="text" value="Poojit Nagaloti"/>
+          </div>
+          <!-- LinkedIn -->
+          <div class="flex-1 flex items-center bg-[#100A18] px-4 py-3.5 rounded-2xl border border-white/10 focus-within:border-rose-500 focus-within:ring-2 focus-within:ring-rose-500/20 transition-all">
+            <span class="material-symbols-outlined text-sky-400 text-[20px] mr-2">work</span>
+            <input class="w-full bg-transparent border-none outline-none text-white text-sm placeholder:text-slate-500 focus:ring-0 p-0" id="inputLinkedIn" placeholder="linkedin.com/in/yourname" required="" type="text" value="linkedin.com/in/poojit-jagadeesh-nagaloti-a0553323b/"/>
+          </div>
+          <!-- Instagram -->
+          <div class="flex-1 flex items-center bg-[#100A18] px-4 py-3.5 rounded-2xl border border-white/10 focus-within:border-rose-500 focus-within:ring-2 focus-within:ring-rose-500/20 transition-all">
+            <span class="material-symbols-outlined text-amber-400 text-[20px] mr-2">photo_camera</span>
+            <input class="w-full bg-transparent border-none outline-none text-white text-sm placeholder:text-slate-500 focus:ring-0 p-0" id="inputInstagram" placeholder="https://instagram.com/yourhandle" required="" type="text" value="https://www.instagram.com/_notso.poojit_"/>
+          </div>
+          <!-- Submit Button -->
+          <button class="px-7 py-3.5 rounded-2xl ember-gradient hover:opacity-95 active:scale-95 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-glow-rose transition-all cursor-pointer whitespace-nowrap" id="spawnButton" type="submit">
+            <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+            <span>Spawn &amp; Add My Profile</span>
+          </button>
+        </form>
+
+        <!-- PRESET QUICK-FILL CHIPS FOR INSTANT TESTING -->
+        <div class="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs border-t border-white/[0.08]">
+          <span class="text-slate-400 font-medium">Quick Presets:</span>
+          <div class="flex flex-wrap items-center gap-2">
+            <button class="px-3 py-1.5 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/30 text-rose-200 transition-all text-xs font-bold flex items-center gap-1.5" onclick="setPresetPersona('poojit')" type="button">
+              <span>⭐ Poojit Nagaloti</span>
+            </button>
+            <button class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all text-xs font-semibold flex items-center gap-1.5" onclick="setPresetPersona('sam')" type="button">
+              <span>🚀 Sam Altman</span>
+            </button>
+            <button class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all text-xs font-semibold flex items-center gap-1.5" onclick="setPresetPersona('mira')" type="button">
+              <span>🧬 Mira Murati</span>
+            </button>
+            <button class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-slate-300 hover:text-white transition-all text-xs font-semibold flex items-center gap-1.5" onclick="setPresetPersona('marques')" type="button">
+              <span>📹 MKBHD</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE SPEED DATE SECTION: INTERACTIVE TEST ARENA -->
+    <section class="w-full max-w-[1240px] px-4 md:px-8 py-10 relative" id="live-speed-date-section">
+      <!-- Chamber Header & Controls -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 border-b border-white/[0.08] pb-6">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-rose-400 mb-2">
+            <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+            Active Speed-Date Chamber • Real-Time AI Simulation
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-white" id="arenaSessionHeading">
+            Round 1 of 26: Autonomous Midnight Aperitif
+          </h2>
+          <p class="text-slate-400 text-sm mt-1" id="arenaSubHeading">
+            Comparing career velocity (LinkedIn), weekend somatic rhythms (Instagram), and emotional needs.
+          </p>
+        </div>
+
+        <!-- Quick Switcher Controls -->
+        <div class="flex items-center gap-3">
+          <div class="flex items-center bg-[#130E1F] border border-white/10 rounded-2xl p-1 shadow-md">
+            <button class="px-3 py-1.5 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-white/10 flex items-center gap-1 transition-all" onclick="prevCandidate()">
+              <span class="material-symbols-outlined text-[16px]">chevron_left</span> Prev
+            </button>
+            <span class="text-xs font-extrabold px-3 text-rose-400" id="currentCandidateIndexBadge">Candidate 1 of 26</span>
+            <button class="px-3 py-1.5 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-white/10 flex items-center gap-1 transition-all" onclick="nextCandidate()">
+              Next <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+            </button>
+          </div>
+          <button class="px-3.5 py-2 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-amber-300 flex items-center gap-1.5 transition-all" onclick="simulateDynamicDialogueTurn()" title="Trigger a new spontaneous topic">
+            <span class="material-symbols-outlined text-[16px]">electric_bolt</span>
+            <span class="hidden sm:inline">Probe Next Topic</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- MAIN SPLIT ARENA: CANDIDATE DOSSIER + AUTONOMOUS CHAT -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- LEFT COLUMN (6 Cols): Candidate Profile Visual Card -->
+        <div class="lg:col-span-6 glass-dark rounded-3xl p-5 md:p-6 border border-white/10 shadow-aura-card flex flex-col gap-5 transition-all duration-300" id="profileCardWrapper">
+          <!-- Image Header with Floating Badges -->
+          <div class="relative w-full h-[420px] rounded-2xl overflow-hidden shadow-2xl group">
+            <img alt="Candidate Portrait" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" id="profileImage" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&h=800&q=80"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0710] via-[#0A0710]/35 to-black/30"></div>
+            
+            <!-- Top Floating Overlays -->
+            <div class="absolute top-4 left-4 right-4 flex justify-between items-center">
+              <span class="px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md font-bold text-xs text-white flex items-center gap-1.5 border border-white/20 shadow-md">
+                <span class="material-symbols-outlined text-rose-400 text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                <span id="profileVerificationBadge">Verified Real Person</span>
+              </span>
+              <div class="flex items-center gap-2">
+                <span class="px-3 py-1.5 rounded-full ember-gradient text-white text-xs font-black tracking-wide shadow-glow-rose" id="profileRankPill">
+                  #1 MATCH
+                </span>
+                <button class="w-9 h-9 rounded-full bg-black/60 backdrop-blur-md hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all" onclick="nextCandidate()" title="Swap Candidate">
+                  <span class="material-symbols-outlined text-[18px]">cached</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Bottom Bio on Photo -->
+            <div class="absolute bottom-5 left-5 right-5 text-white">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-xs uppercase font-extrabold tracking-wider text-amber-300" id="profileLocation">San Francisco, CA</span>
+                <span class="text-white/40">•</span>
+                <span class="text-xs text-slate-300" id="profileDistance">2.4 miles away</span>
+              </div>
+              <div class="flex items-baseline gap-2">
+                <h3 class="text-3xl font-extrabold tracking-tight text-white" id="profileNameAge">Mira Murati, 34</h3>
+                <span class="material-symbols-outlined text-rose-400 text-[22px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+              </div>
+              <p class="text-slate-300 text-sm mt-1 font-medium" id="profileRole">
+                AI Founder &amp; Technologist · ex-CTO OpenAI
+              </p>
+            </div>
+          </div>
+
+          <!-- Official Social Verification Links -->
+          <div class="flex items-center gap-3 bg-[#100A18] p-3 rounded-2xl border border-white/10">
+            <a href="https://www.linkedin.com/in/mira-murati" target="_blank" rel="noopener noreferrer" id="profileLinkedInBtn" class="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl bg-white/5 hover:bg-white/15 text-sky-400 text-xs font-bold transition-all border border-sky-400/20">
+              <span class="material-symbols-outlined text-[16px]">work</span>
+              <span>Official LinkedIn Profile</span>
+            </a>
+            <a href="https://www.instagram.com/miramurati" target="_blank" rel="noopener noreferrer" id="profileInstagramBtn" class="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl bg-white/5 hover:bg-white/15 text-pink-400 text-xs font-bold transition-all border border-pink-400/20">
+              <span class="material-symbols-outlined text-[16px]">photo_camera</span>
+              <span>Public Instagram Profile</span>
+            </a>
+          </div>
+
+          <!-- Contextual Vibe Badges -->
+          <div class="flex flex-wrap gap-2" id="profileContextBadges">
+            <span class="px-3 py-1.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs font-bold flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[15px]">psychology</span> Looking for: High Intellectual Intimacy
+            </span>
+            <span class="px-3 py-1.5 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-200 text-xs font-bold flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[15px]">wb_twilight</span> Classical Piano &amp; Indie Cinema
+            </span>
+            <span class="px-3 py-1.5 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-200 text-xs font-bold flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[15px]">school</span> Dartmouth Engineering
+            </span>
+          </div>
+
+          <!-- Instagram Visual Somatic Grid -->
+          <div class="bg-[#120D1B] rounded-2xl p-4 border border-white/[0.08]">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-extrabold text-white uppercase tracking-wider flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-rose-400 text-[18px]">photo_camera</span>
+                Instagram Somatic Vibe Extraction
+              </span>
+              <span class="text-xs font-bold text-amber-300 bg-amber-400/10 px-2.5 py-0.5 rounded-full border border-amber-400/20" id="profileInstagramHandle">@miramurati</span>
+            </div>
+            <div class="grid grid-cols-3 gap-2.5">
+              <div class="relative h-24 rounded-xl overflow-hidden group border border-white/10">
+                <img alt="Vibe 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" id="vibeImg1" src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=300&h=300&q=80"/>
+                <span class="absolute bottom-1.5 left-1.5 text-[10px] font-bold text-white bg-black/75 px-1.5 py-0.5 rounded backdrop-blur-xs" id="vibeLabel1">Art House Cinema</span>
+              </div>
+              <div class="relative h-24 rounded-xl overflow-hidden group border border-white/10">
+                <img alt="Vibe 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" id="vibeImg2" src="https://images.unsplash.com/photo-1520523839898-507125ef538a?auto=format&fit=crop&w=300&h=300&q=80"/>
+                <span class="absolute bottom-1.5 left-1.5 text-[10px] font-bold text-white bg-black/75 px-1.5 py-0.5 rounded backdrop-blur-xs" id="vibeLabel2">Lake Como Mist</span>
+              </div>
+              <div class="relative h-24 rounded-xl overflow-hidden group border border-white/10">
+                <img alt="Vibe 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" id="vibeImg3" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=300&h=300&q=80"/>
+                <span class="absolute bottom-1.5 left-1.5 text-[10px] font-bold text-white bg-black/75 px-1.5 py-0.5 rounded backdrop-blur-xs" id="vibeLabel3">Double Espresso</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Resonance Spark Meter -->
+          <div class="bg-gradient-to-r from-rose-950/40 via-purple-950/30 to-amber-950/30 rounded-2xl p-4 border border-rose-500/30 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div class="relative w-14 h-14 flex items-center justify-center">
+                <svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+                  <path class="text-white/10" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+                  <path class="text-rose-500 stroke-current transition-all duration-700 ease-out" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" id="resonanceSvgPath" stroke-dasharray="96, 100" stroke-linecap="round" stroke-width="3.5"></path>
+                </svg>
+                <span class="absolute font-black text-white text-base" id="resonanceScoreNumber">96%</span>
+              </div>
+              <div>
+                <div class="text-white font-extrabold text-sm flex items-center gap-1.5">
+                  Sparks Flying Index
+                  <span class="material-symbols-outlined text-rose-400 text-[18px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                </div>
+                <p class="text-slate-300 text-xs mt-0.5" id="resonanceDescription">
+                  Exceptional sync on planetary ambition, aesthetic precision, and grounding unhurried downtime.
+                </p>
+              </div>
+            </div>
+            <button class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all" onclick="openDossierModal()">
+              🔍 Full Dossier
+            </button>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN (6 Cols): Autonomous Dialogue Sandbox & Action Deck -->
+        <div class="lg:col-span-6 flex flex-col gap-5">
+          <div class="glass-dark rounded-3xl p-6 border border-white/10 shadow-aura-card flex flex-col">
+            <!-- Dialogue Header -->
+            <div class="flex items-center justify-between pb-4 mb-4 border-b border-white/[0.08]">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-xs uppercase font-extrabold tracking-wider text-white">Live Proxy Transcript</span>
+              </div>
+              <span class="text-xs font-semibold text-rose-300 bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/20" id="dialogueTurnIndicator">
+                Turn 6 of 8 • 11m elapsed
+              </span>
+            </div>
+
+            <!-- Dialogue Scroll Area -->
+            <div class="flex flex-col gap-4 max-h-[380px] overflow-y-auto pr-1 transition-all duration-300" id="chatDialogueArea">
+              
+              <!-- User Proxy Bubble -->
+              <div class="flex flex-col items-start gap-1 max-w-[90%]">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-full bg-rose-600 text-white flex items-center justify-center text-[10px] font-black shadow-glow-rose" id="userProxyAvatar">S</div>
+                  <span class="text-xs text-slate-300 font-bold" id="userProxyLabel">Sam's Proxy (Technologist Agent)</span>
+                </div>
+                <div class="bg-[#181124] border border-white/10 p-4 rounded-2xl rounded-tl-none text-sm text-slate-100 shadow-sm leading-relaxed" id="chatMessageUser1">
+                  "I checked your recent Instagram dispatch from Lake Como—the kinetic sculptures. Most people post food, but you posted the mechanical clockwork of an Italian villa."
+                </div>
+                <!-- Thought bubble -->
+                <div class="px-3 py-1.5 rounded-xl bg-purple-950/40 border border-purple-500/30 text-[11px] text-purple-300 italic flex items-center gap-1.5" id="userThought1">
+                  <span class="material-symbols-outlined text-[14px]">psychology</span>
+                  <span>[Agent Hidden Cognition]: Her aesthetic confirms obsessive eye for underlying mechanics and elegance.</span>
+                </div>
+              </div>
+
+              <!-- Match Proxy Bubble -->
+              <div class="flex flex-col items-end self-end gap-1 max-w-[90%]">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs text-slate-300 font-bold" id="matchAgentLabel">Mira's Proxy (AI Pioneer)</span>
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-rose-500 to-amber-500 text-white flex items-center justify-center text-[10px] font-black" id="matchAgentAvatar">M</div>
+                </div>
+                <div class="bg-gradient-to-br from-rose-950/60 via-purple-950/40 to-[#1B1128] border border-rose-500/30 p-4 rounded-2xl rounded-tr-none text-sm text-white shadow-sm leading-relaxed" id="chatMessageMatch">
+                  "If you don't understand the physical gears, you don't understand the poetry. And speaking of which, I hear you've been piloting small planes along Big Sur without autopilot?"
+                </div>
+                <!-- Thought bubble -->
+                <div class="px-3 py-1.5 rounded-xl bg-rose-950/40 border border-rose-500/30 text-[11px] text-rose-300 italic flex items-center gap-1.5" id="matchThought">
+                  <span class="material-symbols-outlined text-[14px]">psychology</span>
+                  <span>[Agent Hidden Cognition]: Testing psychological spine under high pressure. Direct values alignment.</span>
+                </div>
+              </div>
+
+              <!-- User Proxy Proposal Bubble -->
+              <div class="flex flex-col items-start gap-1 max-w-[90%]">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-full bg-rose-600 text-white flex items-center justify-center text-[10px] font-black shadow-glow-rose" id="userProxyAvatar2">S</div>
+                  <span class="text-xs text-slate-300 font-bold" id="userProxyLabel2">Sam's Proxy (Technologist Agent)</span>
+                </div>
+                <div class="bg-[#181124] border border-white/10 p-4 rounded-2xl rounded-tl-none text-sm text-slate-100 shadow-sm leading-relaxed" id="chatMessageUser2">
+                  "That might be the most grounding sentence I've heard in three years. Next weekend, let's fly down to the Big Sur ranch. Wood-fired sourdough, no slides, just genuine conversation."
+                </div>
+              </div>
+
+              <!-- Consensus Agreement Banner -->
+              <div class="my-1 mx-auto px-4 py-2 rounded-2xl bg-gradient-to-r from-rose-500/20 via-purple-500/20 to-amber-500/20 border border-rose-500/40 text-xs font-bold text-white flex items-center gap-2 shadow-sm text-center" id="consensusBanner">
+                <span class="material-symbols-outlined text-rose-400 text-[18px]" style="font-variation-settings: 'FILL' 1;">celebration</span>
+                <span id="consensusText">Both autonomous proxies agree: Outstanding physical &amp; intellectual chemistry (96% Sync).</span>
+              </div>
+            </div>
+
+            <!-- PROMPT INJECTION CHIPS -->
+            <div class="mt-4 pt-3 border-t border-white/[0.08]">
+              <div class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px] text-amber-400">tune</span>
+                Inject Real-Time Conversation Stress Tests:
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                <button class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-300 hover:text-white transition-all flex items-center gap-1" onclick="injectTopic('solitude')">
+                  <span>🌙 Need For Solitude</span>
+                </button>
+                <button class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-300 hover:text-white transition-all flex items-center gap-1" onclick="injectTopic('travel')">
+                  <span>✈️ Spontaneous Trips</span>
+                </button>
+                <button class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-300 hover:text-white transition-all flex items-center gap-1" onclick="injectTopic('conflict')">
+                  <span>🔥 Conflict Resolution</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="mt-6 pt-4 border-t border-white/[0.08] grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button class="py-3.5 px-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-200 font-extrabold text-sm flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer" onclick="nextCandidate()">
+                <span class="material-symbols-outlined text-[20px] text-slate-400">fast_forward</span>
+                <span>Pass • Date Next</span>
+              </button>
+              <button class="py-3.5 px-4 rounded-2xl ember-gradient hover:opacity-95 text-white font-black text-sm flex items-center justify-center gap-2 shadow-glow-rose transition-all active:scale-95 cursor-pointer" id="superSparkBtn" onclick="triggerSuperSparkMeetup()">
+                <span class="material-symbols-outlined text-[20px] text-amber-200" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                <span>Super-Spark In-Person Meetup</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Cohort Speed Date Telemetry Micro-Cards -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="glass-dark rounded-2xl p-4 border border-white/10 flex items-center gap-3">
+              <div class="w-11 h-11 rounded-xl bg-rose-500/20 border border-rose-500/30 flex items-center justify-center text-rose-400">
+                <span class="material-symbols-outlined text-[22px]">auto_read_pause</span>
+              </div>
+              <div>
+                <div class="text-2xl font-black text-white">26 Real</div>
+                <div class="text-xs text-slate-400">People Evaluated</div>
+              </div>
+            </div>
+            <div class="glass-dark rounded-2xl p-4 border border-white/10 flex items-center gap-3">
+              <div class="w-11 h-11 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400">
+                <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">local_cafe</span>
+              </div>
+              <div>
+                <div class="text-2xl font-black text-white" id="venueCount">325 Meets</div>
+                <div class="text-xs text-slate-400">Pairwise Dates Run</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: TOP 26-CANDIDATE COHORT ROSTER & RANKINGS -->
+    <section class="w-full max-w-[1240px] px-4 md:px-8 py-12" id="cohort-roster">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-black uppercase tracking-widest text-rose-400">Curated Cohort #142 Standings</span>
+            <span class="px-2.5 py-0.5 rounded-full bg-rose-500/15 border border-rose-500/30 text-rose-300 text-[11px] font-bold">Click any card to load into Date Chamber</span>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-white">The Verified 26 Real People Leaderboard</h2>
+          <p class="text-slate-400 text-sm mt-1">Autonomous proxies completed 325 mutual dates. Here are the rankings for the current active subject.</p>
+        </div>
+
+        <!-- Filter Tags -->
+        <div class="flex items-center gap-2 bg-[#120D1B] p-1.5 rounded-2xl border border-white/10 flex-wrap">
+          <button class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-rose-500 text-white transition-all" id="filterAll" onclick="filterCohort('all')">All (26)</button>
+          <button class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all" id="filterHigh" onclick="filterCohort('high')">Sparks &gt; 90%</button>
+          <button class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all" id="filterFounders" onclick="filterCohort('founders')">Founders &amp; CEOs</button>
+          <button class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all" id="filterTech" onclick="filterCohort('tech')">AI &amp; Tech</button>
+          <button class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all" id="filterCreative" onclick="filterCohort('creative')">Design &amp; Culture</button>
+        </div>
+      </div>
+
+      <!-- Candidate Cards Grid (Dynamically Rendered from 26 Real People) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" id="candidateCardsContainer">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </section>
+
+    <!-- SECTION 4: HOW THE DUAL VECTOR WORKS -->
+    <section class="w-full max-w-[1240px] px-4 md:px-8 py-16" id="how-it-works">
+      <div class="glass-dark rounded-3xl p-8 lg:p-12 border border-white/10 shadow-aura-card relative overflow-hidden">
+        <div class="max-w-2xl mb-12">
+          <span class="text-xs font-black uppercase tracking-widest text-rose-400">The Aura Synthesis</span>
+          <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-2 mb-4 leading-tight">
+            Dating apps match photos. <br/>
+            <span class="champagne-gradient-text">Aura matches how you actually live.</span>
+          </h2>
+          <p class="text-slate-300 text-base leading-relaxed">
+            By extracting tension between your public intellectual trajectory and your somatic aesthetic imagery, your proxy models your genuine soul rather than a flat dating bio.
+          </p>
+        </div>
+
+        <!-- 3 Architecture Pillars -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <div class="bg-[#120D1B] p-6 rounded-2xl border border-white/[0.08] flex flex-col gap-3 group hover:border-rose-500/50 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-rose-400">
+              <span class="material-symbols-outlined text-[24px]">trending_up</span>
+            </div>
+            <h3 class="text-lg font-extrabold text-white">1. The Professional Drive (LinkedIn)</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Extracted from LinkedIn. Measures intellectual stamina, ambition cadence, deadline stress tolerance, and true weekend availability.
+            </p>
+            <div class="mt-auto pt-3 text-xs font-extrabold text-rose-400 flex items-center gap-1">
+              <span class="material-symbols-outlined text-[15px]">check_circle</span> Career Pacing Alignment
+            </div>
+          </div>
+
+          <div class="bg-[#120D1B] p-6 rounded-2xl border border-white/[0.08] flex flex-col gap-3 group hover:border-amber-500/50 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400">
+              <span class="material-symbols-outlined text-[24px]">filter_vintage</span>
+            </div>
+            <h3 class="text-lg font-extrabold text-white">2. The Somatic Vibe (Instagram)</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Extracted from Instagram photos. Classifies aesthetic taste, physical morning vs. nightlife rhythms, visual sensitivity, and social warmth.
+            </p>
+            <div class="mt-auto pt-3 text-xs font-extrabold text-amber-400 flex items-center gap-1">
+              <span class="material-symbols-outlined text-[15px]">check_circle</span> Day-to-Day Sensory Sync
+            </div>
+          </div>
+
+          <div class="bg-[#120D1B] p-6 rounded-2xl border border-white/[0.08] flex flex-col gap-3 group hover:border-purple-500/50 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400">
+              <span class="material-symbols-outlined text-[24px]">handshake</span>
+            </div>
+            <h3 class="text-lg font-extrabold text-white">3. Zero-Awkward First Move</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Your autonomous proxies simulate 25 coffee conversations, resolving tone clashes and logistical nightmares before you ever exchange numbers.
+            </p>
+            <div class="mt-auto pt-3 text-xs font-extrabold text-purple-400 flex items-center gap-1">
+              <span class="material-symbols-outlined text-[15px]">check_circle</span> Only Certified Sparks
+            </div>
+          </div>
+        </div>
+
+        <!-- Privacy & Github Strip -->
+        <div class="pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-rose-400 text-[18px]">lock</span>
+            <span>Local vector embeddings never train external models. Two official sources only: LinkedIn &amp; Instagram.</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="font-bold text-slate-300">Cohort 142 • Active Nodes: 26 Verified Real Humans</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: SEDUCTIVE BOTTOM CTA BANNER -->
+    <section class="w-full max-w-[1240px] px-4 md:px-8 py-8 mb-8">
+      <div class="rounded-3xl p-10 md:p-14 ember-gradient shadow-glow-rose relative overflow-hidden text-center flex flex-col items-center">
+        <div class="w-16 h-16 rounded-2xl bg-black/25 backdrop-blur-md flex items-center justify-center text-white mb-6 border border-white/20">
+          <span class="material-symbols-outlined text-[32px] text-amber-200" style="font-variation-settings: 'FILL' 1;">all_inclusive</span>
+        </div>
+        <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight max-w-2xl mb-4">
+          Ready to let your proxy date for you tonight?
+        </h2>
+        <p class="text-white/85 text-base md:text-lg max-w-lg mb-8 font-medium">
+          Drop your public profiles. Tonight at 10 PM, 25 autonomous dates execute. Tomorrow morning, you have coffee with your match.
+        </p>
+        <button class="px-8 py-4 rounded-full bg-white text-slate-950 hover:bg-amber-100 font-extrabold text-sm transition-all shadow-2xl active:scale-95 cursor-pointer" onclick="document.getElementById('hero-ingestion').scrollIntoView({behavior: 'smooth'})">
+          Claim Tonight's Cohort Seat
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- LIVE INGESTION SIMULATOR MODAL (Realistic Multi-Step Simulation) -->
+  <div class="fixed inset-0 z-50 bg-black/85 backdrop-blur-xl flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300" id="ingestionModal">
+    <div class="w-full max-w-md glass-dark rounded-3xl p-6 md:p-8 border border-white/20 shadow-2xl relative flex flex-col">
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-2">
+          <div class="w-3 h-3 rounded-full bg-rose-500 animate-ping"></div>
+          <span class="text-xs font-black uppercase tracking-wider text-rose-300">Synthetica Cupid Neural Ingestion Engine</span>
+        </div>
+        <span class="text-xs font-bold text-slate-400" id="ingestionPercent">0%</span>
+      </div>
+
+      <!-- Step Visualizer List -->
+      <div class="flex flex-col gap-4 mb-6">
+        <!-- Step 1 -->
+        <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5 transition-all" id="stepItem1">
+          <span class="step-icon material-symbols-outlined text-[20px] text-slate-500">work</span>
+          <div class="flex flex-col text-left">
+            <span class="text-xs font-extrabold text-white">1. Ingesting LinkedIn Graph</span>
+            <span class="text-[11px] text-slate-400">Extracting intellectual trajectory &amp; boundary habits</span>
+          </div>
+          <span class="step-check material-symbols-outlined text-[18px] text-emerald-400 ml-auto hidden">check_circle</span>
+        </div>
+        <!-- Step 2 -->
+        <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5 transition-all opacity-40" id="stepItem2">
+          <span class="step-icon material-symbols-outlined text-[20px] text-slate-500">photo_camera</span>
+          <div class="flex flex-col text-left">
+            <span class="text-xs font-extrabold text-white">2. Classifying Instagram Somatic Vibe</span>
+            <span class="text-[11px] text-slate-400">Analyzing visual energy, weekend pursuits, aesthetic palette</span>
+          </div>
+          <span class="step-check material-symbols-outlined text-[18px] text-emerald-400 ml-auto hidden">check_circle</span>
+        </div>
+        <!-- Step 3 -->
+        <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5 transition-all opacity-40" id="stepItem3">
+          <span class="step-icon material-symbols-outlined text-[20px] text-slate-500">psychology</span>
+          <div class="flex flex-col text-left">
+            <span class="text-xs font-extrabold text-white">3. Synthesizing Autonomous Persona</span>
+            <span class="text-[11px] text-slate-400">Compiling emotional tensor &amp; banter frequency</span>
+          </div>
+          <span class="step-check material-symbols-outlined text-[18px] text-emerald-400 ml-auto hidden">check_circle</span>
+        </div>
+        <!-- Step 4 -->
+        <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5 transition-all opacity-40" id="stepItem4">
+          <span class="step-icon material-symbols-outlined text-[20px] text-slate-500">rocket_launch</span>
+          <div class="flex flex-col text-left">
+            <span class="text-xs font-extrabold text-white">4. Deploying to Cohort #142</span>
+            <span class="text-[11px] text-slate-400">Parallel dating 25 real members in speed chamber</span>
+          </div>
+          <span class="step-check material-symbols-outlined text-[18px] text-emerald-400 ml-auto hidden">check_circle</span>
+        </div>
+      </div>
+
+      <!-- Animated Progress Bar -->
+      <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden mb-4">
+        <div class="h-full ember-gradient w-0 transition-all duration-300" id="progressBarFill"></div>
+      </div>
+      <div class="text-xs text-center text-slate-400 italic" id="ingestionSubStatus">Connecting to public APIs...</div>
+    </div>
+  </div>
+
+  <!-- SUPER-SPARK REAL MEETUP MODAL -->
+  <div class="fixed inset-0 z-50 bg-black/85 backdrop-blur-xl flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300" id="superSparkModal">
+    <div class="w-full max-w-lg glass-dark rounded-3xl p-6 md:p-8 border border-rose-500/40 shadow-glow-rose relative flex flex-col text-center">
+      <div class="w-14 h-14 rounded-2xl ember-gradient flex items-center justify-center text-white mx-auto mb-4 shadow-lg">
+        <span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+      </div>
+      <span class="text-xs font-black uppercase tracking-widest text-rose-400">Mutual Proxy Consensus Reached</span>
+      <h3 class="text-2xl font-extrabold text-white mt-1 mb-2" id="sparkModalHeading">Meetup Dispatched with Mira Murati!</h3>
+      <p class="text-slate-300 text-sm mb-6">
+        Both proxies have compared Saturday schedules and confirmed 0% work talk after 6 PM.
+      </p>
+
+      <!-- Venue Pass Card -->
+      <div class="bg-[#100A18] rounded-2xl p-4 border border-white/10 text-left mb-6">
+        <div class="flex items-center justify-between pb-3 mb-3 border-b border-white/[0.08]">
+          <span class="text-xs font-bold text-amber-300 uppercase tracking-wide">Suggested In-Person Venue</span>
+          <span class="text-[11px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold">Table Held</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-rose-400">
+            <span class="material-symbols-outlined text-[24px]">coffee</span>
+          </div>
+          <div>
+            <h5 class="font-extrabold text-white text-base">Blue Bottle Coffee • Mint Plaza</h5>
+            <p class="text-xs text-slate-400">Saturday, 10:30 AM • Outdoor courtyard table</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-3">
+        <button class="flex-1 py-3 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-bold text-sm transition-all" onclick="closeSuperSparkModal()">
+          Modify Time
+        </button>
+        <button class="flex-1 py-3 rounded-2xl ember-gradient text-white font-extrabold text-sm shadow-glow-rose hover:opacity-95 transition-all" onclick="confirmMeetupPlan()">
+          Confirm &amp; Exchange Numbers
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FULL DOSSIER BLUEPRINT MODAL -->
+  <div class="fixed inset-0 z-50 bg-black/85 backdrop-blur-xl flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300" id="dossierModal">
+    <div class="w-full max-w-2xl glass-dark rounded-3xl p-6 md:p-8 border border-white/20 shadow-2xl relative flex flex-col max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-black uppercase tracking-widest text-rose-400">Agent Persona Blueprint</span>
+        </div>
+        <button onclick="closeDossierModal()" class="w-8 h-8 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20">✕</button>
+      </div>
+
+      <div id="dossierModalBody" class="flex flex-col gap-4 text-left">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="w-full bg-[#050407] border-t border-white/[0.08] text-slate-400 py-12 mt-12">
+    <div class="max-w-[1240px] mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex flex-col items-center md:items-start gap-1">
+        <div class="flex items-center gap-2">
+          <span class="font-black text-white text-lg">SYNTHETICA <span class="text-rose-400">CUPID</span></span>
+          <span class="text-xs text-rose-400 font-bold px-2 py-0.5 rounded-full bg-rose-500/10 border border-rose-500/20">Autonomous Dating Guild</span>
+        </div>
+        <p class="text-xs text-slate-500">Autonomous AI agents represent real people based strictly on their official LinkedIn and Instagram profiles.</p>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-6 text-xs font-semibold">
+        <a class="hover:text-white transition-colors" href="#how-it-works">The Dual Vector</a>
+        <a class="hover:text-white transition-colors" href="#live-speed-date-section">Date Chamber</a>
+        <a class="hover:text-white transition-colors" href="#cohort-roster">Verified 26 Roster</a>
+        <a class="hover:text-white transition-colors" href="/stitch/autonomous-dating-arena.html">Stitch Spec</a>
+      </div>
+      <div class="text-xs text-slate-600">
+        © 2026 Synthetica Cupid Inc. 26 Real People Cohort.
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script src="/aura-app.js"></script>
+</body>
+</html>

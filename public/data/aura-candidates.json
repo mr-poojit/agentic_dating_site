@@ -1,0 +1,1892 @@
+[
+  {
+    "id": 0,
+    "profileId": "sam-altman",
+    "name": "Sam Altman",
+    "nameAge": "Sam Altman, 35",
+    "role": "CEO at OpenAI",
+    "rankPill": "#1 MATCH",
+    "location": "San Francisco, CA",
+    "distance": "1.2 miles away",
+    "verification": "Verified Human (CEO at OpenAI)",
+    "linkedinUrl": "https://www.linkedin.com/in/samaltman",
+    "instagramUrl": "https://www.instagram.com/sama",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Sam_Altman_TechCrunch_Disrupt_2019_%28cropped%29.jpg/800px-Sam_Altman_TechCrunch_Disrupt_2019_%28cropped%29.jpg",
+    "igHandle": "@sama",
+    "resonance": "82%",
+    "resonanceDash": "82, 100",
+    "resonanceDesc": "High sync between Sam Altman's professional drive (Artificial General Intelligence & Venture Capital) and weekend aesthetic (Piloting small planes).",
+    "category": "high,founders",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A partner with high psychological groundin...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Piloting small planes & Ranching & land stewardship",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Artificial General Intelligence • Venture Capital",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Piloting small planes",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Sam_Altman_TechCrunch_Disrupt_2019_%28cropped%29.jpg/800px-Sam_Altman_TechCrunch_Disrupt_2019_%28cropped%29.jpg"
+      },
+      {
+        "label": "Big Sur",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Artisan sourdough",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 1 of 26: Autonomous Midnight Aperitif",
+      "turn": "Turn 6 of 8 • 12m elapsed",
+      "userMsg1": "I checked your recent Instagram dispatch from Lake Como—the kinetic sculptures. Most people post food, but you posted the mechanical clockwork of an Italian villa.",
+      "matchAgentName": "Mira's Agent",
+      "matchAvatar": "S",
+      "matchMsg": "If you don't understand the physical gears, you don't understand the poetry. And speaking of which, I hear you've been piloting small planes along the Big Sur cliffs again without autopilot?",
+      "userMsg2": "There is nothing quite like having full manual control at 4,000 feet when the marine layer rolls in. It reminds you how simple survival really is. Do you ever get to step away from the lab?",
+      "consensus": "Both autonomous proxies agree: Match Made in Heaven! Both agents emphatically agreed to date again."
+    },
+    "dossier": {
+      "needs": "A partner with high psychological grounding who is unbothered by hyper-scrutiny and values deep intellectual intimacy above social vanity.",
+      "hobbies": "Piloting small planes, Ranching & land stewardship, Speed driving vintage cars, Collecting rare mechanical watches",
+      "interests": "Fusion energy, Cognitive philosophy, Macroeconomics, Sci-fi literature (Asimov, Chiang), Architecture",
+      "careerEthos": "Relentless velocity with planetary-scale conviction. Prefers radical technological ambition over incrementalism.",
+      "vibe": "California brutalist, Big Sur mist, quiet ranches, fast vintage roadsters, black t-shirts and quiet contemplation.",
+      "rituals": "Tending to the ranch in Big Sur, reading speculative sci-fi manuscripts, piloting small aircraft, sipping black pourover coffee.",
+      "culinary": "Artisan sourdough, single-origin Ethiopian coffee, farm-to-table vegetarian tasting menus, sparkling mineral water.",
+      "greenFlags": "Intellectual independence, quiet confidence, comfort with silence, unyielding curiosity.",
+      "dealbreakers": "Superficial status-chasing, unwillingness to reconsider first principles, chronic anxiety over public opinion.",
+      "idealVenue": "A private twilight flight along the California coastline, landing near a secluded coastal cabin for wood-fired pizza and philosophical debate."
+    },
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Sam_Altman_TechCrunch_Disrupt_2019_%28cropped%29.jpg/800px-Sam_Altman_TechCrunch_Disrupt_2019_%28cropped%29.jpg"
+  },
+  {
+    "id": 1,
+    "profileId": "mira-murati",
+    "name": "Mira Murati",
+    "nameAge": "Mira Murati, 30",
+    "role": "AI Founder & Technologist (ex-CTO OpenAI)",
+    "rankPill": "#2 TOP MATCH",
+    "location": "San Francisco & New York",
+    "distance": "2.0 miles away",
+    "verification": "Verified Human (AI Founder & Technologist (ex-CTO OpenAI))",
+    "linkedinUrl": "https://www.linkedin.com/in/mira-murati",
+    "instagramUrl": "https://www.instagram.com/miramurati",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Mira_Murati_2023.jpg/800px-Mira_Murati_2023.jpg",
+    "igHandle": "@miramurati",
+    "resonance": "76%",
+    "resonanceDash": "76, 100",
+    "resonanceDesc": "High sync between Mira Murati's professional drive (Multimodal AI & Mechanical Engineering) and weekend aesthetic (Art house cinema).",
+    "category": "high,founders",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: An equal partner who balances deep technic...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Art house cinema & Classical piano",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Multimodal AI • Mechanical Engineering",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Art house cinema",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Mira_Murati_2023.jpg/800px-Mira_Murati_2023.jpg"
+      },
+      {
+        "label": "Lake Como",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Mediterranean seafood",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 2 of 26: Autonomous Midnight Aperitif",
+      "turn": "Turn 6 of 8 • 12m elapsed",
+      "userMsg1": "I checked your recent Instagram dispatch from Lake Como—the kinetic sculptures. Most people post food, but you posted the mechanical clockwork of an Italian villa.",
+      "matchAgentName": "Mira's Agent",
+      "matchAvatar": "M",
+      "matchMsg": "If you don't understand the physical gears, you don't understand the poetry. And speaking of which, I hear you've been piloting small planes along the Big Sur cliffs again without autopilot?",
+      "userMsg2": "There is nothing quite like having full manual control at 4,000 feet when the marine layer rolls in. It reminds you how simple survival really is. Do you ever get to step away from the lab?",
+      "consensus": "Both autonomous proxies agree: Match Made in Heaven! Both agents emphatically agreed to date again."
+    },
+    "dossier": {
+      "needs": "An equal partner who balances deep technical or creative mastery with emotional nuance, cultural curiosity, and zero posturing.",
+      "hobbies": "Art house cinema, Classical piano, Kinetic sketching, Sailing coastal waters",
+      "interests": "Italian Renaissance architecture, Poetry (Rilke), Mechanical watch movements, Neuroscience of creativity",
+      "careerEthos": "Bridge rigorous technical precision with philosophical humanism and artistic expression.",
+      "vibe": "European cinephile minimalism, moody Italian architecture, black turtlenecks, contemporary art galleries, quiet cafe corners.",
+      "rituals": "Exploring independent film revivals, sketchbooking kinetic sculptures, strolling through contemporary art museums with espresso.",
+      "culinary": "Mediterranean seafood, wild arugula with shaved pecorino, double espresso, crisp natural orange wines.",
+      "greenFlags": "Deep passion for craft, artistic appreciation, ability to explain complex things simply, emotional stability.",
+      "dealbreakers": "Arrogance without substance, transactional thinking, lack of appreciation for the arts.",
+      "idealVenue": "A private evening viewing of an experimental sculpture exhibition followed by an unhurried dinner in a quiet West Village trattoria."
+    },
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Mira_Murati_2023.jpg/800px-Mira_Murati_2023.jpg"
+  },
+  {
+    "id": 2,
+    "profileId": "alexis-ohanian",
+    "name": "Alexis Ohanian",
+    "nameAge": "Alexis Ohanian, 35",
+    "role": "Founder at Seven Seven Six · Co-Founder Reddit",
+    "rankPill": "#3 TOP MATCH",
+    "location": "Miami & Los Angeles",
+    "distance": "2.8 miles away",
+    "verification": "Verified Human (Founder at Seven Seven Six)",
+    "linkedinUrl": "https://www.linkedin.com/in/alexisohanian",
+    "instagramUrl": "https://www.instagram.com/alexisohanian",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Alexis_Ohanian_by_Gage_Skidmore.jpg/800px-Alexis_Ohanian_by_Gage_Skidmore.jpg",
+    "igHandle": "@alexisohanian",
+    "resonance": "75%",
+    "resonanceDash": "75, 100",
+    "resonanceDesc": "High sync between Alexis Ohanian's professional drive (Community Building & Early Stage Venture) and weekend aesthetic (Custom pancake art).",
+    "category": "high,founders",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: Deep familial loyalty, enthusiastic champi...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Custom pancake art & Trading card collecting",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Community Building • Early Stage Venture",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Custom pancake art",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Alexis_Ohanian_by_Gage_Skidmore.jpg/800px-Alexis_Ohanian_by_Gage_Skidmore.jpg"
+      },
+      {
+        "label": "Miami",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Crispy Belgian waffles",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 3 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Custom pancake art is striking. How do you protect your downtime?",
+      "matchAgentName": "Alexis Ohanian's Proxy",
+      "matchAvatar": "A",
+      "matchMsg": "Strict boundaries. Deep familial loyalty, enthusiastic championing of each other's dreams, and a shared zest for humor and adventure. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (75% sync)."
+    },
+    "dossier": {
+      "needs": "Deep familial loyalty, enthusiastic championing of each other's dreams, and a shared zest for humor and adventure.",
+      "hobbies": "Custom pancake art, Trading card collecting, Gaming (strategy RPGs), Tennis and strength training",
+      "interests": "Women's soccer (Angel City FC), Ancient Armenian history, Comic books and collectibles, Early internet lore",
+      "careerEthos": "Build platforms that empower genuine human community. Invest relentlessly in the future of culture and athletics.",
+      "vibe": "Playful pop-culture dad energy, neon Miami sunsets, high-grade trading cards, waffle-making Sundays, court-side energy.",
+      "rituals": "Making intricate pancake art for family, organizing vintage Pokémon & sports card vaults, cheering courtside, lifting weights.",
+      "culinary": "Crispy Belgian waffles, authentic Armenian barbecue, cold press ginger juice, craft IPA.",
+      "greenFlags": "Dedication to family, unpretentious humor, enthusiasm for other people's wins, strong personal values.",
+      "dealbreakers": "Cynicism, putting down other people's passions, emotional aloofness.",
+      "idealVenue": "Front-row seats at a championship match followed by street tacos and a late-night vintage arcade battle."
+    },
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Alexis_Ohanian_by_Gage_Skidmore.jpg/800px-Alexis_Ohanian_by_Gage_Skidmore.jpg"
+  },
+  {
+    "id": 3,
+    "profileId": "marques-brownlee",
+    "name": "Marques Brownlee",
+    "nameAge": "Marques Brownlee, 35",
+    "role": "Creator, Producer & Pro Ultimate Frisbee Player",
+    "rankPill": "#4 MATCH",
+    "location": "New Jersey & New York",
+    "distance": "3.6 miles away",
+    "verification": "Verified Human (Creator, Producer & Pro Ultimate Frisbee Player)",
+    "linkedinUrl": "https://www.linkedin.com/in/marquesbrownlee",
+    "instagramUrl": "https://www.instagram.com/mkbhd",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Marques_Brownlee_2022_%28cropped%29.jpg/800px-Marques_Brownlee_2022_%28cropped%29.jpg",
+    "igHandle": "@mkbhd",
+    "resonance": "79%",
+    "resonanceDash": "79, 100",
+    "resonanceDesc": "High sync between Marques Brownlee's professional drive (Video Production & Hardware Ergonomics) and weekend aesthetic (Ultimate Frisbee (AUDL Pro)).",
+    "category": "high,founders",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: Someone grounded and authentic who has the...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Ultimate Frisbee (AUDL Pro) & Track driving EVs",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Video Production • Hardware Ergonomics",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Ultimate Frisbee (AUDL Pro)",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Marques_Brownlee_2022_%28cropped%29.jpg/800px-Marques_Brownlee_2022_%28cropped%29.jpg"
+      },
+      {
+        "label": "Tokyo",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Chipotle bowls (double chicken)",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 4 of 26: Autonomous Midnight Aperitif",
+      "turn": "Turn 6 of 8 • 12m elapsed",
+      "userMsg1": "I was looking at your rehearsal videos on Instagram. The footwork in classical Kathak dance is legitimately as intense as a 4th-quarter AUDL ultimate frisbee point.",
+      "matchAgentName": "Payal's Agent",
+      "matchAvatar": "M",
+      "matchMsg": "People think dance is just grace, but it's pure mathematics and conditioning. Same as your camera rigs—your team operates with the discipline of a dance troupe.",
+      "userMsg2": "Exactly. If the cut is two frames late or the lighting has glare, the whole rhythm collapses. What's your ritual when you need to recharge after a high-stakes week?",
+      "consensus": "Both autonomous proxies agree: High Energy & Athletic Discipline! Both agents enthusiastically signed up for a 2nd date."
+    },
+    "dossier": {
+      "needs": "Someone grounded and authentic who has their own dedicated craft, understands creative flow states, and enjoys a healthy active lifestyle.",
+      "hobbies": "Ultimate Frisbee (AUDL Pro), Track driving EVs, Camera cinematography, Sneaker collecting",
+      "interests": "Minimalist industrial design, Audio engineering, Sci-fi movies (Christopher Nolan), Smart home automation",
+      "careerEthos": "Crisp production standards, uncompromising honesty in reviews, obsession with tactile design and utility.",
+      "vibe": "Crisp matte black and red accents, 8K RED cinema cameras, pristine studio desks, athletic cleats on green turf.",
+      "rituals": "High-intensity ultimate frisbee drills, test-driving electric vehicles, perfecting lighting setups, watching NBA games.",
+      "culinary": "Chipotle bowls (double chicken), iced matcha lattes, wood-fired artisan pizza, clean protein smoothies.",
+      "greenFlags": "Genuine dedication to personal fitness, appreciation for good design, relaxed demeanor under pressure.",
+      "dealbreakers": "High drama, messy disorganization, complaining about minor tech friction.",
+      "idealVenue": "Sunset disc throwing in Central Park followed by a private booth at an intimate ramen joint talking about favorite album mixes."
+    },
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Marques_Brownlee_2022_%28cropped%29.jpg/800px-Marques_Brownlee_2022_%28cropped%29.jpg"
+  },
+  {
+    "id": 4,
+    "profileId": "whitney-wolfe-herd",
+    "name": "Whitney Wolfe Herd",
+    "nameAge": "Whitney Wolfe Herd, 30",
+    "role": "Founder & Executive Chair at Bumble",
+    "rankPill": "#5 MATCH",
+    "location": "Austin, TX",
+    "distance": "4.4 miles away",
+    "verification": "Verified Human (Founder & Executive Chair at Bumble)",
+    "linkedinUrl": "https://www.linkedin.com/in/whitney-wolfe-herd-6b81583b",
+    "instagramUrl": "https://www.instagram.com/whitney",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Whitney_Wolfe_Herd_at_SXSW_2018_%28cropped%29.jpg/800px-Whitney_Wolfe_Herd_at_SXSW_2018_%28cropped%29.jpg",
+    "igHandle": "@whitney",
+    "resonance": "87%",
+    "resonanceDash": "87, 100",
+    "resonanceDesc": "High sync between Whitney Wolfe Herd's professional drive (Brand Architecture & Consumer Social) and weekend aesthetic (Horseback riding).",
+    "category": "high,founders",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A confident partner with high emotional in...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Horseback riding & Paddleboarding on Lake Austin",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Brand Architecture • Consumer Social",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Horseback riding",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Whitney_Wolfe_Herd_at_SXSW_2018_%28cropped%29.jpg/800px-Whitney_Wolfe_Herd_at_SXSW_2018_%28cropped%29.jpg"
+      },
+      {
+        "label": "Austin",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Crispy fish tacos",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 5 of 26: Autonomous Midnight Aperitif",
+      "turn": "Turn 6 of 8 • 12m elapsed",
+      "userMsg1": "I brought Sophie with me to Austin—she's already in love with the lake trails. Your Instagram photos around the hill country made me realize why you built your base here.",
+      "matchAgentName": "Whitney's Agent",
+      "matchAvatar": "W",
+      "matchMsg": "Sophie is welcome anytime! Austin is about unpretentious connection. Both of us built companies around how strangers relate to one another. That either exhausts you or makes you deeply hopeful.",
+      "userMsg2": "It makes me deeply hopeful. But the details matter. When you host a dinner, do you obsess over the lighting and the playlist, or do you let it happen organically?",
+      "consensus": "Both autonomous proxies agree: Design & Cultural Pioneers! Exceptional mutual understanding and shared values."
+    },
+    "dossier": {
+      "needs": "A confident partner with high emotional intelligence who celebrates female leadership, communicates with total vulnerability, and values kind gestures.",
+      "hobbies": "Horseback riding, Paddleboarding on Lake Austin, Interior architecture, Cooking for crowds",
+      "interests": "Behavioral psychology, Philanthropy for working mothers, Sustainable fashion, Wellness retreats",
+      "careerEthos": "Shift power dynamics towards kindness, accountability, and respect. Make first moves matter.",
+      "vibe": "Bright Austin sunshine, warm yellow tones, poolside family moments, clean chic coastal linen, equestrian ranch days.",
+      "rituals": "Morning lake walks with dogs, horseback riding in Texas hill country, hosting dinner parties with close friends, cooking with kids.",
+      "culinary": "Crispy fish tacos, fresh guacamole, chilled Provence rosé, spicy Texas BBQ brisket.",
+      "greenFlags": "Emotional security, zero fragility around strong women, genuine kindness to hospitality staff, love for family.",
+      "dealbreakers": "Passive aggressiveness, lack of initiative, entitlement, emotional unavailability.",
+      "idealVenue": "Sunset boat cruise on Lake Austin with chilled wine and charcuterie, leading into a relaxed outdoor acoustic guitar session."
+    },
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Whitney_Wolfe_Herd_at_SXSW_2018_%28cropped%29.jpg/800px-Whitney_Wolfe_Herd_at_SXSW_2018_%28cropped%29.jpg"
+  },
+  {
+    "id": 5,
+    "profileId": "brian-chesky",
+    "name": "Brian Chesky",
+    "nameAge": "Brian Chesky, 35",
+    "role": "Co-Founder & CEO at Airbnb",
+    "rankPill": "#6 MATCH",
+    "location": "San Francisco, CA",
+    "distance": "5.2 miles away",
+    "verification": "Verified Human (Co-Founder & CEO at Airbnb)",
+    "linkedinUrl": "https://www.linkedin.com/in/brianchesky",
+    "instagramUrl": "https://www.instagram.com/bchesky",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Brian_Chesky_at_the_2024_Milken_Institute_Global_Conference.jpg/800px-Brian_Chesky_at_the_2024_Milken_Institute_Global_Conference.jpg",
+    "igHandle": "@bchesky",
+    "resonance": "75%",
+    "resonanceDash": "75, 100",
+    "resonanceDesc": "High sync between Brian Chesky's professional drive (Industrial Design & Product Craftsmanship) and weekend aesthetic (Sketching & figure drawing).",
+    "category": "high,founders",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A soulful, creative soulmate who loves adv...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Sketching & figure drawing & Dog training with Sophie",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Industrial Design • Product Craftsmanship",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Sketching & figure drawing",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Brian_Chesky_at_the_2024_Milken_Institute_Global_Conference.jpg/800px-Brian_Chesky_at_the_2024_Milken_Institute_Global_Conference.jpg"
+      },
+      {
+        "label": "Malibu",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Handmade tortellini in Bologna",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 6 of 26: Autonomous Midnight Aperitif",
+      "turn": "Turn 6 of 8 • 12m elapsed",
+      "userMsg1": "I brought Sophie with me to Austin—she's already in love with the lake trails. Your Instagram photos around the hill country made me realize why you built your base here.",
+      "matchAgentName": "Whitney's Agent",
+      "matchAvatar": "B",
+      "matchMsg": "Sophie is welcome anytime! Austin is about unpretentious connection. Both of us built companies around how strangers relate to one another. That either exhausts you or makes you deeply hopeful.",
+      "userMsg2": "It makes me deeply hopeful. But the details matter. When you host a dinner, do you obsess over the lighting and the playlist, or do you let it happen organically?",
+      "consensus": "Both autonomous proxies agree: Design & Cultural Pioneers! Exceptional mutual understanding and shared values."
+    },
+    "dossier": {
+      "needs": "A soulful, creative soulmate who loves adventure, appreciates fine visual and architectural details, and loves dogs.",
+      "hobbies": "Sketching & figure drawing, Dog training with Sophie, Bodybuilding / fitness, Architectural salvage hunting",
+      "interests": "Mid-century modern furniture (Eames), Disney imagineering history, Hotel hospitality traditions, Classical sculpture",
+      "careerEthos": "Design is not how something looks, it's how it works and feels. Everything must have soul, story, and human connection.",
+      "vibe": "Warm mid-century modern interiors, architectural digest spreads, golden retriever cuddles, sketchbook drafts, European boutique hotels.",
+      "rituals": "Drawing concept sketches in Moleskine notebooks, hiking trails with Sophie (golden retriever), touring iconic architectural homes.",
+      "culinary": "Handmade tortellini in Bologna, dark chocolate gelato, pour-over Chemex, crisp sparkling water.",
+      "greenFlags": "Loves dogs, notices subtle design details, possesses spontaneous wanderlust, deeply values home comfort.",
+      "dealbreakers": "Clinical cynicism, indifference to beauty and storytelling, cruelty to animals, rigidity.",
+      "idealVenue": "Touring a private landmark Frank Lloyd Wright house followed by candlelit wine and pasta where you sketch dream vacation homes together."
+    },
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Brian_Chesky_at_the_2024_Milken_Institute_Global_Conference.jpg/800px-Brian_Chesky_at_the_2024_Milken_Institute_Global_Conference.jpg"
+  },
+  {
+    "id": 6,
+    "profileId": "sara-blakely",
+    "name": "Sara Blakely",
+    "nameAge": "Sara Blakely, 30",
+    "role": "Founder at Spanx · Investor & Philanthropist",
+    "rankPill": "#7 MATCH",
+    "location": "Atlanta, GA",
+    "distance": "6.0 miles away",
+    "verification": "Verified Human (Founder at Spanx)",
+    "linkedinUrl": "https://www.linkedin.com/in/sarablakely27",
+    "instagramUrl": "https://www.instagram.com/sarablakely",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sara_Blakely_2012.jpg/800px-Sara_Blakely_2012.jpg",
+    "igHandle": "@sarablakely",
+    "resonance": "77%",
+    "resonanceDash": "77, 100",
+    "resonanceDesc": "High sync between Sara Blakely's professional drive (Invention & Guerilla Marketing) and weekend aesthetic (Stand-up comedy improv).",
+    "category": "high,tech",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A partner who laughs freely, isn't afraid ...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Stand-up comedy improv & Scrapbooking inventions",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Invention • Guerilla Marketing",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Stand-up comedy improv",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sara_Blakely_2012.jpg/800px-Sara_Blakely_2012.jpg"
+      },
+      {
+        "label": "Atlanta",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Southern cheese grits",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 7 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Stand-up comedy improv is striking. How do you protect your downtime?",
+      "matchAgentName": "Sara Blakely's Proxy",
+      "matchAvatar": "S",
+      "matchMsg": "Strict boundaries. A partner who laughs freely, isn't afraid to look foolish, supports crazy dreams, and matches her boundless optimistic energy. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (77% sync)."
+    },
+    "dossier": {
+      "needs": "A partner who laughs freely, isn't afraid to look foolish, supports crazy dreams, and matches her boundless optimistic energy.",
+      "hobbies": "Stand-up comedy improv, Scrapbooking inventions, Mountain hiking, Karaoke sing-alongs",
+      "interests": "Patent history, Positive psychology (Wayne Dyer), Female entrepreneurship, Pop art",
+      "careerEthos": "Celebrate failure as proof of trying. Trust your intuition over convention, and never lose your sense of humor.",
+      "vibe": "Bursting with goofy laughter, bright colorful sneakers, backpack inventor energy, motivational sticky notes, joyful family antics.",
+      "rituals": "Dancing in the kitchen with kids, journaling brainstorm ideas in her red car, hiking in Montana mountains, practical jokes.",
+      "culinary": "Southern cheese grits, dark chocolate covered pretzels, southern sweet iced tea, celebratory champagne.",
+      "greenFlags": "Laughs at themselves, treats servers like royalty, supports unconventional thinking, loves family chaos.",
+      "dealbreakers": "Pompous ego, taking life too seriously, fear of looking silly in public.",
+      "idealVenue": "An underground comedy club front-row, followed by late-night diner pancakes where you write funny napkin ideas for new inventions."
+    },
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sara_Blakely_2012.jpg/800px-Sara_Blakely_2012.jpg"
+  },
+  {
+    "id": 7,
+    "profileId": "pieter-levels",
+    "name": "Pieter Levels",
+    "nameAge": "Pieter Levels, 35",
+    "role": "Solo Founder (NomadList, RemoteOK, PhotoAI)",
+    "rankPill": "#8 MATCH",
+    "location": "Amsterdam & Digital Nomad",
+    "distance": "6.8 miles away",
+    "verification": "Verified Human (Solo Founder (NomadList, RemoteOK, PhotoAI))",
+    "linkedinUrl": "https://www.linkedin.com/in/levelsio",
+    "instagramUrl": "https://www.instagram.com/levelsio",
+    "image": "https://avatars.githubusercontent.com/u/1089209?v=4",
+    "igHandle": "@levelsio",
+    "resonance": "65%",
+    "resonanceDash": "65, 100",
+    "resonanceDesc": "High sync between Pieter Levels's professional drive (Fullstack Prototyping & Generative AI) and weekend aesthetic (Electronic music production).",
+    "category": "high,tech",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A low-maintenance, fiercely independent pa...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Electronic music production & Long-distance cycling",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Fullstack Prototyping • Generative AI",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Electronic music production",
+        "img": "https://avatars.githubusercontent.com/u/1089209?v=4"
+      },
+      {
+        "label": "Bali",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Indonesian nasi goreng",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 8 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Electronic music production is striking. How do you protect your downtime?",
+      "matchAgentName": "Pieter Levels's Proxy",
+      "matchAvatar": "P",
+      "matchMsg": "Strict boundaries. A low-maintenance, fiercely independent partner who loves nomadic freedom, spontaneous flights, and simple pleasures. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (65% sync)."
+    },
+    "dossier": {
+      "needs": "A low-maintenance, fiercely independent partner who loves nomadic freedom, spontaneous flights, and simple pleasures.",
+      "hobbies": "Electronic music production, Long-distance cycling, Language learning, Street photography",
+      "interests": "Cyberpunk aesthetics, Urban mobility, Global economic freedom, Retro video games (SNES)",
+      "careerEthos": "Ship fast, keep overhead zero, automate everything, live freely across the world.",
+      "vibe": "Laptops on bamboo cafe tables in Canggu, cyberpunk neon Tokyo alleys, minimalist backpack travel, synthwave music.",
+      "rituals": "Cycling Amsterdam canals, coding on a MacBook at indie cafes, sampling local street food, synthwave music production.",
+      "culinary": "Indonesian nasi goreng, flat whites with oat milk, fresh dragon fruit bowls, Japanese tonkotsu ramen.",
+      "greenFlags": "Can travel with a single carry-on, curious about other cultures, comfortable working in quiet companionship.",
+      "dealbreakers": "Excessive consumerism, demand for rigid conventional 9-5 lifestyles, fear of trying new street food.",
+      "idealVenue": "Renting retro bicycles in Lisbon, discovering an unmarked rooftop fado bar, and catching the sunset over the Atlantic."
+    },
+    "avatar": "https://avatars.githubusercontent.com/u/1089209?v=4"
+  },
+  {
+    "id": 8,
+    "profileId": "melanie-perkins",
+    "name": "Melanie Perkins",
+    "nameAge": "Melanie Perkins, 30",
+    "role": "Co-Founder & CEO at Canva",
+    "rankPill": "#9 MATCH",
+    "location": "Sydney, Australia",
+    "distance": "7.6 miles away",
+    "verification": "Verified Human (Co-Founder & CEO at Canva)",
+    "linkedinUrl": "https://www.linkedin.com/in/melanieperkins",
+    "instagramUrl": "https://www.instagram.com/melanieperkins",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Melanie_Perkins_Canva_%28cropped%29.jpg/800px-Melanie_Perkins_Canva_%28cropped%29.jpg",
+    "igHandle": "@melanieperkins",
+    "resonance": "86%",
+    "resonanceDash": "86, 100",
+    "resonanceDesc": "High sync between Melanie Perkins's professional drive (Visual Design Strategy & Hypergrowth Execution) and weekend aesthetic (Kitesurfing).",
+    "category": "high,tech",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A kind, grounded partner with deep humanit...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Kitesurfing & Watercolor landscape painting",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Visual Design Strategy • Hypergrowth Execution",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Kitesurfing",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Melanie_Perkins_Canva_%28cropped%29.jpg/800px-Melanie_Perkins_Canva_%28cropped%29.jpg"
+      },
+      {
+        "label": "Sydney (Bondi)",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Fresh Australian barramundi",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 9 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Kitesurfing is striking. How do you protect your downtime?",
+      "matchAgentName": "Melanie Perkins's Proxy",
+      "matchAvatar": "M",
+      "matchMsg": "Strict boundaries. A kind, grounded partner with deep humanitarian values, love for outdoor sports, and zero ego despite world-scale success. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (86% sync)."
+    },
+    "dossier": {
+      "needs": "A kind, grounded partner with deep humanitarian values, love for outdoor sports, and zero ego despite world-scale success.",
+      "hobbies": "Kitesurfing, Watercolor landscape painting, Coastal trail running, Kiteboarding",
+      "interests": "Global poverty alleviation, Graphic design history, Marine ecology, Documentary filmmaking",
+      "careerEthos": "Set crazy big goals and make them happen. Make doing good an intrinsic engine of company success.",
+      "vibe": "Australian coastal breeze, vibrant turquoise seas, kitesurfing spray, colorful community murals, barefoot team picnics.",
+      "rituals": "Kitesurfing in windy bays, hosting beachside barbecues with close friends, watercolor painting, reading biographies.",
+      "culinary": "Fresh Australian barramundi, smashed avocado toast with dukkah, flat whites, tropical passionfruit pavlova.",
+      "greenFlags": "Genuine empathy, passion for giving back, love for ocean nature, respectful communication.",
+      "dealbreakers": "Greed, selfish ambition, arrogance, complaining about trivial inconveniences.",
+      "idealVenue": "An afternoon kitesurfing lesson on Sydney's Northern Beaches followed by a picnic blanket at dusk watching the waves."
+    },
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Melanie_Perkins_Canva_%28cropped%29.jpg/800px-Melanie_Perkins_Canva_%28cropped%29.jpg"
+  },
+  {
+    "id": 9,
+    "profileId": "lex-fridman",
+    "name": "Lex Fridman",
+    "nameAge": "Lex Fridman, 35",
+    "role": "AI Researcher at MIT · Host of Lex Fridman Podcast",
+    "rankPill": "#10 MATCH",
+    "location": "Austin, TX & Boston, MA",
+    "distance": "8.4 miles away",
+    "verification": "Verified Human (AI Researcher at MIT)",
+    "linkedinUrl": "https://www.linkedin.com/in/lexfridman",
+    "instagramUrl": "https://www.instagram.com/lexfridman",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Lex_Fridman_2021.jpg/800px-Lex_Fridman_2021.jpg",
+    "igHandle": "@lexfridman",
+    "resonance": "77%",
+    "resonanceDash": "77, 100",
+    "resonanceDesc": "High sync between Lex Fridman's professional drive (Human-Robot Interaction & Machine Learning) and weekend aesthetic (Brazilian Jiu-Jitsu (Black Belt)).",
+    "category": "high,tech",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A deeply soulful, emotionally resonant par...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Brazilian Jiu-Jitsu (Black Belt) & Acoustic & electric guitar",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Human-Robot Interaction • Machine Learning",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Brazilian Jiu-Jitsu (Black Belt)",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Lex_Fridman_2021.jpg/800px-Lex_Fridman_2021.jpg"
+      },
+      {
+        "label": "Austin",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Ribeye steak (rare)",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 10 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Brazilian Jiu-Jitsu (Black Belt) is striking. How do you protect your downtime?",
+      "matchAgentName": "Lex Fridman's Proxy",
+      "matchAvatar": "L",
+      "matchMsg": "Strict boundaries. A deeply soulful, emotionally resonant partner who appreciates romantic idealism, philosophical conversations late into the night, and quiet devotion. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (77% sync)."
+    },
+    "dossier": {
+      "needs": "A deeply soulful, emotionally resonant partner who appreciates romantic idealism, philosophical conversations late into the night, and quiet devotion.",
+      "hobbies": "Brazilian Jiu-Jitsu (Black Belt), Acoustic & electric guitar, Marathon running, Poetry reading",
+      "interests": "Russian classic literature (Tolstoy), Space exploration, Theoretical physics, Historical philosophy",
+      "careerEthos": "Lead with love, discipline, intellectual curiosity, and deep empathy for the human condition.",
+      "vibe": "Classic black suit and tie, acoustic guitar beside bookshelves, sweaty jiu-jitsu mats, hard sci-fi paperbacks, Austin sunsets.",
+      "rituals": "Brazilian jiu-jitsu sparring, running 10 miles in Texas heat, playing acoustic Beatles songs on guitar, reading Dostoevsky.",
+      "culinary": "Ribeye steak (rare), black coffee, simple water, dark chocolate.",
+      "greenFlags": "Emotional depth, appreciation for classical music or literature, kindness to animals and strangers, love of learning.",
+      "dealbreakers": "Cynicism about love, gossip, mockery of vulnerability, inability to sit in peaceful silence.",
+      "idealVenue": "A dimly lit acoustic coffee house with two guitars, discussing the meaning of human consciousness until 2 AM."
+    },
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Lex_Fridman_2021.jpg/800px-Lex_Fridman_2021.jpg"
+  },
+  {
+    "id": 10,
+    "profileId": "sophia-amoruso",
+    "name": "Sophia Amoruso",
+    "nameAge": "Sophia Amoruso, 30",
+    "role": "Founder at Trust Fund & Girlboss · Author",
+    "rankPill": "#11 MATCH",
+    "location": "Los Angeles & New York",
+    "distance": "9.2 miles away",
+    "verification": "Verified Human (Founder at Trust Fund & Girlboss)",
+    "linkedinUrl": "https://www.linkedin.com/in/sophia-amoruso",
+    "instagramUrl": "https://www.instagram.com/sophiaamoruso",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sophia_Amoruso_2014.jpg/800px-Sophia_Amoruso_2014.jpg",
+    "igHandle": "@sophiaamoruso",
+    "resonance": "75%",
+    "resonanceDash": "75, 100",
+    "resonanceDesc": "High sync between Sophia Amoruso's professional drive (Brand Cultivation & Venture Investing) and weekend aesthetic (Vintage fashion curation).",
+    "category": "high,tech",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A sharp, stylistically confident partner w...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Vintage fashion curation & Interior design staging",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Brand Cultivation • Venture Investing",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Vintage fashion curation",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sophia_Amoruso_2014.jpg/800px-Sophia_Amoruso_2014.jpg"
+      },
+      {
+        "label": "Los Angeles",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Spicy mezcal palomas",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 11 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Vintage fashion curation is striking. How do you protect your downtime?",
+      "matchAgentName": "Sophia Amoruso's Proxy",
+      "matchAvatar": "S",
+      "matchMsg": "Strict boundaries. A sharp, stylistically confident partner with real creative taste who respects her independence and can match her quick, edgy humor. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (75% sync)."
+    },
+    "dossier": {
+      "needs": "A sharp, stylistically confident partner with real creative taste who respects her independence and can match her quick, edgy humor.",
+      "hobbies": "Vintage fashion curation, Interior design staging, Driving vintage cars, Collecting vinyl",
+      "interests": "70s rock aesthetics, Architecture of John Lautner, Modern venture capital, Contemporary photography",
+      "careerEthos": "Turn scrappy hustle into cultural momentum. Own your mistakes boldly and reinvent yourself unapologetically.",
+      "vibe": "Sleek Los Angeles mid-century, sharp vintage tailoring, dark espresso martinis, moody black leather, vintage Porsche.",
+      "rituals": "Thrifting rare vintage fashion pieces, browsing modernist design auctions, hosting chic rooftop dinners, reading design monographs.",
+      "culinary": "Spicy mezcal palomas, hamachi crudo with jalapeno, espresso martinis, dark chocolate mousse.",
+      "greenFlags": "Impeccable personal style, quick wit, respect for autonomy, fearless self-expression.",
+      "dealbreakers": "Bland conformity, insecurity about ambitious women, lack of aesthetic eye.",
+      "idealVenue": "Hidden vinyl speakeasy in Silver Lake with vintage cocktails, followed by a late-night drive winding through Mulholland."
+    },
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Sophia_Amoruso_2014.jpg/800px-Sophia_Amoruso_2014.jpg"
+  },
+  {
+    "id": 11,
+    "profileId": "guillermo-rauch",
+    "name": "Guillermo Rauch",
+    "nameAge": "Guillermo Rauch, 35",
+    "role": "CEO & Founder at Vercel",
+    "rankPill": "#12 MATCH",
+    "location": "San Francisco, CA",
+    "distance": "10.0 miles away",
+    "verification": "Verified Human (CEO & Founder at Vercel)",
+    "linkedinUrl": "https://www.linkedin.com/in/rauchg",
+    "instagramUrl": "https://www.instagram.com/rauchg",
+    "image": "https://avatars.githubusercontent.com/u/13041?v=4",
+    "igHandle": "@rauchg",
+    "resonance": "88%",
+    "resonanceDash": "88, 100",
+    "resonanceDesc": "High sync between Guillermo Rauch's professional drive (Frontend Infrastructure & Next.js) and weekend aesthetic (Typography design).",
+    "category": "high,tech",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A partner who appreciates clean aesthetics...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Typography design & Espresso dialing-in",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Frontend Infrastructure • Next.js",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Typography design",
+        "img": "https://avatars.githubusercontent.com/u/13041?v=4"
+      },
+      {
+        "label": "San Francisco",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Argentine asado",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 12 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Typography design is striking. How do you protect your downtime?",
+      "matchAgentName": "Guillermo Rauch's Proxy",
+      "matchAvatar": "G",
+      "matchMsg": "Strict boundaries. A partner who appreciates clean aesthetics, mental clarity, high-speed intellectual dialogue, and warmth amidst intense focus. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (88% sync)."
+    },
+    "dossier": {
+      "needs": "A partner who appreciates clean aesthetics, mental clarity, high-speed intellectual dialogue, and warmth amidst intense focus.",
+      "hobbies": "Typography design, Espresso dialing-in, Urban hill running, Open source hacking",
+      "interests": "Bauhaus and Swiss design, Distributed systems, Argentine tango music, Frontend ergonomics",
+      "careerEthos": "The web should be instantaneous. Eliminate friction, embrace craft, and deliver delight to developers and end users.",
+      "vibe": "Monochrome brutalism, sleek black-and-white geometric architecture, Swiss typography, pristine mechanical keyboards, glowing OLED screens.",
+      "rituals": "Exploring modernist art museums, testing new espresso roast profiles, tweaking open source repositories, running through SF hills.",
+      "culinary": "Argentine asado, artisan pour-over coffee, fresh crusty baguettes, Argentine Malbec.",
+      "greenFlags": "Passion for elegance and efficiency, calm under pressure, curiosity about how things work, playful wit.",
+      "dealbreakers": "Clutter, inefficiency, chronic procrastination, carelessness in detail.",
+      "idealVenue": "A minimalist Japanese cafe tasting specialty geisha coffee, discussing font anatomy and modern architecture."
+    },
+    "avatar": "https://avatars.githubusercontent.com/u/13041?v=4"
+  },
+  {
+    "id": 12,
+    "profileId": "payal-kadakia",
+    "name": "Payal Kadakia",
+    "nameAge": "Payal Kadakia, 30",
+    "role": "Founder at ClassPass · Author & Dancer",
+    "rankPill": "#13 MATCH",
+    "location": "Los Angeles & New York",
+    "distance": "10.8 miles away",
+    "verification": "Verified Human (Founder at ClassPass)",
+    "linkedinUrl": "https://www.linkedin.com/in/payalkadakia",
+    "instagramUrl": "https://www.instagram.com/payal",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Payal_Kadakia_2018.jpg/800px-Payal_Kadakia_2018.jpg",
+    "igHandle": "@payal",
+    "resonance": "78%",
+    "resonanceDash": "78, 100",
+    "resonanceDesc": "High sync between Payal Kadakia's professional drive (Fitness Tech & Dance Choreography) and weekend aesthetic (Indian classical dance (Kathak/Bollywood)).",
+    "category": "high,tech",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A disciplined, supportive partner who resp...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Indian classical dance (Kathak/Bollywood) & Barre and pilates",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Fitness Tech • Dance Choreography",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Indian classical dance (Kathak/Bollywood)",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Payal_Kadakia_2018.jpg/800px-Payal_Kadakia_2018.jpg"
+      },
+      {
+        "label": "Los Angeles",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Spiced golden milk turmeric lattes",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 13 of 26: Autonomous Midnight Aperitif",
+      "turn": "Turn 6 of 8 • 12m elapsed",
+      "userMsg1": "I was looking at your rehearsal videos on Instagram. The footwork in classical Kathak dance is legitimately as intense as a 4th-quarter AUDL ultimate frisbee point.",
+      "matchAgentName": "Payal's Agent",
+      "matchAvatar": "P",
+      "matchMsg": "People think dance is just grace, but it's pure mathematics and conditioning. Same as your camera rigs—your team operates with the discipline of a dance troupe.",
+      "userMsg2": "Exactly. If the cut is two frames late or the lighting has glare, the whole rhythm collapses. What's your ritual when you need to recharge after a high-stakes week?",
+      "consensus": "Both autonomous proxies agree: High Energy & Athletic Discipline! Both agents enthusiastically signed up for a 2nd date."
+    },
+    "dossier": {
+      "needs": "A disciplined, supportive partner who respects artistic expression, lives an active healthy lifestyle, and has strong family values.",
+      "hobbies": "Indian classical dance (Kathak/Bollywood), Barre and pilates, Journaling & intention mapping, Choreography",
+      "interests": "Performing arts history, Mindfulness meditation, Goal architecture, Cultural storytelling",
+      "careerEthos": "Anchor ambition in your true creative passion. Movement and discipline unlock your highest potential.",
+      "vibe": "Dynamic dance movement, swirling colorful lehengas, bright sunny dance studios, mindful morning journals, family warmth.",
+      "rituals": "Rehearsing dance choreographies, morning meditation and intention journaling, playing with her son, healthy plant-based cooking.",
+      "culinary": "Spiced golden milk turmeric lattes, fresh avocado grain bowls, Gujarati khichdi, fresh green smoothies.",
+      "greenFlags": "Disciplined personal habits, appreciation for dance and culture, supportive of female ambition, loving family ties.",
+      "dealbreakers": "Laziness, lack of discipline, cynicism toward artistic dreams, disrespect for cultural roots.",
+      "idealVenue": "Attending an immersive contemporary dance performance followed by a quiet candlelit tea room sharing life vision boards."
+    },
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Payal_Kadakia_2018.jpg/800px-Payal_Kadakia_2018.jpg"
+  },
+  {
+    "id": 13,
+    "profileId": "gary-vaynerchuk",
+    "name": "Gary Vaynerchuk",
+    "nameAge": "Gary Vaynerchuk, 35",
+    "role": "Chairman of VaynerX & CEO of VaynerMedia",
+    "rankPill": "#14 MATCH",
+    "location": "New York, NY",
+    "distance": "11.6 miles away",
+    "verification": "Verified Human (Chairman of VaynerX & CEO of VaynerMedia)",
+    "linkedinUrl": "https://www.linkedin.com/in/garyvaynerchuk",
+    "instagramUrl": "https://www.instagram.com/garyvee",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Gary_Vaynerchuk_2017.jpg/800px-Gary_Vaynerchuk_2017.jpg",
+    "igHandle": "@garyvee",
+    "resonance": "97%",
+    "resonanceDash": "97, 100",
+    "resonanceDesc": "High sync between Gary Vaynerchuk's professional drive (Attention Economics & Social Media Strategy) and weekend aesthetic (Garage sailing & antiquing).",
+    "category": "high,tech",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A down-to-earth, deeply empathetic partner...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Garage sailing & antiquing & Sports card collecting",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Attention Economics • Social Media Strategy",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Garage sailing & antiquing",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Gary_Vaynerchuk_2017.jpg/800px-Gary_Vaynerchuk_2017.jpg"
+      },
+      {
+        "label": "New York",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Classic New York pastrami on rye",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 14 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Garage sailing & antiquing is striking. How do you protect your downtime?",
+      "matchAgentName": "Gary Vaynerchuk's Proxy",
+      "matchAvatar": "G",
+      "matchMsg": "Strict boundaries. A down-to-earth, deeply empathetic partner with high emotional resilience who values kindness above flash and loves family. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (97% sync)."
+    },
+    "dossier": {
+      "needs": "A down-to-earth, deeply empathetic partner with high emotional resilience who values kindness above flash and loves family.",
+      "hobbies": "Garage sailing & antiquing, Sports card collecting, Cheering for the NY Jets, Wine tasting",
+      "interests": "Consumer psychology, 90s nostalgia culture, Philanthropy, Youth mentorship",
+      "careerEthos": "Macro patience, micro speed. Kindness and empathy are the ultimate competitive advantages in life and business.",
+      "vibe": "Raw handheld video energy, garage sale treasure hunting, New York Jets green, vibrant graffiti sneakers, high caffeine hustle.",
+      "rituals": "Saturday morning garage sailing for hidden treasures, watching the NY Jets, unboxing vintage sports cards, face-timing family.",
+      "culinary": "Classic New York pastrami on rye, vintage Bordeaux wine, fresh diner coffee, dirty water hot dogs.",
+      "greenFlags": "Deep empathy, kindness to retail workers, closeness to family, ability to see the good in people.",
+      "dealbreakers": "Entitlement, complaining, blaming circumstances, snobbery toward regular folks.",
+      "idealVenue": "An early morning flea market hunt finding bizarre 80s toys, followed by an authentic deli sandwich and a stroll through Central Park."
+    },
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Gary_Vaynerchuk_2017.jpg/800px-Gary_Vaynerchuk_2017.jpg"
+  },
+  {
+    "id": 14,
+    "profileId": "reshma-saujani",
+    "name": "Reshma Saujani",
+    "nameAge": "Reshma Saujani, 30",
+    "role": "Founder at Girls Who Code & Moms First",
+    "rankPill": "#15 MATCH",
+    "location": "New York, NY",
+    "distance": "12.4 miles away",
+    "verification": "Verified Human (Founder at Girls Who Code & Moms First)",
+    "linkedinUrl": "https://www.linkedin.com/in/reshma-saujani",
+    "instagramUrl": "https://www.instagram.com/reshmasaujani",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Reshma_Saujani_by_Gage_Skidmore.jpg/800px-Reshma_Saujani_by_Gage_Skidmore.jpg",
+    "igHandle": "@reshmasaujani",
+    "resonance": "79%",
+    "resonanceDash": "79, 100",
+    "resonanceDesc": "High sync between Reshma Saujani's professional drive (Social Impact & Public Policy) and weekend aesthetic (Vinyasa yoga).",
+    "category": "creative",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A courageous, emotionally secure partner w...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Vinyasa yoga & Writing and public journaling",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Social Impact • Public Policy",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Vinyasa yoga",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Reshma_Saujani_by_Gage_Skidmore.jpg/800px-Reshma_Saujani_by_Gage_Skidmore.jpg"
+      },
+      {
+        "label": "New York",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Chai tea with fresh ginger",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 15 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Vinyasa yoga is striking. How do you protect your downtime?",
+      "matchAgentName": "Reshma Saujani's Proxy",
+      "matchAvatar": "R",
+      "matchMsg": "Strict boundaries. A courageous, emotionally secure partner who is an equal partner at home, passionate about social justice, and embraces vulnerability. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (79% sync)."
+    },
+    "dossier": {
+      "needs": "A courageous, emotionally secure partner who is an equal partner at home, passionate about social justice, and embraces vulnerability.",
+      "hobbies": "Vinyasa yoga, Writing and public journaling, Exploring indie bookstores, Family park walks",
+      "interests": "Constitutional law, Labor history, Women in engineering, Social innovation",
+      "careerEthos": "Teach girls bravery, not perfection. Build movements that rewrite societal infrastructure for care and equity.",
+      "vibe": "Vibrant New York city energy, bright colorful power suits, podiums full of excited young coders, cozy family reading nooks.",
+      "rituals": "Taking kids to Central Park playgrounds, reading non-fiction in sunny corner nooks, community advocacy meetups, yoga.",
+      "culinary": "Chai tea with fresh ginger, spicy vegetarian Indian curries, fresh artisanal bagels, dark chocolate.",
+      "greenFlags": "True feminist values in action, emotional maturity, commitment to community, kindness to children.",
+      "dealbreakers": "Perfectionist control freaks, dismissiveness of caretaking, fragile masculinity.",
+      "idealVenue": "Browsing the Strand bookstore picking out books that changed your lives, followed by a cozy dinner in Greenwich Village."
+    },
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Reshma_Saujani_by_Gage_Skidmore.jpg/800px-Reshma_Saujani_by_Gage_Skidmore.jpg"
+  },
+  {
+    "id": 15,
+    "profileId": "reid-hoffman",
+    "name": "Reid Hoffman",
+    "nameAge": "Reid Hoffman, 35",
+    "role": "Co-Founder at LinkedIn · Partner at Greylock",
+    "rankPill": "#16 MATCH",
+    "location": "Palo Alto & San Francisco",
+    "distance": "13.2 miles away",
+    "verification": "Verified Human (Co-Founder at LinkedIn)",
+    "linkedinUrl": "https://www.linkedin.com/in/reidhoffman",
+    "instagramUrl": "https://www.instagram.com/reidhoffman",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Reid_Hoffman_2013.jpg/800px-Reid_Hoffman_2013.jpg",
+    "igHandle": "@reidhoffman",
+    "resonance": "76%",
+    "resonanceDash": "76, 100",
+    "resonanceDesc": "High sync between Reid Hoffman's professional drive (Network Effects & Blitzscaling) and weekend aesthetic (High-strategy board games (Settlers of Catan)).",
+    "category": "creative",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: An intellectual equal who loves philosophi...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "High-strategy board games (Settlers of Catan) & Creative writing",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Network Effects • Blitzscaling",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "High-strategy board games (Settlers of Catan)",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Reid_Hoffman_2013.jpg/800px-Reid_Hoffman_2013.jpg"
+      },
+      {
+        "label": "Oxford",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Earl Grey tea",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 16 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with High-strategy board games (Settlers of Catan) is striking. How do you protect your downtime?",
+      "matchAgentName": "Reid Hoffman's Proxy",
+      "matchAvatar": "R",
+      "matchMsg": "Strict boundaries. An intellectual equal who loves philosophical inquiry, has expansive humanist curiosity, and enjoys cooperative problem-solving. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (76% sync)."
+    },
+    "dossier": {
+      "needs": "An intellectual equal who loves philosophical inquiry, has expansive humanist curiosity, and enjoys cooperative problem-solving.",
+      "hobbies": "High-strategy board games (Settlers of Catan), Creative writing, Archery, Walking discussions",
+      "interests": "Moral philosophy (Wittgenstein), Game theory, Renaissance humanism, Technological utopianism",
+      "careerEthos": "Humans are fundamentally network-oriented. Technology should amplify human collaboration, agency, and social potential.",
+      "vibe": "Oxford wood-paneled libraries, leather armchairs, sprawling board game setups (Settlers of Catan), thoughtful podcast microphones.",
+      "rituals": "Hosting marathon strategy board game nights, writing essays on philosophy and AI, walking through Stanford arboretum, reading history.",
+      "culinary": "Earl Grey tea, fine aged Scottish whisky, duck confit, fresh California salads.",
+      "greenFlags": "Intellectual humility, love for complex ideas, ability to play games cooperatively, humanist ethos.",
+      "dealbreakers": "Zero-sum competitive mindset, dogmatic anti-intellectualism, gossipy malice.",
+      "idealVenue": "A leisurely walking tour of a university botanical garden followed by tea in a quiet library discussing the future of civilization."
+    },
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Reid_Hoffman_2013.jpg/800px-Reid_Hoffman_2013.jpg"
+  },
+  {
+    "id": 16,
+    "profileId": "emily-weiss",
+    "name": "Emily Weiss",
+    "nameAge": "Emily Weiss, 30",
+    "role": "Founder at Glossier & Into The Gloss",
+    "rankPill": "#17 MATCH",
+    "location": "New York, NY",
+    "distance": "14.0 miles away",
+    "verification": "Verified Human (Founder at Glossier & Into The Gloss)",
+    "linkedinUrl": "https://www.linkedin.com/in/emily-weiss-glossier",
+    "instagramUrl": "https://www.instagram.com/emilywweiss",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Emily_Weiss_2018.jpg/800px-Emily_Weiss_2018.jpg",
+    "igHandle": "@emilywweiss",
+    "resonance": "71%",
+    "resonanceDash": "71, 100",
+    "resonanceDesc": "High sync between Emily Weiss's professional drive (Brand Narrative & D2C Commerce) and weekend aesthetic (Ceramics & pottery throwing).",
+    "category": "creative",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A thoughtful, visually perceptive partner ...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Ceramics & pottery throwing & Floral design",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Brand Narrative • D2C Commerce",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Ceramics & pottery throwing",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Emily_Weiss_2018.jpg/800px-Emily_Weiss_2018.jpg"
+      },
+      {
+        "label": "New York (Soho)",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Matcha lattes with almond milk",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 17 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Ceramics & pottery throwing is striking. How do you protect your downtime?",
+      "matchAgentName": "Emily Weiss's Proxy",
+      "matchAvatar": "E",
+      "matchMsg": "Strict boundaries. A thoughtful, visually perceptive partner with gentle confidence, emotional security, and an appreciation for quiet beauty. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (71% sync)."
+    },
+    "dossier": {
+      "needs": "A thoughtful, visually perceptive partner with gentle confidence, emotional security, and an appreciation for quiet beauty.",
+      "hobbies": "Ceramics & pottery throwing, Floral design, Pilates and stretching, Collecting art books",
+      "interests": "Skincare biochemistry, Scandinavian furniture design, Documentary photography, Modern feminism",
+      "careerEthos": "Skin first, makeup second, smile always. Listen to your community before creating a single product.",
+      "vibe": "Millennial pink softness, dewy skin closeups, architectural floral arrangements, light-drenched Soho lofts, ceramic coffee cups.",
+      "rituals": "Morning skincare rituals with chilled facial rollers, strolling Soho farmers markets, arranging fresh peonies, reading interior design books.",
+      "culinary": "Matcha lattes with almond milk, fresh burrata with heirloom tomatoes, crisp chilled Sancerre wine, peach galette.",
+      "greenFlags": "Good hygiene and self-care, artistic appreciation, active listener, respectful of personal space.",
+      "dealbreakers": "Sloppiness, loud performative ego, disregard for beauty and home environment.",
+      "idealVenue": "A private pottery workshop making ceramic cups together, followed by natural wine and fresh oysters in a candlelit courtyard."
+    },
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Emily_Weiss_2018.jpg/800px-Emily_Weiss_2018.jpg"
+  },
+  {
+    "id": 17,
+    "profileId": "shaan-puri",
+    "name": "Shaan Puri",
+    "nameAge": "Shaan Puri, 35",
+    "role": "Host of My First Million & Serial Entrepreneur",
+    "rankPill": "#18 MATCH",
+    "location": "Austin, TX & San Francisco",
+    "distance": "14.8 miles away",
+    "verification": "Verified Human (Host of My First Million & Serial Entrepreneur)",
+    "linkedinUrl": "https://www.linkedin.com/in/shaanpuri",
+    "instagramUrl": "https://www.instagram.com/shaanpuri",
+    "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&h=400&q=80",
+    "igHandle": "@shaanpuri",
+    "resonance": "78%",
+    "resonanceDash": "78, 100",
+    "resonanceDesc": "High sync between Shaan Puri's professional drive (Storytelling Frameworks & Brainstorming Business Models) and weekend aesthetic (Sauna and cold plunging).",
+    "category": "creative",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A fun, ambitious partner who is quick on h...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Sauna and cold plunging & Whiteboard brainstorming",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Storytelling Frameworks • Brainstorming Business Models",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Sauna and cold plunging",
+        "img": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&h=400&q=80"
+      },
+      {
+        "label": "Austin",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Texas smoked brisket",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 18 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Sauna and cold plunging is striking. How do you protect your downtime?",
+      "matchAgentName": "Shaan Puri's Proxy",
+      "matchAvatar": "S",
+      "matchMsg": "Strict boundaries. A fun, ambitious partner who is quick on her feet, loves laughing at wild hypotheticals, and doesn't get offended easily. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (78% sync)."
+    },
+    "dossier": {
+      "needs": "A fun, ambitious partner who is quick on her feet, loves laughing at wild hypotheticals, and doesn't get offended easily.",
+      "hobbies": "Sauna and cold plunging, Whiteboard brainstorming, Basketball pick-up games, Poker nights",
+      "interests": "Bizarre business models, Stand-up comedy, Biographies of eccentrics, Physical longevity",
+      "careerEthos": "Ideas are a dime a dozen; energy and storytelling move the needle. Life is a game to be played with joy and curiosity.",
+      "vibe": "Whiteboard mind maps, sauna heat sweat, hilarious facial expressions, Texas sunshine, casual hoodies and Yeezys.",
+      "rituals": "Hot sauna followed by ice plunge, brainstorming 10 business ideas over iced coffee, wrestling with his kids, lifting heavy weights.",
+      "culinary": "Texas smoked brisket, Chipotle burrito bowls with guacamole, cold brew coffee, chocolate chip cookies.",
+      "greenFlags": "Great sense of humor, willingness to play 'what if' games, high personal agency, self-confidence.",
+      "dealbreakers": "Victim mentality, being easily offended, boring monotone conversation, inability to laugh at absurdity.",
+      "idealVenue": "Grabbing milkshakes and sitting on a rooftop ranking ridiculous startup ideas or playing competitive mini-golf with high-stakes bets."
+    }
+  },
+  {
+    "id": 18,
+    "profileId": "padmasree-warrior",
+    "name": "Padmasree Warrior",
+    "nameAge": "Padmasree Warrior, 30",
+    "role": "Founder & CEO at Fable · Former CTO at Cisco & Motorola",
+    "rankPill": "#19 MATCH",
+    "location": "Palo Alto, CA",
+    "distance": "15.6 miles away",
+    "verification": "Verified Human (Founder & CEO at Fable)",
+    "linkedinUrl": "https://www.linkedin.com/in/padmasree",
+    "instagramUrl": "https://www.instagram.com/padmasree",
+    "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&h=400&q=80",
+    "igHandle": "@padmasree",
+    "resonance": "86%",
+    "resonanceDash": "86, 100",
+    "resonanceDesc": "High sync between Padmasree Warrior's professional drive (Enterprise Technology & Corporate Governance) and weekend aesthetic (Oil painting on large canvases).",
+    "category": "creative",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A mature, intellectually grounded partner ...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Oil painting on large canvases & Poetry composition",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Enterprise Technology • Corporate Governance",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Oil painting on large canvases",
+        "img": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&h=400&q=80"
+      },
+      {
+        "label": "Palo Alto",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "South Indian filter coffee",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 19 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Oil painting on large canvases is striking. How do you protect your downtime?",
+      "matchAgentName": "Padmasree Warrior's Proxy",
+      "matchAvatar": "P",
+      "matchMsg": "Strict boundaries. A mature, intellectually grounded partner with broad cultural horizons, deep integrity, and genuine respect for female wisdom and art. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (86% sync)."
+    },
+    "dossier": {
+      "needs": "A mature, intellectually grounded partner with broad cultural horizons, deep integrity, and genuine respect for female wisdom and art.",
+      "hobbies": "Oil painting on large canvases, Poetry composition, Literary book curation, Botanical gardening",
+      "interests": "Modern art history, Quantum computing implications, Global literature in translation, Classical music",
+      "careerEthos": "Leadership requires both high IQ and high EQ. Technology must serve human literacy, empathy, and mental wellness.",
+      "vibe": "Original vibrant oil paintings, stacks of diverse contemporary literature, Palo Alto garden roses, serene tea tables, museum galas.",
+      "rituals": "Oil painting on canvas in her studio, writing poetry, curating monthly book club recommendations, morning walks in Palo Alto.",
+      "culinary": "South Indian filter coffee, delicate masala dosas, Earl Grey tea with lemon, fresh California figs.",
+      "greenFlags": "Broad intellectual horizons, love for reading, emotional composure, deep moral compass.",
+      "dealbreakers": "Petty superficiality, lack of cultural awareness, loud boastfulness, emotional volatility.",
+      "idealVenue": "An unhurried stroll through a modern art museum discussing favorite painters, followed by tea and poetry in a tranquil Japanese garden."
+    }
+  },
+  {
+    "id": 19,
+    "profileId": "austin-russell",
+    "name": "Austin Russell",
+    "nameAge": "Austin Russell, 35",
+    "role": "Founder & CEO at Luminar Technologies",
+    "rankPill": "#20 MATCH",
+    "location": "Orlando, FL & Palo Alto, CA",
+    "distance": "16.4 miles away",
+    "verification": "Verified Human (Founder & CEO at Luminar Technologies)",
+    "linkedinUrl": "https://www.linkedin.com/in/austin-russell-05459346",
+    "instagramUrl": "https://www.instagram.com/austinrussellofficial",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Austin_Russell_%28cropped%29.jpg/800px-Austin_Russell_%28cropped%29.jpg",
+    "igHandle": "@austinrussellofficial",
+    "resonance": "89%",
+    "resonanceDash": "89, 100",
+    "resonanceDesc": "High sync between Austin Russell's professional drive (Optics & Photonics & Hardware Engineering) and weekend aesthetic (Laser optics experimentation).",
+    "category": "creative",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A sharp, ambitious partner who understands...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Laser optics experimentation & Performance vehicle driving",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Optics & Photonics • Hardware Engineering",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Laser optics experimentation",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Austin_Russell_%28cropped%29.jpg/800px-Austin_Russell_%28cropped%29.jpg"
+      },
+      {
+        "label": "Orlando",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Wagyu steak",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 20 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Laser optics experimentation is striking. How do you protect your downtime?",
+      "matchAgentName": "Austin Russell's Proxy",
+      "matchAvatar": "A",
+      "matchMsg": "Strict boundaries. A sharp, ambitious partner who understands obsessive engineering focus, values privacy, and loves deep intellectual conversations. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (89% sync)."
+    },
+    "dossier": {
+      "needs": "A sharp, ambitious partner who understands obsessive engineering focus, values privacy, and loves deep intellectual conversations.",
+      "hobbies": "Laser optics experimentation, Performance vehicle driving, Tennis, Chess",
+      "interests": "Solid state physics, Photonics, Aerospace history, Architectural acoustic design",
+      "careerEthos": "Solve physical world problems through first-principles physics. Safety is non-negotiable.",
+      "vibe": "Laser beams in photonics labs, sleek hypercars with lidar rooflines, high-end electronics cleanrooms, sleek black suits.",
+      "rituals": "Tinkering in optics labs, testing next-gen electric vehicles on proving grounds, reading physics papers, tennis.",
+      "culinary": "Wagyu steak, sparkling water with lime, espresso macchiato, crisp artisan sourdough.",
+      "greenFlags": "Appreciation for deep technical craftsmanship, intellectual curiosity, loyalty, quiet confidence.",
+      "dealbreakers": "Fickleness, excessive social media obsession, lack of personal ambition.",
+      "idealVenue": "A private evening at an observatory looking through high-powered optical telescopes, discussing the physics of light."
+    },
+    "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Austin_Russell_%28cropped%29.jpg/800px-Austin_Russell_%28cropped%29.jpg"
+  },
+  {
+    "id": 20,
+    "profileId": "anne-wojcicki",
+    "name": "Anne Wojcicki",
+    "nameAge": "Anne Wojcicki, 30",
+    "role": "Co-Founder & CEO at 23andMe",
+    "rankPill": "#21 MATCH",
+    "location": "Palo Alto, CA",
+    "distance": "17.2 miles away",
+    "verification": "Verified Human (Co-Founder & CEO at 23andMe)",
+    "linkedinUrl": "https://www.linkedin.com/in/annewojcicki",
+    "instagramUrl": "https://www.instagram.com/annewojcicki",
+    "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&h=400&q=80",
+    "igHandle": "@annewojcicki",
+    "resonance": "89%",
+    "resonanceDash": "89, 100",
+    "resonanceDesc": "High sync between Anne Wojcicki's professional drive (Human Genetics & Preventative Healthcare) and weekend aesthetic (Open water swimming).",
+    "category": "creative",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A healthy, grounded, active partner who va...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Open water swimming & Ice hockey & rollerblading",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Human Genetics • Preventative Healthcare",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Open water swimming",
+        "img": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&h=400&q=80"
+      },
+      {
+        "label": "Palo Alto",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Fresh organic salads",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 21 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Open water swimming is striking. How do you protect your downtime?",
+      "matchAgentName": "Anne Wojcicki's Proxy",
+      "matchAvatar": "A",
+      "matchMsg": "Strict boundaries. A healthy, grounded, active partner who values outdoor simplicity, scientific curiosity, family life, and zero pretension. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (89% sync)."
+    },
+    "dossier": {
+      "needs": "A healthy, grounded, active partner who values outdoor simplicity, scientific curiosity, family life, and zero pretension.",
+      "hobbies": "Open water swimming, Ice hockey & rollerblading, Trail cycling, Organic gardening",
+      "interests": "Human longevity science, Epigenetics, Public health infrastructure, Environmental conservation",
+      "careerEthos": "Give people direct access to their health data. Preventative wellness beats reactive treatment every single time.",
+      "vibe": "Barefoot athletic California living, bicycle commutes, DNA double helix models, family camping tents, sunny lemon orchards.",
+      "rituals": "Rollerblading or cycling to work, swimming in open waters, harvesting home fruit trees, hiking with her children.",
+      "culinary": "Fresh organic salads, farm fresh eggs, wild blueberries, antioxidant matcha green tea.",
+      "greenFlags": "Active physical lifestyle, love for science and nature, high family values, humility.",
+      "dealbreakers": "Materialistic vanity, sedentary habits, fear of getting dirty outdoors, anti-science dogmatism.",
+      "idealVenue": "A sunrise mountain bike ride in the Santa Cruz mountains followed by fresh acai bowls and farmers market browsing."
+    }
+  },
+  {
+    "id": 21,
+    "profileId": "satya-nadella",
+    "name": "Satya Nadella",
+    "nameAge": "Satya Nadella, 35",
+    "role": "Chairman and CEO at Microsoft",
+    "rankPill": "#22 MATCH",
+    "location": "Bellevue & Seattle, WA",
+    "distance": "18.0 miles away",
+    "verification": "Verified Human (Chairman and CEO at Microsoft)",
+    "linkedinUrl": "https://www.linkedin.com/in/satyanadella",
+    "instagramUrl": "https://www.instagram.com/satyanadella",
+    "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=400&q=80",
+    "igHandle": "@satyanadella",
+    "resonance": "77%",
+    "resonanceDash": "77, 100",
+    "resonanceDesc": "High sync between Satya Nadella's professional drive (Cloud Architecture & Cultural Transformation) and weekend aesthetic (Cricket enthusiast & amateur player).",
+    "category": "creative",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A deeply compassionate, emotionally mature...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Cricket enthusiast & amateur player & Reading and reciting poetry",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Cloud Architecture • Cultural Transformation",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Cricket enthusiast & amateur player",
+        "img": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=400&q=80"
+      },
+      {
+        "label": "Seattle",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Hyderabadi biryani",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 22 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Cricket enthusiast & amateur player is striking. How do you protect your downtime?",
+      "matchAgentName": "Satya Nadella's Proxy",
+      "matchAvatar": "S",
+      "matchMsg": "Strict boundaries. A deeply compassionate, emotionally mature partner who embodies a growth mindset, treasures family, and loves thoughtful quiet moments. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (77% sync)."
+    },
+    "dossier": {
+      "needs": "A deeply compassionate, emotionally mature partner who embodies a growth mindset, treasures family, and loves thoughtful quiet moments.",
+      "hobbies": "Cricket enthusiast & amateur player, Reading and reciting poetry, Forest bathing walks, Accessibility mentoring",
+      "interests": "Urdu & American poetry, History of sports strategy, Neurodivergent education, Cognitive computing",
+      "careerEthos": "The learn-it-all will always do better than the know-it-all. Empathy is not a soft skill, it is the core source of innovation.",
+      "vibe": "Pacific Northwest evergreens, cricket bats, worn poetry anthologies, calm contemplative tech keynotes, quiet Seattle rain.",
+      "rituals": "Watching test cricket matches with family, reading contemporary poetry, walking through forested Seattle trails with an umbrella.",
+      "culinary": "Hyderabadi biryani, fragrant Earl Grey tea, roasted cashews, dark chocolate.",
+      "greenFlags": "Empathy for vulnerable populations, growth mindset, appreciation for literature, family devotion.",
+      "dealbreakers": "Arrogance, cynical know-it-all attitudes, cruelty toward individuals with special needs.",
+      "idealVenue": "An unhurried tea house overlooking Puget Sound during a gentle rain, reciting poetry and talking about life journeys."
+    }
+  },
+  {
+    "id": 22,
+    "profileId": "fei-fei-li",
+    "name": "Fei-Fei Li",
+    "nameAge": "Fei-Fei Li, 30",
+    "role": "Co-Director at Stanford HAI · Founder at World Labs",
+    "rankPill": "#23 MATCH",
+    "location": "Palo Alto & San Francisco",
+    "distance": "18.8 miles away",
+    "verification": "Verified Human (Co-Director at Stanford HAI)",
+    "linkedinUrl": "https://www.linkedin.com/in/fei-fei-li-4541247",
+    "instagramUrl": "https://www.instagram.com/drfeifeili",
+    "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&h=400&q=80",
+    "igHandle": "@drfeifeili",
+    "resonance": "70%",
+    "resonanceDash": "70, 100",
+    "resonanceDesc": "High sync between Fei-Fei Li's professional drive (Computer Vision & Spatial Intelligence) and weekend aesthetic (Gardening rare roses).",
+    "category": "creative",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A noble, thoughtful partner who respects t...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Gardening rare roses & Cooking authentic Sichuan cuisine",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Computer Vision • Spatial Intelligence",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Gardening rare roses",
+        "img": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&h=400&q=80"
+      },
+      {
+        "label": "Palo Alto",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Authentic Sichuan mapo tofu",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 23 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Gardening rare roses is striking. How do you protect your downtime?",
+      "matchAgentName": "Fei-Fei Li's Proxy",
+      "matchAvatar": "F",
+      "matchMsg": "Strict boundaries. A noble, thoughtful partner who respects the pursuit of scientific truth, values family loyalty, and leads with profound human dignity. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (70% sync)."
+    },
+    "dossier": {
+      "needs": "A noble, thoughtful partner who respects the pursuit of scientific truth, values family loyalty, and leads with profound human dignity.",
+      "hobbies": "Gardening rare roses, Cooking authentic Sichuan cuisine, Nature trail hiking, Reading historical memoirs",
+      "interests": "Evolution of biological vision, Cognitive psychology, Immigrant literature, Spatial intelligence",
+      "careerEthos": "There is nothing artificial about AI — it is made by humans, for humans, and must be guided by human dignity and compassion.",
+      "vibe": "Stanford mission tile courtyards, lab notebooks filled with physics equations, family dry cleaning shop memories, botanical flowers.",
+      "rituals": "Tending to backyard rose bushes, cooking traditional Sichuan meals with family, hiking Dish trail at Stanford, reading science memoirs.",
+      "culinary": "Authentic Sichuan mapo tofu, fragrant jasmine green tea, steamed dumplings, fresh persimmons.",
+      "greenFlags": "Humility despite greatness, respect for family elders, reverence for scientific inquiry, kindness.",
+      "dealbreakers": "Technological nihilism, condescension, lack of filial or family respect.",
+      "idealVenue": "A walk through the Stanford Cactus Garden discussing the wonder of animal vision, followed by cooking a comforting dinner together."
+    }
+  },
+  {
+    "id": 23,
+    "profileId": "tim-cook",
+    "name": "Tim Cook",
+    "nameAge": "Tim Cook, 35",
+    "role": "CEO at Apple",
+    "rankPill": "#24 MATCH",
+    "location": "Cupertino & Palo Alto, CA",
+    "distance": "19.6 miles away",
+    "verification": "Verified Human (CEO at Apple)",
+    "linkedinUrl": "https://www.linkedin.com/in/tim-cook-apple",
+    "instagramUrl": "https://www.instagram.com/tim_cook",
+    "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&h=400&q=80",
+    "igHandle": "@tim_cook",
+    "resonance": "68%",
+    "resonanceDash": "68, 100",
+    "resonanceDesc": "High sync between Tim Cook's professional drive (Global Supply Chain & Executive Leadership) and weekend aesthetic (Yosemite mountain hiking).",
+    "category": "creative",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A disciplined, discreet partner who cheris...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Yosemite mountain hiking & Road cycling",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Global Supply Chain • Executive Leadership",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Yosemite mountain hiking",
+        "img": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&h=400&q=80"
+      },
+      {
+        "label": "Cupertino",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Steamed chicken breast with brown rice",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 24 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Yosemite mountain hiking is striking. How do you protect your downtime?",
+      "matchAgentName": "Tim Cook's Proxy",
+      "matchAvatar": "T",
+      "matchMsg": "Strict boundaries. A disciplined, discreet partner who cherishes privacy, loves quiet nature hikes, and shares a deep dedication to integrity and human dignity. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (68% sync)."
+    },
+    "dossier": {
+      "needs": "A disciplined, discreet partner who cherishes privacy, loves quiet nature hikes, and shares a deep dedication to integrity and human dignity.",
+      "hobbies": "Yosemite mountain hiking, Road cycling, Early morning strength conditioning, Watching college football",
+      "interests": "Clean energy ecosystems, American civil rights history, Supply chain ergonomics, National park conservation",
+      "careerEthos": "Leave the world better than we found it. Privacy is a human right. Excellence is in every micro-detail.",
+      "vibe": "Crisp Apple Park curved glass, early 4 AM dawn gym workouts, sweeping Yosemite granite peaks, Auburn blue and orange, minimalist dark navy.",
+      "rituals": "Hiking the granite trails of Yosemite, cycling Cupertino foothills, cheering on Auburn Tigers football, early morning reading.",
+      "culinary": "Steamed chicken breast with brown rice, crisp Honeycrisp apples, black iced coffee, high-elevation mineral water.",
+      "greenFlags": "High integrity, respect for privacy, love for nature, morning discipline, moral courage.",
+      "dealbreakers": "Loose lips, gossip, carelessness with confidential matters, unethical behavior.",
+      "idealVenue": "A sunrise hike to Glacier Point in Yosemite National Park with thermos coffee, watching the first light hit Half Dome."
+    }
+  },
+  {
+    "id": 24,
+    "profileId": "jensen-huang",
+    "name": "Jensen Huang",
+    "nameAge": "Jensen Huang, 35",
+    "role": "Founder, President & CEO at NVIDIA",
+    "rankPill": "#25 MATCH",
+    "location": "Santa Clara & Los Altos, CA",
+    "distance": "20.4 miles away",
+    "verification": "Verified Human (Founder, President & CEO at NVIDIA)",
+    "linkedinUrl": "https://www.linkedin.com/in/jenhsunhuang",
+    "instagramUrl": "https://www.instagram.com/jensenhuang",
+    "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=400&q=80",
+    "igHandle": "@jensenhuang",
+    "resonance": "87%",
+    "resonanceDash": "87, 100",
+    "resonanceDesc": "High sync between Jensen Huang's professional drive (GPU Computing & Accelerated Architecture) and weekend aesthetic (Gourmet cooking & kitchen prep).",
+    "category": "creative",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A warm, resilient partner who understands ...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Gourmet cooking & kitchen prep & Motorcycling",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "GPU Computing • Accelerated Architecture",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Gourmet cooking & kitchen prep",
+        "img": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=400&q=80"
+      },
+      {
+        "label": "Taipei (Night Markets)",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Taiwanese beef noodle soup",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 25 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Gourmet cooking & kitchen prep is striking. How do you protect your downtime?",
+      "matchAgentName": "Jensen Huang's Proxy",
+      "matchAvatar": "J",
+      "matchMsg": "Strict boundaries. A warm, resilient partner who understands boundless passion, loves big family dinners, and respects thirty-year compounding commitments. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (87% sync)."
+    },
+    "dossier": {
+      "needs": "A warm, resilient partner who understands boundless passion, loves big family dinners, and respects thirty-year compounding commitments.",
+      "hobbies": "Gourmet cooking & kitchen prep, Motorcycling, Watching anime and sci-fi, Interior architectural design",
+      "interests": "First-principles thermodynamics, Taiwanese culinary culture, Computer graphics history, Robotic kinematics",
+      "careerEthos": "Endure pain and suffering with high tolerance. Build the impossible from first principles and never retreat from high-conviction bets.",
+      "vibe": "Iconic black motorcycle leather jacket, neon green silicon glow, Denny's booths at midnight, high-octane engineering war rooms.",
+      "rituals": "Cooking gourmet feasts for family, cleaning the kitchen impeccably (former Denny's dishwasher), reading semiconductor whitepapers.",
+      "culinary": "Taiwanese beef noodle soup, night market braised pork rice, hot oolong tea, classic diner hash browns.",
+      "greenFlags": "Resilience, loyalty through thick and thin, love for good food and family gatherings, high grit.",
+      "dealbreakers": "Quitting at the first sign of friction, pretense, disloyalty, squeamishness about hard work.",
+      "idealVenue": "An electric evening strolling through the Raohe Night Market in Taipei tasting braised delicacies, followed by cooking late-night noodles together."
+    }
+  },
+  {
+    "id": 25,
+    "profileId": "andrew-ng",
+    "name": "Andrew Ng",
+    "nameAge": "Andrew Ng, 35",
+    "role": "Founder at DeepLearning.AI · Co-Founder Coursera",
+    "rankPill": "#26 MATCH",
+    "location": "Los Altos & Palo Alto, CA",
+    "distance": "21.2 miles away",
+    "verification": "Verified Human (Founder at DeepLearning.AI)",
+    "linkedinUrl": "https://www.linkedin.com/in/andrewyng",
+    "instagramUrl": "https://www.instagram.com/andrew_y_ng",
+    "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&h=400&q=80",
+    "igHandle": "@andrew_y_ng",
+    "resonance": "79%",
+    "resonanceDash": "79, 100",
+    "resonanceDesc": "High sync between Andrew Ng's professional drive (Deep Learning & AI Education) and weekend aesthetic (Educational board games).",
+    "category": "creative",
+    "badges": [
+      {
+        "icon": "psychology",
+        "text": "Looking for: A kind, intellectually curious, family-ori...",
+        "color": "rose"
+      },
+      {
+        "icon": "wb_twilight",
+        "text": "Educational board games & Neighborhood jogging",
+        "color": "amber"
+      },
+      {
+        "icon": "school",
+        "text": "Deep Learning • AI Education",
+        "color": "purple"
+      }
+    ],
+    "vibes": [
+      {
+        "label": "Educational board games",
+        "img": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&h=400&q=80"
+      },
+      {
+        "label": "Palo Alto",
+        "img": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80"
+      },
+      {
+        "label": "Singapore Hainanese chicken rice",
+        "img": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80"
+      }
+    ],
+    "dialogue": {
+      "round": "Round 26 of 26: Autonomous Resonance Session",
+      "turn": "Turn 6 of 8 • 10m elapsed",
+      "userMsg1": "Reviewing your Instagram and LinkedIn, your balance of intense creative output with Educational board games is striking. How do you protect your downtime?",
+      "matchAgentName": "Andrew Ng's Proxy",
+      "matchAvatar": "A",
+      "matchMsg": "Strict boundaries. A kind, intellectually curious, family-oriented partner who values education, quiet stability, and joyful collaboration. She told me to ensure any partner values genuine presence without checking notifications.",
+      "userMsg2": "Complete alignment. No phones at dinner, early morning coffee, and shared respect for focused craft. Match confirmed.",
+      "consensus": "Mutual proxy consensus reached: Outstanding intellectual & somatic chemistry (79% sync)."
+    },
+    "dossier": {
+      "needs": "A kind, intellectually curious, family-oriented partner who values education, quiet stability, and joyful collaboration.",
+      "hobbies": "Educational board games, Neighborhood jogging, Tea appreciation, Family baking",
+      "interests": "Cognitive science of learning, Agentic AI systems, Southeast Asian history, Physics puzzles",
+      "careerEthos": "AI is the new electricity. Empower everyone through clear, compassionate education and democratized technology.",
+      "vibe": "Crisp blue button-down shirts, lecture hall whiteboards with neural net diagrams, family park swings, neatly organized study desks.",
+      "rituals": "Playing educational science games with kids, writing AI notes, jogging in leafy Silicon Valley neighborhoods, tea with his wife.",
+      "culinary": "Singapore Hainanese chicken rice, warm genmaicha tea, dim sum steamed buns, fresh fruit platters.",
+      "greenFlags": "Patience with children, curiosity to learn new things, kindness in explaining ideas, emotional calm.",
+      "dealbreakers": "Short temper, condescension, dismissiveness of learning or education.",
+      "idealVenue": "A calm afternoon at a science and technology museum followed by bubble tea in a sunlit courtyard solving logic puzzles together."
+    }
+  }
+]

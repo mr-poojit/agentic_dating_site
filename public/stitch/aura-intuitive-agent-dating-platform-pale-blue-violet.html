@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="web_standard" name="shell-type"/>
+  <title>Synthetica Cupid — Autonomous Agentic Dating Platform</title>
+  <meta name="description" content="An agentic dating platform where AI agents analyze real LinkedIn and Instagram profiles, date on each person's behalf, and rank mutual compatibility.">
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  
+  <style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { display: none; }
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+    }
+    .soft-glow-blue {
+      box-shadow: 0 10px 35px -8px rgba(99, 102, 241, 0.18);
+    }
+    .soft-glow-purple {
+      box-shadow: 0 10px 35px -8px rgba(168, 85, 247, 0.2);
+    }
+    .fade-transition {
+      transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  </style>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary": "#7c3aed",
+            "tertiary-container": "#ede9fe",
+            "on-tertiary-fixed-variant": "#5b21b6",
+            "surface-tint": "#6366f1",
+            "on-secondary-fixed-variant": "#475569",
+            "inverse-on-surface": "#f8fafc",
+            "outline": "#94a3b8",
+            "on-primary-fixed-variant": "#312e81",
+            "surface-bright": "#fcfdff",
+            "error-container": "#fee2e2",
+            "on-primary": "#ffffff",
+            "error": "#ef4444",
+            "secondary-container": "#e2e8f0",
+            "primary-container": "#e0e7ff",
+            "on-background": "#0f172a",
+            "surface-container-low": "#f8fafc",
+            "tertiary-fixed-dim": "#c4b5fd",
+            "surface": "#f8f9ff",
+            "on-secondary-fixed": "#0f172a",
+            "surface-container-high": "#edf2f7",
+            "secondary-fixed": "#e2e8f0",
+            "primary-fixed-dim": "#c7d2fe",
+            "on-surface-variant": "#475569",
+            "surface-container": "#f1f5f9",
+            "on-secondary": "#ffffff",
+            "on-tertiary-container": "#4c1d95",
+            "inverse-surface": "#1e1b4b",
+            "surface-dim": "#e2e8f0",
+            "inverse-primary": "#818cf8",
+            "on-error": "#ffffff",
+            "on-error-container": "#991b1b",
+            "on-tertiary": "#ffffff",
+            "on-secondary-container": "#334155",
+            "primary": "#6366f1",
+            "surface-variant": "#e2e8f0",
+            "secondary": "#64748b",
+            "surface-container-highest": "#cbd5e1",
+            "outline-variant": "#cbd5e1",
+            "on-primary-fixed": "#1e1b4b",
+            "on-tertiary-fixed": "#2e1065",
+            "secondary-fixed-dim": "#cbd5e1",
+            "primary-fixed": "#e0e7ff",
+            "tertiary-fixed": "#f3e8ff",
+            "surface-container-lowest": "#ffffff",
+            "background": "#f8f9fe",
+            "on-primary-container": "#312e81",
+            "on-surface": "#0f172a"
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "space-md": "1rem",
+            "gutter-md": "1.5rem",
+            "gutter-lg": "2rem",
+            "space-xs": "0.25rem",
+            "margin-lg": "3rem",
+            "gutter": "1rem",
+            "space-sm": "0.5rem",
+            "space-xl": "2.5rem",
+            "space-lg": "1.5rem",
+            "margin-md": "2rem",
+            "margin": "1rem"
+          },
+          fontFamily: {
+            "display-hero-mobile": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "display-hero": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"]
+          },
+          fontSize: {
+            "display-hero-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["15px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "body-lg": ["17px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "700" }],
+            "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400" }],
+            "display-hero": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "700" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-gradient-to-b from-[#f6f8ff] via-[#edf1fd] via-[#f5f2fd] to-[#f6f8fe] font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between selection:bg-purple-200 selection:text-purple-900 w-full overflow-x-hidden relative">
+
+  <!-- Full-Bleed Ambient Living Blur Spotlights (Edge-to-Edge across entire screen) -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute -top-32 -left-32 w-[55rem] h-[55rem] rounded-full bg-gradient-to-br from-indigo-200/50 via-blue-200/35 to-transparent blur-3xl"></div>
+    <div class="absolute top-1/4 -right-32 w-[58rem] h-[58rem] rounded-full bg-gradient-to-tl from-purple-200/50 via-pink-100/40 to-transparent blur-3xl"></div>
+    <div class="absolute top-2/3 left-1/4 w-[50rem] h-[50rem] rounded-full bg-gradient-to-tr from-blue-100/40 via-indigo-100/35 to-transparent blur-3xl"></div>
+    <div class="absolute -bottom-20 right-10 w-[52rem] h-[52rem] rounded-full bg-gradient-to-br from-purple-100/45 via-indigo-50/40 to-transparent blur-3xl"></div>
+  </div>
+
+  <!-- TOP NAVIGATION HEADER -->
+  <header class="fixed top-0 left-0 w-full z-50 bg-white/85 backdrop-blur-xl shadow-[0_4px_25px_-6px_rgba(99,102,241,0.08)] border-b border-indigo-50/80">
+    <div class="h-20 max-w-[1240px] mx-auto px-margin-md lg:px-margin-lg flex items-center justify-between gap-space-md">
+      <!-- Logo & Brand -->
+      <div class="flex items-center gap-space-sm cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-indigo-400 flex items-center justify-center text-white shadow-[0_4px_14px_rgba(124,58,237,0.35)]">
+          <span class="material-symbols-outlined text-[23px]">all_inclusive</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-headline-sm text-headline-sm text-[#1e1b4b] font-extrabold tracking-tight leading-none flex items-center gap-1.5">
+            SYNTHETICA <span class="text-purple-600">CUPID</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full font-bold bg-indigo-50 text-indigo-600 border border-indigo-100">Autonomous</span>
+          </span>
+          <span class="font-label-sm text-[11px] text-purple-600 font-bold tracking-wide uppercase mt-0.5">Autonomous Agentic Dating</span>
+        </div>
+      </div>
+
+      <!-- Navigation Pill -->
+      <nav class="hidden xl:flex items-center bg-slate-100/80 p-1.5 rounded-full border border-indigo-50">
+        <a class="px-space-md py-space-sm rounded-full transition-all bg-white text-indigo-700 font-bold shadow-sm" href="#hero-ingestion">Deploy Proxy</a>
+        <a class="px-space-md py-space-sm rounded-full font-label-md text-label-md text-slate-600 hover:text-indigo-600 hover:bg-white/60 transition-all" href="#live-speed-date-section">Date Chamber</a>
+        <a class="px-space-md py-space-sm rounded-full font-label-md text-label-md text-slate-600 hover:text-indigo-600 hover:bg-white/60 transition-all" href="#cohort-roster">Verified 26 Roster</a>
+        <a class="px-space-md py-space-sm rounded-full font-label-md text-label-md text-slate-600 hover:text-indigo-600 hover:bg-white/60 transition-all" href="#how-it-works">Dual-Vector Specs</a>
+      </nav>
+
+      <!-- Active Metrics & Ingestion Shortcut -->
+      <div class="flex items-center gap-space-sm sm:gap-space-md">
+        <button class="hidden sm:flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-gradient-to-r from-indigo-50 to-purple-50 hover:from-indigo-100 hover:to-purple-100 border border-indigo-100/80 font-label-md text-label-md text-indigo-900 transition-colors shadow-sm" onclick="document.getElementById('hero-ingestion').scrollIntoView({behavior: 'smooth'})">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="font-bold">Autonomous Cohort</span>
+        </button>
+        <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center shadow-md shadow-indigo-300/40 text-white font-black text-sm" id="userProxyAvatarTop">
+          <span class="material-symbols-outlined text-[18px]">person</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN BODY CONTENT (Full Screen Width with Centered Inner Content) -->
+  <main class="w-full pt-20 flex-1 relative z-10">
+    <div class="max-w-[1240px] mx-auto px-margin-md lg:px-margin-lg flex flex-col w-full">
+
+      <!-- Toast Feedback Notification -->
+      <div class="fixed bottom-6 right-6 z-50 pointer-events-none transition-all duration-300 transform translate-y-8 opacity-0" id="swapNotification">
+        <div class="flex items-center gap-2.5 px-4 py-3 rounded-full bg-slate-900/95 text-white backdrop-blur-md shadow-2xl border border-purple-500/30 text-sm font-semibold">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span id="toastMessage">Swapped to candidate profile</span>
+        </div>
+      </div>
+
+      <!-- SECTION 1: HERO & INGESTION DRAWER -->
+      <section class="relative pt-8 pb-12 lg:pt-14 lg:pb-16 flex flex-col items-center text-center" id="hero-ingestion">
+        <!-- Status Pill in Ethereal Lavender/Indigo -->
+        <div class="inline-flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 border border-purple-200/70 text-indigo-900 shadow-sm mb-space-lg transition-transform hover:scale-105 cursor-default">
+          <span class="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 animate-pulse"></span>
+          <span class="font-label-sm text-label-sm uppercase tracking-wider font-extrabold bg-gradient-to-r from-indigo-600 to-purple-700 bg-clip-text text-transparent">Cohort #142 Active Now</span>
+          <span class="text-purple-300">•</span>
+          <span class="font-label-sm text-label-sm font-semibold text-slate-700">26 Verified Real Leaders &amp; Creators</span>
+        </div>
+
+        <!-- Main Catchphrase -->
+        <h1 class="font-display-hero text-display-hero text-[#0f172a] max-w-4xl tracking-tight leading-none mb-space-md">
+          Stop endless swiping. <br class="hidden sm:inline"/>
+          <span class="relative inline-block px-4 py-1.5 mt-1 text-white">
+            <span class="absolute inset-0 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 -rotate-1 rounded-2xl -z-10 shadow-lg shadow-purple-500/25"></span>
+            Send your AI proxy
+          </span> 
+          to do the first date.
+        </h1>
+
+        <p class="font-body-lg text-body-lg text-slate-600 max-w-2xl mx-auto mb-space-xl">
+          Paste your LinkedIn &amp; public Instagram. Your proxy dates 25 other real people while you live your life, then hands you your certified Top Sparks.
+        </p>
+
+        <!-- Agent Ingestion Dock / Card Drawer in Soft Frosted Glass -->
+        <div class="w-full max-w-3xl glass-panel rounded-2xl p-space-md lg:p-space-lg shadow-2xl shadow-indigo-100/70 border border-white/80 relative">
+          <form class="flex flex-col md:flex-row items-stretch md:items-center gap-space-md" id="ingestionForm" onsubmit="event.preventDefault(); startIngestionProcess();">
+            <!-- Name Input -->
+            <div class="md:w-1/4 flex items-center bg-slate-50/90 px-space-md py-3.5 rounded-full border border-slate-200/80 focus-within:bg-white focus-within:border-indigo-400 focus-within:ring-2 focus-within:ring-indigo-100 transition-all">
+              <span class="material-symbols-outlined text-indigo-500 text-[20px] mr-2">badge</span>
+              <input class="w-full bg-transparent border-none outline-none font-body-md text-body-md text-slate-800 placeholder:text-slate-400 focus:ring-0 p-0" id="inputName" placeholder="Your Name" type="text" value=""/>
+            </div>
+
+            <!-- LinkedIn Input -->
+            <div class="flex-1 flex items-center bg-slate-50/90 px-space-md py-3.5 rounded-full border border-slate-200/80 focus-within:bg-white focus-within:border-indigo-400 focus-within:ring-2 focus-within:ring-indigo-100 transition-all">
+              <span class="material-symbols-outlined text-indigo-500 text-[20px] mr-2">work</span>
+              <input class="w-full bg-transparent border-none outline-none font-body-md text-body-md text-slate-800 placeholder:text-slate-400 focus:ring-0 p-0" id="inputLinkedIn" placeholder="linkedin.com/in/username" required="" type="text" value=""/>
+            </div>
+
+            <!-- Instagram Handle Input -->
+            <div class="flex-1 flex items-center bg-slate-50/90 px-space-md py-3.5 rounded-full border border-slate-200/80 focus-within:bg-white focus-within:border-indigo-400 focus-within:ring-2 focus-within:ring-indigo-100 transition-all">
+              <span class="material-symbols-outlined text-purple-500 text-[20px] mr-2">photo_camera</span>
+              <input class="w-full bg-transparent border-none outline-none font-body-md text-body-md text-slate-800 placeholder:text-slate-400 focus:ring-0 p-0" id="inputInstagram" placeholder="instagram.com/handle" required="" type="text" value=""/>
+            </div>
+
+            <!-- CTA Button -->
+            <button class="px-space-lg py-3.5 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 hover:from-indigo-700 hover:to-purple-800 active:scale-95 text-white font-label-lg text-label-lg font-extrabold flex items-center justify-center gap-space-xs shadow-lg shadow-indigo-500/30 transition-all cursor-pointer whitespace-nowrap" id="spawnAgentBtn" type="submit">
+              <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+              <span>Spawn &amp; Add My Profile</span>
+            </button>
+          </form>
+
+          <!-- Trust Badges (No Preset Buttons) -->
+          <div class="mt-space-md pt-space-sm flex flex-wrap items-center justify-center gap-6 text-xs text-slate-500 border-t border-slate-100">
+            <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-indigo-500 text-[16px]">verified_user</span> Zero cold DMs. Zero ghosting.</span>
+            <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-purple-500 text-[16px]">security</span> Privacy-safe contextual embedding</span>
+            <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-pink-500 text-[16px]">timer</span> 15-minute speed date protocol</span>
+          </div>
+        </div>
+
+            <!-- Micro Feature Badges -->
+            <div class="mt-space-md pt-space-sm flex flex-wrap items-center justify-center gap-space-md text-slate-500">
+              <span class="flex items-center gap-1.5 font-label-sm text-label-sm">
+                <span class="material-symbols-outlined text-indigo-600 text-[17px]">verified_user</span>
+                Zero cold DMs. Zero ghosting.
+              </span>
+              <span class="flex items-center gap-1.5 font-label-sm text-label-sm">
+                <span class="material-symbols-outlined text-purple-600 text-[17px]">encrypted</span>
+                Privacy-safe contextual embedding
+              </span>
+              <span class="flex items-center gap-1.5 font-label-sm text-label-sm">
+                <span class="material-symbols-outlined text-indigo-600 text-[17px]">timer</span>
+                15-minute speed date protocol
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 2: REAL-TIME PROXY SPEED DATE INTERACTIVE MATCH ARENA -->
+        <section class="py-space-xl" id="live-speed-date-section">
+          <!-- Eyebrow Navigation and Stream Indicator -->
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-space-lg gap-space-sm">
+            <div>
+              <div class="inline-flex items-center gap-space-xs font-label-sm text-label-sm uppercase font-bold text-indigo-700 tracking-widest mb-1">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                Live Proxy Telemetry • Interactive Chamber
+              </div>
+              <h2 class="font-headline-lg text-headline-lg text-[#0f172a]" id="activeRoundHeading">Round 4 of 26: Autonomous Coffee Session</h2>
+            </div>
+            <div class="flex items-center gap-space-sm flex-wrap">
+              <!-- Quick Candidate Selector / Swapper -->
+              <div class="flex items-center bg-white/90 border border-purple-100 rounded-full p-1 shadow-sm">
+                <button class="px-2.5 py-1 text-xs font-bold rounded-full text-slate-500 hover:text-indigo-600 flex items-center gap-1 transition-colors" id="prevCandidateBtn" title="Previous Candidate">
+                  <span class="material-symbols-outlined text-[16px]">chevron_left</span> Prev
+                </button>
+                <span class="text-xs font-extrabold text-indigo-600 px-2" id="currentCandidateIndexBadge">Candidate 1 of 26</span>
+                <button class="px-2.5 py-1 text-xs font-bold rounded-full text-slate-500 hover:text-indigo-600 flex items-center gap-1 transition-colors" id="nextCandidateBtn" title="Next Candidate">
+                  Next <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+                </button>
+              </div>
+              <span class="px-space-md py-1.5 rounded-full bg-white border border-slate-200/80 font-label-sm text-label-sm text-slate-600 font-bold shadow-sm">Latency: 18ms</span>
+              <span class="px-space-md py-1.5 rounded-full bg-gradient-to-r from-indigo-50 to-purple-50 text-indigo-900 border border-indigo-100 font-label-sm text-label-sm font-bold flex items-center gap-1">
+                <span class="material-symbols-outlined text-purple-600 text-[16px]">stream</span> Swarm Simulation
+              </span>
+            </div>
+          </div>
+
+          <!-- Ethereal Dual Showcase Layout -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+            <!-- Left: Interactive Profile Card -->
+            <div class="lg:col-span-6 glass-panel rounded-2xl p-space-md shadow-xl shadow-indigo-100/60 border border-white flex flex-col gap-space-md transition-all duration-300" id="profileCardWrapper">
+              <!-- Image Header with Floating Verified Pill & Vibe Tags -->
+              <div class="relative w-full h-[25rem] rounded-xl overflow-hidden shadow-md group">
+                <img class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" data-alt="Profile portrait" id="profileImage" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&h=800&q=80"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-black/20"></div>
+
+                <!-- Top floating controls on profile photo -->
+                <div class="absolute top-space-md left-space-md right-space-md flex justify-between items-center">
+                  <span class="px-space-md py-1 rounded-full bg-white/90 backdrop-blur-md font-label-md text-label-md text-indigo-950 font-extrabold flex items-center gap-1.5 shadow-sm border border-white/50">
+                    <span class="material-symbols-outlined text-indigo-600 text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                    <span id="profileVerificationText">Verified Real Human</span>
+                  </span>
+                  <div class="flex items-center gap-1.5">
+                    <button class="w-10 h-10 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-slate-700 hover:text-indigo-600 hover:bg-white transition-colors shadow-sm" id="swapRandomProfileBtn" title="Swap to another profile">
+                      <span class="material-symbols-outlined text-[20px]">cached</span>
+                    </button>
+                    <button class="px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md flex items-center gap-1 text-slate-700 hover:text-indigo-600 hover:bg-white transition-colors shadow-sm text-xs font-bold" onclick="openDossierModal()">
+                      <span class="material-symbols-outlined text-[16px]">visibility</span>
+                      <span>View Dossier</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Profile Overview on Photo Bottom -->
+                <div class="absolute bottom-space-md left-space-md right-space-md text-white">
+                  <div class="flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-full bg-purple-500/90 text-white font-label-sm text-[11px] font-black tracking-wide" id="profileBadgeRank">#1 MATCH</span>
+                    <span class="text-xs text-purple-200" id="profileLocation">San Francisco, CA</span>
+                  </div>
+                  <div class="flex items-baseline gap-space-xs mt-1">
+                    <h3 class="font-headline-lg text-headline-lg font-black tracking-tight text-white drop-shadow-sm" id="profileNameAge">Autonomous Candidate</h3>
+                    <span class="material-symbols-outlined text-indigo-300 text-[22px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                  </div>
+                  <p class="font-body-md text-body-md text-slate-200 font-medium" id="profileRole">Verified 26 Cohort</p>
+                </div>
+              </div>
+
+              <!-- Deep Context Badges -->
+              <div class="flex flex-wrap gap-space-xs pt-space-xs" id="profileContextBadges">
+                <!-- Rendered dynamically -->
+              </div>
+
+              <!-- Instagram Somatic Vibe Extraction -->
+              <div class="bg-gradient-to-r from-slate-50 to-indigo-50/40 rounded-xl p-space-md border border-indigo-50">
+                <div class="flex items-center justify-between mb-space-xs">
+                  <span class="font-label-md text-label-md text-slate-800 font-bold flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-purple-600 text-[18px]">collections_bookmark</span>
+                    <span>Instagram Somatic Vibe Extraction</span>
+                  </span>
+                  <span class="font-label-sm text-label-sm font-semibold text-purple-700 bg-purple-100/60 px-2.5 py-0.5 rounded-full" id="profileInstagramHandle">@candidate</span>
+                </div>
+                <div class="grid grid-cols-3 gap-space-xs mt-space-xs" id="profileVibeGrid">
+                  <div class="relative h-24 rounded-lg overflow-hidden group border border-white/60">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" id="vibeImg1" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Sam_Altman_TechCrunch_Disrupt_2019_%28cropped%29.jpg/800px-Sam_Altman_TechCrunch_Disrupt_2019_%28cropped%29.jpg"/>
+                    <span class="absolute bottom-1 left-1.5 font-label-sm text-[10px] text-white bg-slate-900/70 backdrop-blur-xs px-1.5 py-0.5 rounded" id="vibeLabel1">Vibe 1</span>
+                  </div>
+                  <div class="relative h-24 rounded-lg overflow-hidden group border border-white/60">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" id="vibeImg2" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Mira_Murati_crop.jpg/800px-Mira_Murati_crop.jpg"/>
+                    <span class="absolute bottom-1 left-1.5 font-label-sm text-[10px] text-white bg-slate-900/70 backdrop-blur-xs px-1.5 py-0.5 rounded" id="vibeLabel2">Vibe 2</span>
+                  </div>
+                  <div class="relative h-24 rounded-lg overflow-hidden group border border-white/60">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" id="vibeImg3" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Marques_Brownlee_crop.jpg/800px-Marques_Brownlee_crop.jpg"/>
+                    <span class="absolute bottom-1 left-1.5 font-label-sm text-[10px] text-white bg-slate-900/70 backdrop-blur-xs px-1.5 py-0.5 rounded" id="vibeLabel3">Vibe 3</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Resonance Score Ribbon -->
+              <div class="flex items-center justify-between bg-gradient-to-r from-indigo-50/90 via-purple-50/70 to-pink-50/60 rounded-xl p-space-md border border-purple-100/70">
+                <div class="flex items-center gap-space-md">
+                  <div class="relative w-14 h-14 flex items-center justify-center">
+                    <svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+                      <path class="text-indigo-100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+                      <path class="text-purple-600 stroke-current transition-all duration-700 ease-out" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" id="resonanceSvgPath" stroke-dasharray="96, 100" stroke-linecap="round" stroke-width="3.5"></path>
+                    </svg>
+                    <span class="absolute font-headline-sm text-headline-sm font-extrabold text-indigo-950" id="resonanceScoreNumber">96%</span>
+                  </div>
+                  <div>
+                    <div class="font-headline-sm text-headline-sm font-bold text-[#0f172a] flex items-center gap-1.5">
+                      Resonance Score 
+                      <span class="material-symbols-outlined text-purple-600 text-[20px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                    </div>
+                    <p class="font-body-sm text-body-sm text-slate-600" id="resonanceDescription">High overlap in somatic rhythm, intellectual tempo &amp; lifestyle pacing.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Proxy AI Dialogue Transcript & Interactive Control -->
+            <div class="lg:col-span-6 flex flex-col gap-space-md">
+              <div class="glass-panel rounded-2xl p-space-lg shadow-xl shadow-purple-100/50 border border-white flex flex-col">
+                <!-- Conversation Top Bar -->
+                <div class="flex items-center justify-between pb-space-md mb-space-md bg-gradient-to-r from-slate-50 via-indigo-50/50 to-purple-50/40 px-space-md py-2.5 rounded-full border border-indigo-100/60">
+                  <div class="flex items-center gap-space-xs">
+                    <div class="w-3 h-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 animate-pulse"></div>
+                    <span class="font-label-md text-label-md text-slate-800 font-extrabold">Autonomous Dialogue Sandbox</span>
+                  </div>
+                  <span class="font-label-sm text-label-sm text-indigo-800 font-semibold" id="dialogueTurnIndicator">Turn 6 of 8 • 11m elapsed</span>
+                </div>
+
+                <!-- Dialogue Scroll Area -->
+                <div class="flex flex-col gap-space-md max-h-[380px] overflow-y-auto pr-1 transition-all duration-300" id="chatDialogueArea">
+                  <!-- User Proxy Message 1 -->
+                  <div class="flex flex-col items-start gap-1 max-w-[88%]">
+                    <div class="flex items-center gap-space-xs">
+                      <div class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center font-label-sm text-[11px] font-black shadow-sm" id="userProxyAvatar">✦</div>
+                      <span class="font-label-sm text-label-sm text-slate-600 font-bold" id="userProxyLabel">Your Proxy (Active)</span>
+                    </div>
+                    <div class="bg-white border border-slate-200/90 p-space-md rounded-2xl rounded-tl-none font-body-md text-body-md text-slate-800 shadow-sm" id="julianMessage1">
+                      "Looking at your profile, your balance of intense creative output with quiet personal discipline is striking. How do you protect your downtime?"
+                    </div>
+                  </div>
+
+                  <!-- Match Proxy Message -->
+                  <div class="flex flex-col items-end self-end gap-1 max-w-[88%]">
+                    <div class="flex items-center gap-space-xs">
+                      <span class="font-label-sm text-label-sm text-slate-600 font-bold" id="matchAgentLabel">Candidate Proxy (Bio-Agent)</span>
+                      <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-purple-600 to-pink-500 text-white flex items-center justify-center font-label-sm text-[11px] font-black shadow-sm" id="matchAgentAvatar">⚡</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-50 via-indigo-50/70 to-pink-50/40 border border-purple-200/70 p-space-md rounded-2xl rounded-tr-none font-body-md text-body-md text-slate-900 shadow-sm" id="matchMessage">
+                      "Spot on. She values slow, physical craft over abstract hype and strictly protects her evening sanctuary. She looks for someone with equal autonomy."
+                    </div>
+                  </div>
+
+                  <!-- User Proxy Message 2 -->
+                  <div class="flex flex-col items-start gap-1 max-w-[88%]">
+                    <div class="flex items-center gap-space-xs">
+                      <div class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center font-label-sm text-[11px] font-black shadow-sm" id="userProxyAvatar2">✦</div>
+                      <span class="font-label-sm text-label-sm text-slate-600 font-bold" id="userProxyLabel2">Your Proxy (Active)</span>
+                    </div>
+                    <div class="bg-white border border-slate-200/90 p-space-md rounded-2xl rounded-tl-none font-body-md text-body-md text-slate-800 shadow-sm" id="julianMessage2">
+                      "Match confirmed. Zero posturing, long conversations over coffee, and shared respect for focused craft. Proposing Saturday coffee at Mint Plaza."
+                    </div>
+                  </div>
+
+                  <!-- Consensus Banner -->
+                  <div class="my-space-xs mx-auto px-space-md py-1.5 rounded-full bg-gradient-to-r from-purple-100 to-indigo-100 border border-purple-200/80 font-label-sm text-label-sm text-indigo-950 font-bold flex items-center gap-1.5 shadow-sm" id="consensusBanner">
+                    <span class="material-symbols-outlined text-purple-700 text-[16px]">celebration</span> Both autonomous agents agree: High physical &amp; intellectual chemistry
+                  </div>
+                </div>
+
+                <!-- Match Actions Bar -->
+                <div class="mt-space-lg pt-space-md border-t border-indigo-50 flex flex-col sm:flex-row gap-space-sm items-center">
+                  <button class="w-full sm:w-1/2 py-3 px-space-md rounded-full bg-white hover:bg-slate-100 active:scale-95 text-slate-700 border border-slate-200 font-label-lg text-label-lg font-bold flex items-center justify-center gap-space-xs transition-all cursor-pointer shadow-sm" id="passNextDateBtn">
+                    <span class="material-symbols-outlined text-[20px] text-slate-500">skip_next</span>
+                    <span>Pass • Next Candidate</span>
+                  </button>
+                  <button class="w-full sm:w-1/2 py-3 px-space-md rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 hover:from-indigo-700 hover:to-purple-800 text-white font-label-lg text-label-lg font-black flex items-center justify-center gap-space-xs shadow-lg shadow-indigo-500/25 active:scale-95 transition-all cursor-pointer" id="superSparkBtn">
+                    <span class="material-symbols-outlined text-[20px] text-pink-200" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                    <span>Super-Spark Real Meetup</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Cohort Stats Callout -->
+              <div class="grid grid-cols-2 gap-space-md">
+                <div class="glass-panel rounded-2xl p-space-md shadow-md shadow-indigo-100/40 border border-white flex items-center gap-space-md">
+                  <div class="w-12 h-12 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
+                    <span class="material-symbols-outlined text-[24px]">forum</span>
+                  </div>
+                  <div>
+                    <div class="font-headline-md text-headline-md font-black text-slate-900">325+</div>
+                    <div class="font-label-sm text-label-sm text-slate-500">Dates Executed Today</div>
+                  </div>
+                </div>
+                <div class="glass-panel rounded-2xl p-space-md shadow-md shadow-purple-100/40 border border-white flex items-center gap-space-md">
+                  <div class="w-12 h-12 rounded-full bg-purple-50 border border-purple-100 flex items-center justify-center text-purple-600">
+                    <span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                  </div>
+                  <div>
+                    <div class="font-headline-md text-headline-md font-black text-slate-900">18 Meets</div>
+                    <div class="font-label-sm text-label-sm text-slate-500">Coffee Dates Dispatched</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 3: THE 26-PERSON COHORT ROSTER -->
+        <section class="py-space-xl" id="cohort-roster">
+          <div class="flex flex-col md:flex-row md:items-end justify-between mb-space-lg">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-label-sm text-label-sm uppercase font-extrabold text-indigo-600 tracking-widest">Cohort #142 Standings</span>
+                <span class="px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 text-[11px] font-bold">Click any card to swap live profile</span>
+              </div>
+              <h2 class="font-headline-lg text-headline-lg text-[#0f172a]">Top Vetted Matches Ready For You</h2>
+              <p class="font-body-md text-body-md text-slate-600">Your AI proxy eliminated mismatches based on schedule, communication tone, and lifestyle cadence.</p>
+            </div>
+          </div>
+
+          <!-- Dynamic Candidate Cards Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-space-md" id="candidateCardsContainer">
+            <!-- Dynamically populated from candidates array -->
+          </div>
+        </section>
+
+        <!-- SECTION 4: DUAL-VECTOR ARCHITECTURE SPECS -->
+        <section class="py-space-xl" id="how-it-works">
+          <div class="glass-panel rounded-2xl p-space-lg lg:p-space-xl border border-white shadow-xl shadow-indigo-100/40">
+            <div class="max-w-3xl mb-space-lg">
+              <span class="font-label-sm text-label-sm uppercase font-extrabold text-indigo-600 tracking-widest">How The Hive Works</span>
+              <h2 class="font-headline-lg text-headline-lg text-[#0f172a]">Dual-Vector Autonomous Synthesis</h2>
+              <p class="font-body-lg text-body-lg text-slate-600">Dating apps force you into superficial 3-second snap judgments. Synthetica Cupid pairs two deep vector signals so your AI proxy represents your actual soul.</p>
+            </div>
+
+            <!-- 3 Pillars -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg mb-space-xl">
+              <div class="bg-white/90 p-space-lg rounded-2xl border border-indigo-50 shadow-sm flex flex-col gap-space-sm hover:shadow-md transition-shadow">
+                <div class="w-12 h-12 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
+                  <span class="material-symbols-outlined text-[24px]">trending_up</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm font-bold text-slate-900">1. The Professional Drive</h3>
+                <p class="font-body-md text-body-md text-slate-600">Extracted from LinkedIn. Understands your intellectual trajectory, ambition level, weekend boundary habits, and life cadence.</p>
+                <div class="mt-auto pt-space-sm font-label-sm text-label-sm text-indigo-700 font-bold flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[15px]">check</span> Calibrated for Long-Term Alignment
+                </div>
+              </div>
+
+              <div class="bg-white/90 p-space-lg rounded-2xl border border-purple-50 shadow-sm flex flex-col gap-space-sm hover:shadow-md transition-shadow">
+                <div class="w-12 h-12 rounded-full bg-purple-50 border border-purple-100 flex items-center justify-center text-purple-600">
+                  <span class="material-symbols-outlined text-[24px]">filter_vintage</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm font-bold text-slate-900">2. The Somatic Vibe</h3>
+                <p class="font-body-md text-body-md text-slate-600">Extracted from Instagram imagery. Identifies aesthetic taste, physical energy (outdoors vs. cozy reading), humor, and authentic friend groups.</p>
+                <div class="mt-auto pt-space-sm font-label-sm text-label-sm text-purple-700 font-bold flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[15px]">check</span> Calibrated for Day-to-Day Chemistry
+                </div>
+              </div>
+
+              <div class="bg-white/90 p-space-lg rounded-2xl border border-pink-50 shadow-sm flex flex-col gap-space-sm hover:shadow-md transition-shadow">
+                <div class="w-12 h-12 rounded-full bg-pink-50 border border-pink-100 flex items-center justify-center text-indigo-600">
+                  <span class="material-symbols-outlined text-[24px]">handshake</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm font-bold text-slate-900">3. Zero-Awkward First Move</h3>
+                <p class="font-body-md text-body-md text-slate-600">Your agents stress-test conflict resolution, conversation depth, and schedule availability before you ever send a human text.</p>
+                <div class="mt-auto pt-space-sm font-label-sm text-label-sm text-pink-700 font-bold flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[15px]">check</span> Only High-Confidence Matches
+                </div>
+              </div>
+            </div>
+
+            <!-- Proof Strip -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-md border-t border-slate-200/70">
+              <div class="flex flex-wrap items-center gap-space-md text-slate-700 text-xs font-bold">
+                <a class="flex items-center gap-1.5 hover:text-indigo-600 transition-colors" href="https://github.com/mr-poojit/agentic-dating-site" target="_blank">
+                  <span class="material-symbols-outlined text-[18px]">code</span>
+                  <span>GitHub Repository</span>
+                </a>
+                <span class="text-slate-300">•</span>
+                <a class="flex items-center gap-1.5 hover:text-purple-600 transition-colors" href="#hero-ingestion">
+                  <span class="material-symbols-outlined text-[18px] text-purple-600">smart_display</span>
+                  <span>Autonomous Speed Date Engine</span>
+                </a>
+              </div>
+              <div class="flex items-center gap-space-xs text-slate-500 font-label-sm text-label-sm">
+                <span class="material-symbols-outlined text-[16px] text-indigo-600">lock</span>
+                <span>Dual-Link Official Extraction Protocol</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 5: RADIANT CALL TO ACTION -->
+        <section class="py-space-xl mb-space-lg text-center bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 rounded-3xl p-space-xl shadow-2xl shadow-indigo-500/25 relative overflow-hidden text-white">
+          <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-white/10 blur-3xl pointer-events-none"></div>
+          <div class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-purple-400/20 blur-3xl pointer-events-none"></div>
+          <div class="relative z-10 max-w-2xl mx-auto flex flex-col items-center gap-space-md">
+            <div class="w-16 h-16 rounded-full bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white shadow-inner">
+              <span class="material-symbols-outlined text-[32px] text-purple-200" style="font-variation-settings: 'FILL' 1;">all_inclusive</span>
+            </div>
+            <h2 class="font-display-hero-mobile lg:font-display-hero text-display-hero-mobile lg:text-display-hero text-white tracking-tight drop-shadow-sm">
+              Ready to let your proxy date for you tonight?
+            </h2>
+            <p class="font-body-lg text-body-lg text-indigo-100 max-w-lg">
+              Join Cohort #142 with 26 real verified people. It takes 30 seconds to spawn your proxy.
+            </p>
+            <button class="px-space-xl py-4 rounded-full bg-white text-indigo-950 hover:bg-slate-50 font-label-lg text-label-lg font-black transition-all shadow-xl shadow-indigo-950/30 active:scale-95 cursor-pointer" onclick="document.getElementById('hero-ingestion').scrollIntoView({behavior: 'smooth'});">
+              Spawn Your Proxy Now
+            </button>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- LIVE INGESTION MODAL -->
+  <div class="fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300" id="ingestionModal">
+    <div class="w-full max-w-md bg-white rounded-3xl p-6 md:p-8 border border-indigo-100 shadow-2xl relative flex flex-col">
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-2">
+          <div class="w-3 h-3 rounded-full bg-indigo-600 animate-ping"></div>
+          <span class="text-xs font-black uppercase tracking-wider text-indigo-900">Synthetica Cupid Neural Engine</span>
+        </div>
+        <span class="text-xs font-bold text-slate-500" id="ingestionPercent">0%</span>
+      </div>
+
+      <!-- Step List -->
+      <div class="flex flex-col gap-3 mb-6">
+        <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100 transition-all" id="stepItem1">
+          <span class="step-icon material-symbols-outlined text-[20px] text-indigo-600">work</span>
+          <div class="flex flex-col text-left">
+            <span class="text-xs font-extrabold text-slate-900">1. Ingesting LinkedIn Vector</span>
+            <span class="text-[11px] text-slate-500">Extracting intellectual focus &amp; ambition boundaries</span>
+          </div>
+          <span class="step-check material-symbols-outlined text-[18px] text-emerald-500 ml-auto hidden">check_circle</span>
+        </div>
+
+        <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100 transition-all opacity-40" id="stepItem2">
+          <span class="step-icon material-symbols-outlined text-[20px] text-purple-600">photo_camera</span>
+          <div class="flex flex-col text-left">
+            <span class="text-xs font-extrabold text-slate-900">2. Classifying Instagram Somatic Vibe</span>
+            <span class="text-[11px] text-slate-500">Extracting weekend pursuits, aesthetic palette, humor</span>
+          </div>
+          <span class="step-check material-symbols-outlined text-[18px] text-emerald-500 ml-auto hidden">check_circle</span>
+        </div>
+
+        <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100 transition-all opacity-40" id="stepItem3">
+          <span class="step-icon material-symbols-outlined text-[20px] text-indigo-600">psychology</span>
+          <div class="flex flex-col text-left">
+            <span class="text-xs font-extrabold text-slate-900">3. Synthesizing Autonomous Persona</span>
+            <span class="text-[11px] text-slate-500">Calibrating conversation cadence &amp; core partner criteria</span>
+          </div>
+          <span class="step-check material-symbols-outlined text-[18px] text-emerald-500 ml-auto hidden">check_circle</span>
+        </div>
+
+        <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100 transition-all opacity-40" id="stepItem4">
+          <span class="step-icon material-symbols-outlined text-[20px] text-purple-600">rocket_launch</span>
+          <div class="flex flex-col text-left">
+            <span class="text-xs font-extrabold text-slate-900">4. Deploying to Cohort #142</span>
+            <span class="text-[11px] text-slate-500">Running 25 parallel dates in speed chamber</span>
+          </div>
+          <span class="step-check material-symbols-outlined text-[18px] text-emerald-500 ml-auto hidden">check_circle</span>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden mb-4">
+        <div class="h-full bg-gradient-to-r from-indigo-600 to-purple-600 w-0 transition-all duration-300" id="progressBarFill"></div>
+      </div>
+      <div class="text-xs text-center text-slate-500 italic" id="ingestionSubStatus">Connecting to public profile graphs...</div>
+    </div>
+  </div>
+
+  <!-- FULL DOSSIER BLUEPRINT MODAL -->
+  <div class="fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300" id="dossierModal">
+    <div class="w-full max-w-2xl bg-white rounded-3xl p-6 md:p-8 border border-indigo-100 shadow-2xl relative flex flex-col max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-purple-600 text-[20px]">psychology</span>
+          <span class="text-xs font-black uppercase tracking-widest text-indigo-900">Agent Persona Blueprint</span>
+        </div>
+        <button onclick="closeDossierModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center hover:bg-slate-200">✕</button>
+      </div>
+
+      <div id="dossierModalBody" class="flex flex-col gap-4 text-left">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- SUPER-SPARK MEETUP MODAL -->
+  <div class="fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300" id="superSparkModal">
+    <div class="w-full max-w-lg bg-white rounded-3xl p-6 md:p-8 border border-purple-200 shadow-2xl relative flex flex-col text-center">
+      <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white mx-auto mb-4 shadow-lg">
+        <span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+      </div>
+      <span class="text-xs font-black uppercase tracking-widest text-purple-700">Mutual Proxy Consensus Reached</span>
+      <h3 class="text-2xl font-extrabold text-slate-900 mt-1 mb-2" id="sparkModalHeading">Meetup Dispatched!</h3>
+      <p class="text-slate-600 text-sm mb-6">
+        Both autonomous proxies have evaluated lifestyle rhythm, schedule availability, and confirmed 96% mutual chemistry.
+      </p>
+
+      <div class="bg-indigo-50/60 rounded-2xl p-4 border border-indigo-100 text-left mb-6">
+        <div class="flex items-center justify-between pb-3 mb-3 border-b border-indigo-100/80">
+          <span class="text-xs font-bold text-indigo-900 uppercase tracking-wide">Suggested In-Person Venue</span>
+          <span class="text-[11px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">Table Held</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-white border border-indigo-100 flex items-center justify-center text-purple-600">
+            <span class="material-symbols-outlined text-[24px]">coffee</span>
+          </div>
+          <div>
+            <h5 class="font-extrabold text-slate-900 text-base">Blue Bottle Coffee • Mint Plaza</h5>
+            <p class="text-xs text-slate-500">Saturday, 10:30 AM • Outdoor courtyard table</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-3">
+        <button class="flex-1 py-3 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm transition-all" onclick="closeSuperSparkModal()">
+          Modify Time
+        </button>
+        <button class="flex-1 py-3 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-extrabold text-sm shadow-md hover:opacity-95 transition-all" onclick="confirmMeetupPlan()">
+          Confirm &amp; Exchange Numbers
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="w-full bg-slate-900 text-slate-300 py-space-xl mt-space-xl border-t border-slate-800">
+    <div class="max-w-[1240px] mx-auto px-margin-md lg:px-margin-lg flex flex-col md:flex-row items-center justify-between gap-space-lg">
+      <div class="flex flex-col items-center md:items-start gap-space-xs">
+        <div class="flex items-center gap-space-xs">
+          <span class="font-headline-sm text-headline-sm text-white font-extrabold flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-purple-400 text-[20px]">all_inclusive</span>
+            SYNTHETICA <span class="text-purple-400">CUPID</span>
+          </span>
+          <span class="font-label-sm text-label-sm px-2.5 py-0.5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold">Autonomous Cohorts</span>
+        </div>
+        <p class="font-body-sm text-body-sm text-slate-400 text-center md:text-left">Autonomous AI agents represent real people based strictly on their official LinkedIn and Instagram profiles.</p>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-space-lg font-label-md text-label-md text-slate-400">
+        <a class="hover:text-white transition-colors" href="#hero-ingestion">Deploy Proxy</a>
+        <a class="hover:text-white transition-colors" href="#live-speed-date-section">Date Chamber</a>
+        <a class="hover:text-white transition-colors" href="#cohort-roster">Verified 26 Roster</a>
+        <a class="hover:text-white transition-colors" href="#how-it-works">Dual Vector</a>
+      </div>
+      <div class="font-body-sm text-body-sm text-slate-400">
+        © 2026 Synthetica Cupid Inc. 26 Real People Cohort.
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script src="/aura-app.js"></script>
+</body>
+</html>
