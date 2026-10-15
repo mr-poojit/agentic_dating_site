@@ -27,6 +27,22 @@ function formatNameFromUrl(url) {
   }
 }
 
+// Helper: wrap protected CDN image URLs through backend proxy
+function safeImageUrl(url) {
+  if (!url) return 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&h=800&q=80';
+  if (typeof url !== 'string') {
+    if (url && url.url) return safeImageUrl(url.url);
+    return 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&h=800&q=80';
+  }
+  if (url.startsWith('/api/proxy-image') || url.startsWith('data:') || url.startsWith('/')) {
+    return url;
+  }
+  if (url.includes('cdninstagram.com') || url.includes('fbcdn.net') || url.includes('fbsbx.com') || url.includes('licdn.com') || url.includes('instagram.com') || url.includes('linkedin.com')) {
+    return `/api/proxy-image?url=${encodeURIComponent(url)}`;
+  }
+  return url;
+}
+
 // Toast notification
 function showToast(msg) {
   const toast = document.getElementById('swapNotification') || document.getElementById('toastNotification');
@@ -78,6 +94,17 @@ async function initAura() {
       updateUserProxyLabels();
     }
   } catch (err) {}
+
+  // Sanitize candidate image URLs so external CDN restrictions / hotlink blocks never break preview
+  candidates = candidates.map(c => ({
+    ...c,
+    avatar: safeImageUrl(c.avatar || c.image),
+    image: safeImageUrl(c.image || c.avatar),
+    vibes: (c.vibes || []).map(v => ({
+      ...v,
+      img: safeImageUrl(v.img)
+    }))
+  }));
 
   console.log(`Loaded ${candidates.length} candidate proxies.`);
   if (candidates && candidates.length > 0) {
@@ -233,7 +260,18 @@ function renderCandidate(index) {
 
     // Profile details
     const imgEl = document.getElementById('profileImage');
-    if (imgEl) imgEl.src = c.image || c.avatar;
+    if (imgEl) {
+      imgEl.setAttribute('referrerpolicy', 'no-referrer');
+      imgEl.src = safeImageUrl(c.image || c.avatar);
+      imgEl.onerror = function() {
+        if (!this.dataset.triedProxy && this.src && !this.src.includes('/api/proxy-image')) {
+          this.dataset.triedProxy = '1';
+          this.src = '/api/proxy-image?url=' + encodeURIComponent(this.src);
+        } else {
+          this.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&h=800&q=80';
+        }
+      };
+    }
 
     const verEl = document.getElementById('profileVerificationText') || document.getElementById('profileVerificationBadge');
     if (verEl) verEl.textContent = c.verification || c.verifiedText || "Verified Real Human";
@@ -281,9 +319,23 @@ function renderCandidate(index) {
       const v1 = document.getElementById('vibeImg1');
       const v2 = document.getElementById('vibeImg2');
       const v3 = document.getElementById('vibeImg3');
-      if (v1) { v1.src = c.vibes[0].img; v1.classList.remove('opacity-60'); }
-      if (v2) { v2.src = c.vibes[1].img; v2.classList.remove('opacity-60'); }
-      if (v3) { v3.src = c.vibes[2].img; v3.classList.remove('opacity-60'); }
+      const setupVibeImg = (imgEl, vibeData) => {
+        if (!imgEl) return;
+        imgEl.setAttribute('referrerpolicy', 'no-referrer');
+        imgEl.src = safeImageUrl(vibeData.img);
+        imgEl.classList.remove('opacity-60');
+        imgEl.onerror = function() {
+          if (!this.dataset.triedProxy && this.src && !this.src.includes('/api/proxy-image')) {
+            this.dataset.triedProxy = '1';
+            this.src = '/api/proxy-image?url=' + encodeURIComponent(this.src);
+          } else {
+            this.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80';
+          }
+        };
+      };
+      setupVibeImg(v1, c.vibes[0]);
+      setupVibeImg(v2, c.vibes[1]);
+      setupVibeImg(v3, c.vibes[2]);
       if (document.getElementById('vibeLabel1')) document.getElementById('vibeLabel1').textContent = c.vibes[0].label;
       if (document.getElementById('vibeLabel2')) document.getElementById('vibeLabel2').textContent = c.vibes[1].label;
       if (document.getElementById('vibeLabel3')) document.getElementById('vibeLabel3').textContent = c.vibes[2].label;
@@ -494,9 +546,10 @@ async function startIngestionProcess() {
           const apiData = apiRes ? await apiRes.json().catch(() => null) : null;
 
           const finalName = apiData?.auraCandidate?.name || apiData?.profile?.name || inferredName;
-          const userAvatar = apiData?.auraCandidate?.image || apiData?.profile?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80";
+          const userAvatar = safeImageUrl(apiData?.auraCandidate?.image || apiData?.profile?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80");
 
           if (avatarImg) {
+            avatarImg.setAttribute('referrerpolicy', 'no-referrer');
             avatarImg.src = userAvatar;
             avatarImg.style.filter = 'blur(0px) contrast(100%)';
           }
@@ -630,7 +683,7 @@ function openDossierModal() {
 
   body.innerHTML = `
     <div class="flex items-center gap-4 pb-4 border-b border-indigo-100">
-      <img src="${c.image || c.avatar}" class="w-16 h-16 rounded-2xl object-cover border-2 border-indigo-600 shadow-md">
+      <img src="${safeImageUrl(c.image || c.avatar)}" referrerpolicy="no-referrer" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80'" class="w-16 h-16 rounded-2xl object-cover border-2 border-indigo-600 shadow-md">
       <div>
         <h3 class="text-xl font-extrabold text-slate-900">${c.nameAge || c.name}</h3>
         <p class="text-xs text-slate-500">${c.role} • ${c.location || 'San Francisco, CA'}</p>

@@ -459,8 +459,23 @@ app.get('/api/rankings', (req, res) => {
 });
 
 app.get('/api/aura-candidates', (req, res) => {
-  // Only return user-ingested candidate profiles
-  res.json(customAuraCandidates);
+  // Always load fresh candidates from file and ensure all CDN URLs are safely proxied
+  try {
+    if (fs.existsSync(auraCandidatesFile)) {
+      customAuraCandidates = JSON.parse(fs.readFileSync(auraCandidatesFile, 'utf-8'));
+    }
+  } catch (e) {}
+
+  const sanitized = (customAuraCandidates || []).map(c => ({
+    ...c,
+    avatar: safeImageUrl(c.avatar || c.image),
+    image: safeImageUrl(c.image || c.avatar),
+    vibes: (c.vibes || []).map(v => ({
+      ...v,
+      img: safeImageUrl(v.img)
+    }))
+  }));
+  res.json(sanitized);
 });
 
 app.delete('/api/aura-candidates', (req, res) => {
@@ -671,13 +686,29 @@ app.get('/auth/:provider', (req, res) => {
 </html>`);
 });
 
+// Helper: wrap protected CDN image URLs through backend proxy
+function safeImageUrl(url) {
+  if (!url) return 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&h=800&q=80';
+  if (typeof url !== 'string') {
+    if (url && url.url) return safeImageUrl(url.url);
+    return 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&h=800&q=80';
+  }
+  if (url.startsWith('/api/proxy-image') || url.startsWith('data:') || url.startsWith('/')) {
+    return url;
+  }
+  if (url.includes('cdninstagram.com') || url.includes('fbcdn.net') || url.includes('licdn.com') || url.includes('instagram.com')) {
+    return `/api/proxy-image?url=${encodeURIComponent(url)}`;
+  }
+  return url;
+}
+
 // Image proxy endpoint to bypass CORS / hotlinking restrictions on Instagram & LinkedIn CDNs
 app.get('/api/proxy-image', async (req, res) => {
   const imageUrl = req.query.url;
   if (!imageUrl) return res.status(400).send('Image URL required');
   try {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 6000);
+    const timeout = setTimeout(() => controller.abort(), 8000);
     const resp = await fetch(imageUrl, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -686,15 +717,17 @@ app.get('/api/proxy-image', async (req, res) => {
       signal: controller.signal
     });
     clearTimeout(timeout);
-    if (!resp.ok) return res.redirect(imageUrl);
+    if (!resp.ok) {
+      return res.redirect('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&h=800&q=80');
+    }
     const contentType = resp.headers.get('content-type') || 'image/jpeg';
     res.setHeader('Content-Type', contentType);
     res.setHeader('Cache-Control', 'public, max-age=86400');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     const buffer = await resp.arrayBuffer();
     res.send(Buffer.from(buffer));
   } catch (e) {
-    // Fallback to direct redirect
-    res.redirect(imageUrl);
+    res.redirect('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&h=800&q=80');
   }
 });
 
@@ -871,6 +904,11 @@ app.post('/api/scrape', async (req, res) => {
   rankings[newId] = scoredMatches.map((m, idx) => ({ rank: idx + 1, ...m }));
 
   const topMatchName = scoredMatches[0]?.candidate_name || "Match Candidate";
+  const proxiedVibeImages = realVibeImages.map(v => ({
+    ...v,
+    img: safeImageUrl(v.img)
+  }));
+
   const newAuraCandidate = {
     id: newId,
     name: realName,
@@ -878,8 +916,8 @@ app.post('/api/scrape', async (req, res) => {
     rankPill: "⭐ YOUR PROFILE",
     nameAge: `${realName}, 28`,
     role: realHeadline,
-    avatar: resolvedImage,
-    image: resolvedImage,
+    avatar: safeImageUrl(resolvedImage),
+    image: safeImageUrl(resolvedImage),
     resonance: "96%",
     resonanceDash: "96, 100",
     resonanceDescription: `Harmonic alignment with ${realName}'s professional vector (${realHeadline.slice(0, 45)}) and weekend aesthetic.`,
@@ -895,7 +933,7 @@ app.post('/api/scrape', async (req, res) => {
     instagramUrl: cleanIgUrl,
     linkedinSnippet: realSummary,
     instagramSnippet: realBio,
-    vibes: realVibeImages,
+    vibes: proxiedVibeImages,
     badges: [
       { icon: "verified", text: "Dual Verified Human", color: "indigo" },
       { icon: "psychology", text: "High EQ & Agency", color: "purple" },
