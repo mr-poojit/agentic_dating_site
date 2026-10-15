@@ -26,9 +26,17 @@ const dataDir = path.join(__dirname, 'public', 'data');
 let profiles = JSON.parse(fs.readFileSync(path.join(dataDir, 'profiles.json'), 'utf-8'));
 let rankings = JSON.parse(fs.readFileSync(path.join(dataDir, 'rankings.json'), 'utf-8'));
 let curatedDates = JSON.parse(fs.readFileSync(path.join(dataDir, 'dates.json'), 'utf-8'));
-// Clean state: Zero pre-populated candidate profiles
-let auraCandidates = [];
+// Candidate profiles store (clean state, preserves genuine user uploads)
+const auraCandidatesFile = path.join(dataDir, 'aura-candidates.json');
 let customAuraCandidates = [];
+try {
+  if (fs.existsSync(auraCandidatesFile)) {
+    customAuraCandidates = JSON.parse(fs.readFileSync(auraCandidatesFile, 'utf-8'));
+  }
+} catch (e) {
+  customAuraCandidates = [];
+}
+let auraCandidates = customAuraCandidates;
 
 // Users and Sessions store for Auth & OAuth
 const usersFile = path.join(dataDir, 'users.json');
@@ -70,15 +78,44 @@ function formatNameFromUrl(url) {
   }
 }
 
-// Helper: Extract username from social links
-function extractUsername(url) {
-  try {
-    const clean = (url || '').trim().replace(/\/+$/, '');
-    const parts = clean.split('/');
-    return parts[parts.length - 1].replace('@', '');
-  } catch (e) {
-    return 'user';
+// Helper: Extract clean username from social links
+function extractUsername(input) {
+  if (!input) return '';
+  let str = input.trim();
+  str = str.replace(/^(https?:\/\/)?(www\.)?(instagram\.com|linkedin\.com\/in)\/?/i, '');
+  str = str.replace(/[?#].*$/, '');
+  str = str.replace(/\/+$/, '');
+  str = str.replace(/^@/, '');
+  const parts = str.split('/').filter(Boolean);
+  return parts.pop() || '';
+}
+
+// Helper: Ensure valid LinkedIn URL
+function formatLinkedInUrl(input) {
+  if (!input) return '';
+  const trimmed = input.trim();
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+    return trimmed.split('?')[0].replace(/\/+$/, '');
   }
+  if (trimmed.includes('linkedin.com')) {
+    return `https://${trimmed.replace(/^\/+/, '').split('?')[0].replace(/\/+$/, '')}`;
+  }
+  const handle = extractUsername(trimmed);
+  return `https://www.linkedin.com/in/${handle}`;
+}
+
+// Helper: Ensure valid Instagram URL
+function formatInstagramUrl(input) {
+  if (!input) return '';
+  const trimmed = input.trim();
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+    return trimmed.split('?')[0].replace(/\/+$/, '');
+  }
+  if (trimmed.includes('instagram.com')) {
+    return `https://${trimmed.replace(/^\/+/, '').split('?')[0].replace(/\/+$/, '')}`;
+  }
+  const handle = extractUsername(trimmed);
+  return `https://www.instagram.com/${handle}`;
 }
 
 // Scrape metadata helper (Direct OpenGraph / Cheerio)
@@ -119,50 +156,64 @@ async function fetchPublicMetadata(url) {
   }
 }
 
-// 1. Apify Live Scraper Actor Integration
+// 1. Apify Live Scraper Actor Integration (Parallel LinkedIn + Instagram)
 async function scrapeWithApify(linkedin_url, instagram_url) {
   if (!apifyToken) return null;
   console.log(`[Apify Scraper] Running live Apify actors for real profiles...`);
   
   const igUsername = extractUsername(instagram_url);
+  const cleanLiUrl = formatLinkedInUrl(linkedin_url);
   let igData = null;
   let liData = null;
 
-  try {
+  const [igResult, liResult] = await Promise.allSettled([
     // Apify Instagram Profile Scraper
-    const igRes = await fetch(`https://api.apify.com/v2/acts/apify~instagram-profile-scraper/run-sync-get-dataset-items?token=${apifyToken}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ usernames: [igUsername] })
-    });
-    if (igRes.ok) {
-      const items = await igRes.json();
-      if (Array.isArray(items) && items.length > 0) {
-        igData = items[0];
-        console.log(`[Apify] Successfully scraped Instagram @${igUsername}:`, igData.fullName);
+    (async () => {
+      if (!igUsername) return null;
+      console.log(`[Apify] Scraping Instagram @${igUsername}...`);
+      const res = await fetch(`https://api.apify.com/v2/acts/apify~instagram-profile-scraper/run-sync-get-dataset-items?token=${apifyToken}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ usernames: [igUsername] })
+      });
+      if (res.ok) {
+        const items = await res.json();
+        if (Array.isArray(items) && items.length > 0) {
+          console.log(`[Apify] Successfully retrieved Instagram @${igUsername}:`, items[0].fullName);
+          return items[0];
+        }
+      } else {
+        const err = await res.text();
+        console.warn(`[Apify] Instagram actor notice (${res.status}):`, err.slice(0, 160));
       }
-    }
-  } catch (err) {
-    console.warn('[Apify] Instagram actor notice:', err.message);
-  }
+      return null;
+    })(),
 
-  try {
-    // Apify LinkedIn Profile Scraper
-    const liRes = await fetch(`https://api.apify.com/v2/acts/curious_coder~linkedin-profile-scraper/run-sync-get-dataset-items?token=${apifyToken}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ urls: [linkedin_url] })
-    });
-    if (liRes.ok) {
-      const items = await liRes.json();
-      if (Array.isArray(items) && items.length > 0) {
-        liData = items[0];
-        console.log(`[Apify] Successfully scraped LinkedIn:`, liData.fullName || liData.headline);
+    // Apify LinkedIn Profile Scraper (harvestapi - no auth cookie required)
+    (async () => {
+      if (!cleanLiUrl) return null;
+      console.log(`[Apify] Scraping LinkedIn ${cleanLiUrl}...`);
+      const res = await fetch(`https://api.apify.com/v2/acts/harvestapi~linkedin-profile-scraper/run-sync-get-dataset-items?token=${apifyToken}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ urls: [cleanLiUrl] })
+      });
+      if (res.ok) {
+        const items = await res.json();
+        if (Array.isArray(items) && items.length > 0) {
+          console.log(`[Apify] Successfully retrieved LinkedIn:`, items[0].fullName || items[0].headline);
+          return items[0];
+        }
+      } else {
+        const err = await res.text();
+        console.warn(`[Apify] LinkedIn actor notice (${res.status}):`, err.slice(0, 160));
       }
-    }
-  } catch (err) {
-    console.warn('[Apify] LinkedIn actor notice:', err.message);
-  }
+      return null;
+    })()
+  ]);
+
+  if (igResult.status === 'fulfilled' && igResult.value) igData = igResult.value;
+  if (liResult.status === 'fulfilled' && liResult.value) liData = liResult.value;
 
   return { igData, liData };
 }
@@ -414,6 +465,9 @@ app.get('/api/aura-candidates', (req, res) => {
 
 app.delete('/api/aura-candidates', (req, res) => {
   customAuraCandidates = [];
+  try {
+    fs.writeFileSync(auraCandidatesFile, '[]');
+  } catch (e) {}
   res.json({ success: true, message: 'All candidate profiles have been purged.' });
 });
 
@@ -617,6 +671,33 @@ app.get('/auth/:provider', (req, res) => {
 </html>`);
 });
 
+// Image proxy endpoint to bypass CORS / hotlinking restrictions on Instagram & LinkedIn CDNs
+app.get('/api/proxy-image', async (req, res) => {
+  const imageUrl = req.query.url;
+  if (!imageUrl) return res.status(400).send('Image URL required');
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 6000);
+    const resp = await fetch(imageUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8'
+      },
+      signal: controller.signal
+    });
+    clearTimeout(timeout);
+    if (!resp.ok) return res.redirect(imageUrl);
+    const contentType = resp.headers.get('content-type') || 'image/jpeg';
+    res.setHeader('Content-Type', contentType);
+    res.setHeader('Cache-Control', 'public, max-age=86400');
+    const buffer = await resp.arrayBuffer();
+    res.send(Buffer.from(buffer));
+  } catch (e) {
+    // Fallback to direct redirect
+    res.redirect(imageUrl);
+  }
+});
+
 // 3. Real scraper & agent analyzer endpoint (Apify + OpenRouter powered)
 app.post('/api/scrape', async (req, res) => {
   const { name, linkedin_url, instagram_url } = req.body;
@@ -625,64 +706,134 @@ app.post('/api/scrape', async (req, res) => {
     return res.status(400).json({ success: false, error: 'Both LinkedIn and Instagram links are required' });
   }
 
-  const personName = (name && name.trim()) || formatNameFromUrl(linkedin_url) || formatNameFromUrl(instagram_url) || 'New Prospect';
+  const cleanLiUrl = formatLinkedInUrl(linkedin_url);
+  const cleanIgUrl = formatInstagramUrl(instagram_url);
   const liUsername = extractUsername(linkedin_url);
   const igUsername = extractUsername(instagram_url);
 
-  console.log(`[Scraper Agent] Analyzing real profile: ${personName}...`);
-  console.log(`[Scraper Agent] LinkedIn: ${linkedin_url}`);
-  console.log(`[Scraper Agent] Instagram: ${instagram_url}`);
+  console.log(`[Scraper Agent] Analyzing real profile...`);
+  console.log(`[Scraper Agent] LinkedIn: ${cleanLiUrl}`);
+  console.log(`[Scraper Agent] Instagram: ${cleanIgUrl}`);
 
-  // Try Apify live scraper first
-  const apifyResult = await scrapeWithApify(linkedin_url, instagram_url);
-
-  // Fallback to Cheerio / OpenGraph
-  const [liMeta, igMeta] = await Promise.all([
-    fetchPublicMetadata(linkedin_url),
-    fetchPublicMetadata(instagram_url)
+  // Run Apify live scrapers and Cheerio in parallel
+  const [apifyResult, [liMeta, igMeta]] = await Promise.all([
+    scrapeWithApify(cleanLiUrl, cleanIgUrl),
+    Promise.all([
+      fetchPublicMetadata(cleanLiUrl),
+      fetchPublicMetadata(cleanIgUrl)
+    ])
   ]);
 
-  const resolvedImage = apifyResult?.igData?.profilePicUrl 
-    || apifyResult?.liData?.pictureUrl 
-    || igMeta.image 
-    || liMeta.image 
-    || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80";
+  // Extract picture URL (harvestapi gives pictureUrl.url or profilePicture; Apify IG gives profilePicUrlHD or profilePicUrl)
+  let liPicture = null;
+  if (apifyResult?.liData) {
+    if (typeof apifyResult.liData.pictureUrl === 'string') {
+      liPicture = apifyResult.liData.pictureUrl;
+    } else if (apifyResult.liData.pictureUrl && apifyResult.liData.pictureUrl.url) {
+      liPicture = apifyResult.liData.pictureUrl.url;
+    } else if (typeof apifyResult.liData.profilePicture === 'string') {
+      liPicture = apifyResult.liData.profilePicture;
+    }
+  }
+
+  let igPicture = apifyResult?.igData?.profilePicUrlHD || apifyResult?.igData?.profilePicUrl || null;
+
+  // Real profile photo
+  let resolvedImage = igPicture || liPicture || igMeta.image || liMeta.image;
+  if (!resolvedImage || resolvedImage.includes('data:image')) {
+    resolvedImage = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&h=800&q=80";
+  }
+
+  // Extract genuine human name
+  const realName = apifyResult?.liData?.fullName 
+    || (apifyResult?.liData?.firstName ? `${apifyResult.liData.firstName} ${apifyResult.liData.lastName || ''}`.trim() : null)
+    || apifyResult?.igData?.fullName 
+    || (name && name.trim())
+    || formatNameFromUrl(linkedin_url)
+    || formatNameFromUrl(instagram_url)
+    || 'Active Member';
+
+  // Extract genuine headline/role
+  const realHeadline = apifyResult?.liData?.headline 
+    || (liMeta.title ? liMeta.title.replace(/\|.*LinkedIn/i, '').replace(/LinkedIn/i, '').trim() : null)
+    || `${realName} · Creative & Professional`;
+
+  // Extract genuine summaries
+  const realSummary = apifyResult?.liData?.about
+    || apifyResult?.liData?.summary
+    || liMeta.description 
+    || "Professional trajectory marked by high agency, creative curiosity, and disciplined execution.";
+
+  const realBio = apifyResult?.igData?.biography 
+    || igMeta.description 
+    || "Living thoughtfully, exploring visual craft, and valuing genuine connection.";
+
+  const realLocation = apifyResult?.liData?.location?.parsed?.text 
+    || apifyResult?.liData?.location?.linkedinText 
+    || "San Francisco / Remote";
+
+  // Build real vibe images from their real Instagram posts
+  let realVibeImages = [];
+  if (Array.isArray(apifyResult?.igData?.latestPosts) && apifyResult.igData.latestPosts.length > 0) {
+    for (const post of apifyResult.igData.latestPosts) {
+      if (post.displayUrl) {
+        realVibeImages.push({
+          img: post.displayUrl,
+          label: post.caption ? post.caption.slice(0, 22).replace(/[\n\r]+/g, ' ') : 'Instagram Moment'
+        });
+      }
+      if (realVibeImages.length >= 3) break;
+    }
+  }
+
+  // Fallback vibe tiles if fewer than 3 posts
+  if (realVibeImages.length < 3) {
+    if (resolvedImage) {
+      realVibeImages.unshift({ img: resolvedImage, label: 'Visual Focus' });
+    }
+    const defaultFallbacks = [
+      { label: "Quiet Mornings", img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80" },
+      { label: "Pour-Over Coffee", img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80" }
+    ];
+    while (realVibeImages.length < 3) {
+      realVibeImages.push(defaultFallbacks[realVibeImages.length % defaultFallbacks.length]);
+    }
+  }
 
   const linkedin_data = {
-    headline: apifyResult?.liData?.headline 
-      || (liMeta.title ? liMeta.title.replace(/\|.*LinkedIn/i, '').trim() : `${personName} · Founder & Creator`),
-    summary: apifyResult?.liData?.summary 
-      || liMeta.description 
-      || `Active leader with a track record of innovation, leadership, and high-impact projects.`,
-    skills: apifyResult?.liData?.skills || ["Strategic Vision", "Leadership", "Product Strategy", "Creative Direction", "High Velocity Execution"],
-    career_ethos: "Relentless curiosity paired with deep professional integrity and human empathy."
+    headline: realHeadline,
+    summary: realSummary,
+    skills: (Array.isArray(apifyResult?.liData?.skills) && apifyResult.liData.skills.length > 0)
+      ? apifyResult.liData.skills.map(s => typeof s === 'string' ? s : s.name).filter(Boolean)
+      : ["Strategic Vision", "Leadership", "Product Strategy", "Creative Direction", "High Velocity Execution"],
+    career_ethos: realSummary.slice(0, 140) || "Relentless curiosity paired with deep professional integrity."
   };
 
   const instagram_data = {
     handle: `@${igUsername}`,
-    bio: apifyResult?.igData?.biography || igMeta.description || `Adventures, aesthetics, and moments in between.`,
-    aesthetic_vibe: "Natural ambient lighting, architectural minimalism, espresso culture, and spontaneous weekend journeys.",
+    bio: realBio,
+    aesthetic_vibe: realBio.slice(0, 140) || "Natural ambient lighting, architectural minimalism, and espresso culture.",
     travel_spots: ["New York", "Tokyo", "London", "San Francisco"],
     weekend_rituals: "Exploring local indie coffee roasters, long city walks, gallery hopping, and cooking dinners with friends."
   };
 
   // Run AI Synthesis with OpenRouter (or heuristic fallback)
-  let aiSynthesis = await synthesizeWithOpenRouter(personName, linkedin_data, instagram_data);
+  let aiSynthesis = await synthesizeWithOpenRouter(realName, linkedin_data, instagram_data);
   if (!aiSynthesis) {
-    aiSynthesis = synthesizeAgentPersona(personName, linkedin_data, instagram_data);
+    aiSynthesis = synthesizeAgentPersona(realName, linkedin_data, instagram_data);
   }
 
   const newId = `custom-${Date.now()}`;
   const newProfile = {
     id: newId,
-    name: personName,
+    name: realName,
     avatar: resolvedImage,
-    role: linkedin_data.headline,
-    location: "San Francisco / Remote",
+    role: realHeadline,
+    location: realLocation,
     gender: "non-binary",
     interested_in: ["female", "male"],
-    linkedin_url,
-    instagram_url,
+    linkedin_url: cleanLiUrl,
+    instagram_url: cleanIgUrl,
     linkedin_data,
     instagram_data,
     agent_analysis: {
@@ -719,64 +870,66 @@ app.post('/api/scrape', async (req, res) => {
   scoredMatches.sort((a, b) => b.score - a.score);
   rankings[newId] = scoredMatches.map((m, idx) => ({ rank: idx + 1, ...m }));
 
-  const topMatchName = scoredMatches[0]?.candidate_name || "Mira Murati";
+  const topMatchName = scoredMatches[0]?.candidate_name || "Match Candidate";
   const newAuraCandidate = {
     id: newId,
-    name: personName,
+    name: realName,
     rank: "#1 MATCH",
     rankPill: "⭐ YOUR PROFILE",
-    nameAge: `${personName}, 28`,
-    role: linkedin_data.headline,
+    nameAge: `${realName}, 28`,
+    role: realHeadline,
     avatar: resolvedImage,
     image: resolvedImage,
     resonance: "96%",
     resonanceDash: "96, 100",
-    resonanceDescription: "Strong harmonic alignment across professional vision, personal boundaries, and lifestyle aesthetics.",
+    resonanceDescription: `Harmonic alignment with ${realName}'s professional vector (${realHeadline.slice(0, 45)}) and weekend aesthetic.`,
     category: "high creative",
-    location: newProfile.location,
+    location: realLocation,
     distance: "Live Proxy Active",
     verifiedText: "Verified Real Human",
-    verification: "Verified Real Human",
+    verification: `Verified Real Human (${realName})`,
     statusPill: "Active Proxy",
     statusColor: "emerald",
     archetype: "Autonomous Visionary",
-    linkedinUrl: linkedin_url,
-    instagramUrl: instagram_url,
-    linkedinSnippet: linkedin_data.career_ethos,
-    instagramSnippet: instagram_data.aesthetic_vibe,
-    vibes: [
-      { label: aiSynthesis.hobbies[0] || "Creative Flow", img: resolvedImage },
-      { label: instagram_data.travel_spots[0] || "Weekend Trips", img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80" },
-      { label: "Pour-Over Coffee", img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80" }
-    ],
+    linkedinUrl: cleanLiUrl,
+    instagramUrl: cleanIgUrl,
+    linkedinSnippet: realSummary,
+    instagramSnippet: realBio,
+    vibes: realVibeImages,
     badges: [
-      { icon: "verified", text: "Dual Verified", color: "indigo" },
+      { icon: "verified", text: "Dual Verified Human", color: "indigo" },
       { icon: "psychology", text: "High EQ & Agency", color: "purple" },
       { icon: "schedule", text: "Active Tonight", color: "blue" }
     ],
-    hobbies: aiSynthesis.hobbies,
-    needs: aiSynthesis.needs,
+    hobbies: aiSynthesis.hobbies || ["Specialty Coffee", "Quiet Sundays", "Tactile Craft"],
+    needs: aiSynthesis.needs || "Emotional maturity, mutual independence, and genuine warmth.",
     communication_style: aiSynthesis.qualities?.communication_style || "Direct, witty, perceptive, and attentive.",
     dialogue: {
-      round: `Round 1 of 26: Autonomous Speed-Date with ${topMatchName}`,
+      round: `Round 1 of 1: Autonomous Speed-Date Protocol`,
       turn: "Turn 6 of 8 • Active Convergence",
-      userMsg1: `Reviewing your two profiles, your professional focus paired with ${aiSynthesis.hobbies[0]} shows deep balance. What is essential for you in partnership?`,
-      matchAgentName: `${topMatchName}'s Proxy`,
-      matchAvatar: topMatchName.charAt(0),
-      matchMsg: `Strict boundaries and mutual autonomy. When two people have their own passions, coming together is effortless.`,
-      userMsg2: `Complete resonance. Authentic presence and shared respect for dedicated craft. Match confirmed.`,
+      userMsg1: `Reviewing your two profiles, your professional focus (${realHeadline.slice(0, 40)}) paired with intentional downtime shows deep balance. What is essential for you in partnership?`,
+      matchAgentName: `Match Proxy`,
+      matchAvatar: `✦`,
+      matchMsg: `Authentic presence and mutual autonomy. When two people have their own passions, coming together is effortless.`,
+      userMsg2: `Complete resonance. High standards, shared laughter, zero pretense. Match confirmed.`,
       consensus: `Both autonomous proxies agree: Electric Chemistry (96% Harmonic Sync)`
     },
     isUserCustom: true
   };
 
-  customAuraCandidates.unshift(newAuraCandidate);
+  // Add to in-memory candidates and save to aura-candidates.json
+  customAuraCandidates = [newAuraCandidate, ...customAuraCandidates.filter(c => c.name !== newAuraCandidate.name)];
+  try {
+    fs.writeFileSync(path.join(dataDir, 'aura-candidates.json'), JSON.stringify(customAuraCandidates, null, 2));
+  } catch (e) {
+    console.error('Failed to persist aura-candidates.json', e);
+  }
 
   res.json({
     success: true,
     message: "Agent successfully created and deployed to dating pool",
     aiPowered: !!openRouterApiKey,
-    apifyPowered: !!apifyResult,
+    apifyPowered: !!(apifyResult?.liData || apifyResult?.igData),
     profile: newProfile,
     auraCandidate: newAuraCandidate,
     rankings: rankings[newId]

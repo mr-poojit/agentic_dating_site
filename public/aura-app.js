@@ -42,13 +42,11 @@ function showToast(msg) {
   }
 }
 
-// Load candidate data (Clean state: zero mock profiles)
+// Load candidate data (Clean state: zero mock profiles, preserves genuine uploads)
 async function initAura() {
-  // Purge any stored or legacy mock profiles from browser storage
+  // Purge only legacy mock keys
   try {
     localStorage.removeItem('aura_user_candidate');
-    localStorage.removeItem('woven_candidates');
-    localStorage.removeItem('woven_user_candidate');
     localStorage.removeItem('candidates');
     localStorage.removeItem('profiles');
   } catch (e) {}
@@ -63,6 +61,23 @@ async function initAura() {
   } catch (e) {
     candidates = [];
   }
+
+  // Restore user proxy if stored locally and not already in candidates
+  try {
+    const stored = localStorage.getItem('woven_user_candidate');
+    if (stored) {
+      const userCand = JSON.parse(stored);
+      if (userCand && userCand.isUserCustom && !candidates.find(c => c.name === userCand.name)) {
+        candidates.unshift(userCand);
+      }
+      currentUserPersona = {
+        name: userCand.name,
+        initial: userCand.name.charAt(0).toUpperCase(),
+        role: "Active User Proxy"
+      };
+      updateUserProxyLabels();
+    }
+  } catch (err) {}
 
   console.log(`Loaded ${candidates.length} candidate proxies.`);
   if (candidates && candidates.length > 0) {
@@ -263,11 +278,14 @@ function renderCandidate(index) {
 
     // Vibes
     if (c.vibes && c.vibes.length >= 3) {
-      if (document.getElementById('vibeImg1')) document.getElementById('vibeImg1').src = c.vibes[0].img;
+      const v1 = document.getElementById('vibeImg1');
+      const v2 = document.getElementById('vibeImg2');
+      const v3 = document.getElementById('vibeImg3');
+      if (v1) { v1.src = c.vibes[0].img; v1.classList.remove('opacity-60'); }
+      if (v2) { v2.src = c.vibes[1].img; v2.classList.remove('opacity-60'); }
+      if (v3) { v3.src = c.vibes[2].img; v3.classList.remove('opacity-60'); }
       if (document.getElementById('vibeLabel1')) document.getElementById('vibeLabel1').textContent = c.vibes[0].label;
-      if (document.getElementById('vibeImg2')) document.getElementById('vibeImg2').src = c.vibes[1].img;
       if (document.getElementById('vibeLabel2')) document.getElementById('vibeLabel2').textContent = c.vibes[1].label;
-      if (document.getElementById('vibeImg3')) document.getElementById('vibeImg3').src = c.vibes[2].img;
       if (document.getElementById('vibeLabel3')) document.getElementById('vibeLabel3').textContent = c.vibes[2].label;
     }
 
@@ -475,8 +493,8 @@ async function startIngestionProcess() {
           const apiRes = await scrapePromise;
           const apiData = apiRes ? await apiRes.json().catch(() => null) : null;
 
-          const finalName = apiData?.profile?.name || inferredName;
-          const userAvatar = apiData?.profile?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80";
+          const finalName = apiData?.auraCandidate?.name || apiData?.profile?.name || inferredName;
+          const userAvatar = apiData?.auraCandidate?.image || apiData?.profile?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80";
 
           if (avatarImg) {
             avatarImg.src = userAvatar;
@@ -491,7 +509,8 @@ async function startIngestionProcess() {
           if (percentEl) percentEl.textContent = '100%';
           if (subStatus) subStatus.textContent = `Deployment complete! ${finalName}'s proxy is active in Date Chamber.`;
           if (logEl) {
-            logEl.innerHTML += `<div class="text-emerald-400 font-bold">> [SUCCESS] Persona certified! Ready for speed date protocol</div>`;
+            const hasRealApify = apiData?.apifyPowered;
+            logEl.innerHTML += `<div class="text-emerald-400 font-bold">> [SUCCESS] ${hasRealApify ? 'Real Instagram & LinkedIn data extracted!' : 'Profile certified!'} Speed date protocol active</div>`;
             logEl.scrollTop = logEl.scrollHeight;
           }
 
