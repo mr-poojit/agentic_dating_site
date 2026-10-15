@@ -1,0 +1,11 @@
+[
+  {
+    "id": "usr_1792053709058_r0nnd7",
+    "name": "Alex Test",
+    "email": "alex@example.com",
+    "password": "secretpassword",
+    "avatar": "https://api.dicebear.com/7.x/notionists/svg?seed=Alex%20Test&backgroundColor=e0e7ff",
+    "provider": "email",
+    "createdAt": "2026-10-15T08:41:49.058Z"
+  }
+]

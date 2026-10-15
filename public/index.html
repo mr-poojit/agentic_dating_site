@@ -195,14 +195,44 @@
         <a class="px-space-md py-space-sm rounded-full font-label-md text-label-md text-slate-600 hover:text-indigo-600 hover:bg-white/60 transition-all" href="#how-it-works">Dual-Vector Specs</a>
       </nav>
 
-      <!-- Active Metrics & Ingestion Shortcut -->
-      <div class="flex items-center gap-space-sm sm:gap-space-md">
-        <button class="hidden sm:flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-gradient-to-r from-indigo-50 to-purple-50 hover:from-indigo-100 hover:to-purple-100 border border-indigo-100/80 font-label-md text-label-md text-indigo-900 transition-colors shadow-sm" onclick="document.getElementById('hero-ingestion').scrollIntoView({behavior: 'smooth'})">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="font-bold">Autonomous Cohort</span>
+      <!-- Auth Actions & User Profile Menu -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Sign In Button (When Logged Out) -->
+        <button id="navSignInBtn" class="flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-label-md text-xs font-bold transition-all shadow-sm active:scale-95 cursor-pointer" onclick="openAuthModal('signin')">
+          <span class="material-symbols-outlined text-[16px]">login</span>
+          <span>Sign In</span>
         </button>
-        <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center shadow-md shadow-indigo-300/40 text-white font-black text-sm" id="userProxyAvatarTop">
-          <span class="material-symbols-outlined text-[18px]">person</span>
+
+        <!-- Create Account Button (When Logged Out) -->
+        <button id="navCreateAccountBtn" class="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 hover:opacity-95 text-white font-label-md text-xs font-bold transition-all shadow-md shadow-indigo-200/50 active:scale-95 cursor-pointer" onclick="openAuthModal('signup')">
+          <span class="material-symbols-outlined text-[16px]">person_add</span>
+          <span>Create Account</span>
+        </button>
+
+        <!-- User Profile Chip & Dropdown (When Logged In) -->
+        <div id="navUserMenuWrapper" class="relative hidden">
+          <button id="navUserChipBtn" onclick="toggleUserDropdown()" class="flex items-center gap-2 p-1 pr-3 rounded-full bg-white border border-indigo-100 hover:border-purple-200 shadow-sm transition-all cursor-pointer">
+            <img id="navUserAvatarImg" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80" class="w-8 h-8 rounded-full object-cover border border-purple-200" alt="Avatar"/>
+            <span id="navUserNameText" class="text-xs font-extrabold text-slate-900 max-w-[100px] truncate">My Account</span>
+            <span class="material-symbols-outlined text-[16px] text-slate-400">expand_more</span>
+          </button>
+          
+          <!-- Dropdown Menu -->
+          <div id="navUserDropdown" class="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-2xl border border-indigo-50 p-2 z-50 hidden flex-col gap-1 text-left">
+            <div class="px-3 py-2 border-b border-slate-100 mb-1">
+              <p id="dropdownUserEmail" class="text-[11px] text-slate-400 truncate font-mono">user@example.com</p>
+              <div class="flex items-center gap-1 mt-1">
+                <span id="dropdownProviderBadge" class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-bold uppercase tracking-wider">OAuth</span>
+                <span class="text-[10px] text-emerald-600 font-bold">• Active</span>
+              </div>
+            </div>
+            <button onclick="document.getElementById('hero-ingestion').scrollIntoView({behavior:'smooth'}); toggleUserDropdown();" class="flex items-center gap-2 w-full px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+              <span class="material-symbols-outlined text-[16px]">psychology</span> My AI Proxy
+            </button>
+            <button onclick="signOutUser()" class="flex items-center gap-2 w-full px-3 py-2 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 transition-colors border-t border-slate-100 mt-1 cursor-pointer">
+              <span class="material-symbols-outlined text-[16px]">logout</span> Sign Out
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -356,16 +386,20 @@
             <div class="lg:col-span-6 glass-panel rounded-2xl p-space-md shadow-xl shadow-indigo-100/60 border border-white flex flex-col gap-space-md transition-all duration-300" id="profileCardWrapper">
               <!-- Image Header with Floating Verified Pill & Vibe Tags -->
               <div class="relative w-full h-[25rem] rounded-xl overflow-hidden shadow-md group">
-                <img class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" data-alt="Profile portrait" id="profileImage" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&h=800&q=80"/>
+                <img class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" data-alt="Chamber Standby" id="profileImage" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&h=800&q=80"/>
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-black/20"></div>
 
                 <!-- Top floating controls on profile photo -->
                 <div class="absolute top-space-md left-space-md right-space-md flex justify-between items-center">
                   <span class="px-space-md py-1 rounded-full bg-white/90 backdrop-blur-md font-label-md text-label-md text-indigo-950 font-extrabold flex items-center gap-1.5 shadow-sm border border-white/50">
                     <span class="material-symbols-outlined text-indigo-600 text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
-                    <span id="profileVerificationText">Verified Real Human</span>
+                    <span id="profileVerificationText">Chamber Standby</span>
                   </span>
                   <div class="flex items-center gap-1.5">
+                    <button class="px-2.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md flex items-center gap-1 text-rose-600 hover:bg-rose-50 transition-colors shadow-sm text-xs font-bold" onclick="purgeAllProfiles()" title="Clear and purge all stored profiles">
+                      <span class="material-symbols-outlined text-[16px]">delete_sweep</span>
+                      <span>Purge</span>
+                    </button>
                     <button class="w-10 h-10 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-slate-700 hover:text-indigo-600 hover:bg-white transition-colors shadow-sm" id="swapRandomProfileBtn" title="Swap to another profile">
                       <span class="material-symbols-outlined text-[20px]">cached</span>
                     </button>
@@ -379,20 +413,25 @@
                 <!-- Profile Overview on Photo Bottom -->
                 <div class="absolute bottom-space-md left-space-md right-space-md text-white">
                   <div class="flex items-center gap-2">
-                    <span class="px-2.5 py-0.5 rounded-full bg-purple-500/90 text-white font-label-sm text-[11px] font-black tracking-wide" id="profileBadgeRank">#1 MATCH</span>
-                    <span class="text-xs text-purple-200" id="profileLocation">San Francisco, CA</span>
+                    <span class="px-2.5 py-0.5 rounded-full bg-purple-500/90 text-white font-label-sm text-[11px] font-black tracking-wide" id="profileBadgeRank">STANDBY</span>
+                    <span class="text-xs text-purple-200" id="profileLocation">Autonomous Swarm</span>
                   </div>
                   <div class="flex items-baseline gap-space-xs mt-1">
-                    <h3 class="font-headline-lg text-headline-lg font-black tracking-tight text-white drop-shadow-sm" id="profileNameAge">Autonomous Candidate</h3>
+                    <h3 class="font-headline-lg text-headline-lg font-black tracking-tight text-white drop-shadow-sm" id="profileNameAge">Date Chamber Standby</h3>
                     <span class="material-symbols-outlined text-indigo-300 text-[22px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
                   </div>
-                  <p class="font-body-md text-body-md text-slate-200 font-medium" id="profileRole">Verified 26 Cohort</p>
+                  <p class="font-body-md text-body-md text-slate-200 font-medium" id="profileRole">Awaiting profile ingestion above</p>
                 </div>
               </div>
 
               <!-- Deep Context Badges -->
               <div class="flex flex-wrap gap-space-xs pt-space-xs" id="profileContextBadges">
-                <!-- Rendered dynamically -->
+                <span class="px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 font-semibold text-xs flex items-center gap-1 shadow-xs">
+                  <span class="material-symbols-outlined text-[15px]">info</span> Awaiting first profile ingestion
+                </span>
+                <span class="px-3 py-1.5 rounded-full bg-purple-50 text-purple-700 font-semibold text-xs flex items-center gap-1 shadow-xs">
+                  <span class="material-symbols-outlined text-[15px]">psychology</span> Ready to synthesize AI Proxy
+                </span>
               </div>
 
               <!-- Instagram Somatic Vibe Extraction -->
@@ -402,20 +441,20 @@
                     <span class="material-symbols-outlined text-purple-600 text-[18px]">collections_bookmark</span>
                     <span>Instagram Somatic Vibe Extraction</span>
                   </span>
-                  <span class="font-label-sm text-label-sm font-semibold text-purple-700 bg-purple-100/60 px-2.5 py-0.5 rounded-full" id="profileInstagramHandle">@candidate</span>
+                  <span class="font-label-sm text-label-sm font-semibold text-purple-700 bg-purple-100/60 px-2.5 py-0.5 rounded-full" id="profileInstagramHandle">@standby</span>
                 </div>
                 <div class="grid grid-cols-3 gap-space-xs mt-space-xs" id="profileVibeGrid">
-                  <div class="relative h-24 rounded-lg overflow-hidden group border border-white/60">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" id="vibeImg1" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Sam_Altman_TechCrunch_Disrupt_2019_%28cropped%29.jpg/800px-Sam_Altman_TechCrunch_Disrupt_2019_%28cropped%29.jpg"/>
-                    <span class="absolute bottom-1 left-1.5 font-label-sm text-[10px] text-white bg-slate-900/70 backdrop-blur-xs px-1.5 py-0.5 rounded" id="vibeLabel1">Vibe 1</span>
+                  <div class="relative h-24 rounded-lg overflow-hidden group border border-white/60 bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-60" id="vibeImg1" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&h=400&q=80"/>
+                    <span class="absolute bottom-1 left-1.5 font-label-sm text-[10px] text-white bg-slate-900/70 backdrop-blur-xs px-1.5 py-0.5 rounded" id="vibeLabel1">Standby</span>
                   </div>
-                  <div class="relative h-24 rounded-lg overflow-hidden group border border-white/60">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" id="vibeImg2" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Mira_Murati_crop.jpg/800px-Mira_Murati_crop.jpg"/>
-                    <span class="absolute bottom-1 left-1.5 font-label-sm text-[10px] text-white bg-slate-900/70 backdrop-blur-xs px-1.5 py-0.5 rounded" id="vibeLabel2">Vibe 2</span>
+                  <div class="relative h-24 rounded-lg overflow-hidden group border border-white/60 bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-60" id="vibeImg2" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&h=400&q=80"/>
+                    <span class="absolute bottom-1 left-1.5 font-label-sm text-[10px] text-white bg-slate-900/70 backdrop-blur-xs px-1.5 py-0.5 rounded" id="vibeLabel2">Standby</span>
                   </div>
-                  <div class="relative h-24 rounded-lg overflow-hidden group border border-white/60">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" id="vibeImg3" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Marques_Brownlee_crop.jpg/800px-Marques_Brownlee_crop.jpg"/>
-                    <span class="absolute bottom-1 left-1.5 font-label-sm text-[10px] text-white bg-slate-900/70 backdrop-blur-xs px-1.5 py-0.5 rounded" id="vibeLabel3">Vibe 3</span>
+                  <div class="relative h-24 rounded-lg overflow-hidden group border border-white/60 bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-60" id="vibeImg3" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&h=400&q=80"/>
+                    <span class="absolute bottom-1 left-1.5 font-label-sm text-[10px] text-white bg-slate-900/70 backdrop-blur-xs px-1.5 py-0.5 rounded" id="vibeLabel3">Standby</span>
                   </div>
                 </div>
               </div>
@@ -450,7 +489,7 @@
                     <div class="w-3 h-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 animate-pulse"></div>
                     <span class="font-label-md text-label-md text-slate-800 font-extrabold">Autonomous Dialogue Sandbox</span>
                   </div>
-                  <span class="font-label-sm text-label-sm text-indigo-800 font-semibold" id="dialogueTurnIndicator">Turn 6 of 8 • 11m elapsed</span>
+                  <span class="font-label-sm text-label-sm text-indigo-800 font-semibold" id="dialogueTurnIndicator">Chamber Idle • Ready for Ingestion</span>
                 </div>
 
                 <!-- Dialogue Scroll Area -->
@@ -462,18 +501,18 @@
                       <span class="font-label-sm text-label-sm text-slate-600 font-bold" id="userProxyLabel">Your Proxy (Active)</span>
                     </div>
                     <div class="bg-white border border-slate-200/90 p-space-md rounded-2xl rounded-tl-none font-body-md text-body-md text-slate-800 shadow-sm" id="julianMessage1">
-                      "Looking at your profile, your balance of intense creative output with quiet personal discipline is striking. How do you protect your downtime?"
+                      "Paste your public Instagram & LinkedIn in the deployment dock above to spawn your AI proxy and initiate live matchmaking sessions."
                     </div>
                   </div>
 
                   <!-- Match Proxy Message -->
                   <div class="flex flex-col items-end self-end gap-1 max-w-[88%]">
                     <div class="flex items-center gap-space-xs">
-                      <span class="font-label-sm text-label-sm text-slate-600 font-bold" id="matchAgentLabel">Candidate Proxy (Bio-Agent)</span>
-                      <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-purple-600 to-pink-500 text-white flex items-center justify-center font-label-sm text-[11px] font-black shadow-sm" id="matchAgentAvatar">⚡</div>
+                      <span class="font-label-sm text-label-sm text-slate-600 font-bold" id="matchAgentLabel">System Telemetry</span>
+                      <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-purple-600 to-pink-500 text-white flex items-center justify-center font-label-sm text-[11px] font-black shadow-sm" id="matchAgentAvatar">✦</div>
                     </div>
                     <div class="bg-gradient-to-br from-purple-50 via-indigo-50/70 to-pink-50/40 border border-purple-200/70 p-space-md rounded-2xl rounded-tr-none font-body-md text-body-md text-slate-900 shadow-sm" id="matchMessage">
-                      "Spot on. She values slow, physical craft over abstract hype and strictly protects her evening sanctuary. She looks for someone with equal autonomy."
+                      "Date Chamber is in standby. Once candidate profiles are ingested, our neural agent swarm will autonomously run simulated 15-minute speed dates here."
                     </div>
                   </div>
 
@@ -484,13 +523,13 @@
                       <span class="font-label-sm text-label-sm text-slate-600 font-bold" id="userProxyLabel2">Your Proxy (Active)</span>
                     </div>
                     <div class="bg-white border border-slate-200/90 p-space-md rounded-2xl rounded-tl-none font-body-md text-body-md text-slate-800 shadow-sm" id="julianMessage2">
-                      "Match confirmed. Zero posturing, long conversations over coffee, and shared respect for focused craft. Proposing Saturday coffee at Mint Plaza."
+                      "Ready to evaluate values, lifestyle rhythm, and deep compatibility."
                     </div>
                   </div>
 
                   <!-- Consensus Banner -->
                   <div class="my-space-xs mx-auto px-space-md py-1.5 rounded-full bg-gradient-to-r from-purple-100 to-indigo-100 border border-purple-200/80 font-label-sm text-label-sm text-indigo-950 font-bold flex items-center gap-1.5 shadow-sm" id="consensusBanner">
-                    <span class="material-symbols-outlined text-purple-700 text-[16px]">celebration</span> Both autonomous agents agree: High physical &amp; intellectual chemistry
+                    <span class="material-symbols-outlined text-purple-700 text-[16px]">hourglass_empty</span> Standby • Zero Profiles Ingested
                   </div>
                 </div>
 
@@ -785,7 +824,116 @@
         © 2026 Woven Inc. Autonomous Agentic Dating.
       </div>
     </div>
-  </footer>
+  <!-- SIGN IN & CREATE ACCOUNT OAUTH MODAL -->
+  <div class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300" id="authModal">
+    <div class="w-full max-w-md bg-white rounded-3xl p-6 sm:p-8 border border-slate-100 shadow-[0_20px_60px_-15px_rgba(99,102,241,0.25)] relative flex flex-col text-slate-800 overflow-hidden">
+      
+      <!-- Close Button -->
+      <button onclick="closeAuthModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors cursor-pointer">
+        <span class="material-symbols-outlined text-[18px]">close</span>
+      </button>
+
+      <!-- Brand Header -->
+      <div class="flex items-center gap-2.5 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-black flex items-center justify-center p-1 shadow-sm">
+          <svg viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+            <defs>
+              <linearGradient id="modalHeartBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f43f5e"/>
+                <stop offset="100%" stop-color="#fb7185"/>
+              </linearGradient>
+            </defs>
+            <path d="M18.6 6.62c-1.44 0-2.8.56-3.77 1.53L12 10.66 9.17 8.15C8.2 7.18 6.84 6.62 5.4 6.62 2.42 6.62 0 9.04 0 12.02s2.42 5.4 5.4 5.4c1.44 0 2.8-.56 3.77-1.53L12 13.38l2.83 2.51c.97.97 2.33 1.53 3.77 1.53 2.98 0 5.4-2.42 5.4-5.4s-2.42-5.4-5.4-5.4zm0 8.8c-1.03 0-1.95-.42-2.61-1.07L12 10.66l-3.99 3.69c-.66.65-1.58 1.07-2.61 1.07-2.02 0-3.66-1.64-3.66-3.4 0-1.76 1.64-3.4 3.66-3.4 1.03 0 1.95.42 2.61 1.07L12 13.38l3.99-3.69c.66-.65 1.58-1.07 2.61-1.07 2.02 0 3.66 1.64 3.66 3.4 0 1.76-1.64 3.4-3.66 3.4z" fill="#ffffff"/>
+            <path d="M 21.2,12.2 C 20.3,10.8 18.5,11.2 18.1,12.5 C 17.5,14.5 20.2,16.8 21.2,17.8 C 22.2,16.8 24.9,14.5 24.3,12.5 C 23.9,11.2 22.1,10.8 21.2,12.2 Z" fill="none" stroke="url(#modalHeartBorder)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="font-headline-sm text-sm text-[#1e1b4b] font-black tracking-tight leading-none">WOVEN ACCOUNT</span>
+      </div>
+
+      <!-- Tab Switcher -->
+      <div class="flex items-center bg-slate-100 p-1 rounded-2xl mb-5">
+        <button id="authTabSignIn" class="flex-1 py-2 rounded-xl text-xs font-extrabold transition-all bg-white text-slate-900 shadow-sm cursor-pointer" onclick="switchAuthTab('signin')">
+          Sign In
+        </button>
+        <button id="authTabSignUp" class="flex-1 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-900 transition-all cursor-pointer" onclick="switchAuthTab('signup')">
+          Create Account
+        </button>
+      </div>
+
+      <!-- Heading -->
+      <h3 class="text-xl font-extrabold text-slate-900 text-left mb-1" id="authModalTitle">Welcome Back</h3>
+      <p class="text-xs text-slate-500 text-left mb-5" id="authModalSubtitle">Sign in to sync your AI proxy and verified match stream</p>
+
+      <!-- OAuth Buttons -->
+      <div class="flex flex-col gap-2.5 mb-4">
+        <!-- Google OAuth -->
+        <button type="button" onclick="loginWithOAuth('google')" class="flex items-center justify-center gap-3 w-full py-3 px-4 rounded-2xl bg-white border border-slate-200 hover:bg-slate-50 active:scale-[0.98] text-slate-700 font-bold text-xs shadow-xs transition-all cursor-pointer">
+          <svg class="w-4 h-4" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span>Continue with Google</span>
+        </button>
+
+        <!-- GitHub OAuth -->
+        <button type="button" onclick="loginWithOAuth('github')" class="flex items-center justify-center gap-3 w-full py-3 px-4 rounded-2xl bg-[#1e2327] hover:bg-[#2b3137] active:scale-[0.98] text-white font-bold text-xs shadow-xs transition-all cursor-pointer">
+          <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          <span>Continue with GitHub</span>
+        </button>
+
+        <!-- LinkedIn OAuth -->
+        <button type="button" onclick="loginWithOAuth('linkedin')" class="flex items-center justify-center gap-3 w-full py-3 px-4 rounded-2xl bg-[#0A66C2] hover:bg-[#004182] active:scale-[0.98] text-white font-bold text-xs shadow-xs transition-all cursor-pointer">
+          <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v7.6H9.2v-7.6H6.46M7.83 6.25c-.91 0-1.64.73-1.64 1.64 0 .9.73 1.64 1.64 1.64.91 0 1.64-.74 1.64-1.64 0-.91-.73-1.64-1.64-1.64z"/>
+          </svg>
+          <span>Continue with LinkedIn</span>
+        </button>
+      </div>
+
+      <!-- Divider -->
+      <div class="relative flex py-1 items-center mb-3">
+        <div class="flex-grow border-t border-slate-200"></div>
+        <span class="flex-shrink mx-3 text-[10px] font-bold uppercase tracking-wider text-slate-400">or with email</span>
+        <div class="flex-grow border-t border-slate-200"></div>
+      </div>
+
+      <!-- Email / Password Form -->
+      <form id="authEmailForm" onsubmit="event.preventDefault(); handleEmailAuth();" class="flex flex-col gap-2.5 text-left">
+        <!-- Name field (shown on Sign Up only) -->
+        <div id="authNameFieldGroup" class="hidden flex-col gap-1">
+          <label class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Your Full Name</label>
+          <input id="authInputName" type="text" placeholder="e.g. Alex Vance" class="w-full bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition-all font-medium"/>
+        </div>
+
+        <!-- Email field -->
+        <div class="flex flex-col gap-1">
+          <label class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Email Address</label>
+          <input id="authInputEmail" type="email" required placeholder="name@example.com" class="w-full bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition-all font-medium"/>
+        </div>
+
+        <!-- Password field -->
+        <div class="flex flex-col gap-1">
+          <label class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Password</label>
+          <input id="authInputPassword" type="password" required placeholder="••••••••" class="w-full bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition-all font-medium"/>
+        </div>
+
+        <!-- Submit Button -->
+        <button id="authSubmitBtn" type="submit" class="w-full mt-2 py-3.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 hover:opacity-95 text-white font-extrabold text-sm shadow-lg shadow-indigo-500/25 transition-all active:scale-98 cursor-pointer">
+          Sign In to Woven
+        </button>
+      </form>
+
+      <!-- Toggle Mode Prompt -->
+      <p class="text-xs text-slate-500 text-center mt-4">
+        <span id="authTogglePromptText">Don't have an account?</span>
+        <button type="button" id="authToggleBtn" class="text-indigo-600 font-extrabold hover:underline ml-1 cursor-pointer" onclick="toggleAuthMode()">Create account</button>
+      </p>
+    </div>
+  </div>
 
   <!-- SCRIPT -->
   <script src="/aura-app.js"></script>

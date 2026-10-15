@@ -42,46 +42,141 @@ function showToast(msg) {
   }
 }
 
-// Load candidate data
+// Load candidate data (Clean state: zero mock profiles)
 async function initAura() {
+  // Purge any stored or legacy mock profiles from browser storage
+  try {
+    localStorage.removeItem('aura_user_candidate');
+    localStorage.removeItem('woven_candidates');
+    localStorage.removeItem('woven_user_candidate');
+    localStorage.removeItem('candidates');
+    localStorage.removeItem('profiles');
+  } catch (e) {}
+
   try {
     const res = await fetch('/api/aura-candidates');
     if (res.ok) {
       candidates = await res.json();
     } else {
-      const fallback = await fetch('/data/aura-candidates.json');
-      candidates = await fallback.json();
+      candidates = [];
     }
   } catch (e) {
-    try {
-      const fallback = await fetch('/data/aura-candidates.json');
-      candidates = await fallback.json();
-    } catch (err) {
-      console.error('Failed to load candidate json', err);
-    }
+    candidates = [];
   }
 
-  // Restore any user profile stored in localStorage
+  console.log(`Loaded ${candidates.length} candidate proxies.`);
+  if (candidates && candidates.length > 0) {
+    renderCandidate(0);
+  } else {
+    renderEmptyChamberState();
+  }
+}
+
+// Purge all profiles from memory and backend
+async function purgeAllProfiles() {
   try {
-    const stored = localStorage.getItem('aura_user_candidate');
-    if (stored) {
-      const userCand = JSON.parse(stored);
-      if (!candidates.find(c => c.id === userCand.id || c.name === userCand.name)) {
-        candidates.unshift(userCand);
-      }
-      currentUserPersona = {
-        name: userCand.name,
-        initial: userCand.name.charAt(0).toUpperCase(),
-        role: "Active User Proxy"
-      };
-      updateUserProxyLabels();
-    }
-  } catch (err) {
-    console.error('Error restoring user profile', err);
+    await fetch('/api/aura-candidates', { method: 'DELETE' });
+  } catch (e) {}
+  candidates = [];
+  currentIndex = 0;
+  try {
+    localStorage.removeItem('woven_user_candidate');
+    localStorage.removeItem('aura_user_candidate');
+    localStorage.removeItem('woven_candidates');
+    localStorage.removeItem('candidates');
+    localStorage.removeItem('profiles');
+  } catch (e) {}
+  renderEmptyChamberState();
+  showToast('All stored profiles removed. Chamber is now completely clean.');
+}
+
+// Render empty chamber state when pool has no candidates
+function renderEmptyChamberState() {
+  const roundEl = document.getElementById('activeRoundHeading') || document.getElementById('arenaSessionHeading');
+  if (roundEl) roundEl.textContent = "Chamber Standby • Awaiting Deployed Proxies";
+
+  const idxBadge = document.getElementById('currentCandidateIndexBadge');
+  if (idxBadge) idxBadge.textContent = "0 Candidates in Pool";
+
+  const prevBtn = document.getElementById('prevCandidateBtn');
+  const nextBtn = document.getElementById('nextCandidateBtn');
+  if (prevBtn) prevBtn.disabled = true;
+  if (nextBtn) nextBtn.disabled = true;
+
+  const turnEl = document.getElementById('dialogueTurnIndicator');
+  if (turnEl) turnEl.textContent = "Chamber Idle • Ready for Ingestion";
+
+  const imgEl = document.getElementById('profileImage');
+  if (imgEl) imgEl.src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&h=800&q=80";
+
+  const verEl = document.getElementById('profileVerificationText');
+  if (verEl) verEl.textContent = "Chamber Standby";
+
+  const rankEl = document.getElementById('profileBadgeRank');
+  if (rankEl) rankEl.textContent = "STANDBY";
+
+  const locEl = document.getElementById('profileLocation');
+  if (locEl) locEl.textContent = "Autonomous Swarm";
+
+  const nameAgeEl = document.getElementById('profileNameAge');
+  if (nameAgeEl) nameAgeEl.textContent = "Date Chamber Standby";
+
+  const roleEl = document.getElementById('profileRole');
+  if (roleEl) roleEl.textContent = "Awaiting profile ingestion above";
+
+  const igHandleEl = document.getElementById('profileInstagramHandle');
+  if (igHandleEl) igHandleEl.textContent = "@standby";
+
+  const badgeContainer = document.getElementById('profileContextBadges');
+  if (badgeContainer) {
+    badgeContainer.innerHTML = `
+      <span class="px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 font-semibold text-xs flex items-center gap-1 shadow-xs">
+        <span class="material-symbols-outlined text-[15px]">info</span> Awaiting first profile ingestion
+      </span>
+      <span class="px-3 py-1.5 rounded-full bg-purple-50 text-purple-700 font-semibold text-xs flex items-center gap-1 shadow-xs">
+        <span class="material-symbols-outlined text-[15px]">psychology</span> Ready to synthesize AI Proxy
+      </span>
+    `;
   }
 
-  console.log(`Loaded ${candidates.length} candidates.`);
-  renderCandidate(0);
+  // Reset vibe images to abstract standby thumbnails
+  const standbyImg = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&h=400&q=80";
+  const v1 = document.getElementById('vibeImg1');
+  const v2 = document.getElementById('vibeImg2');
+  const v3 = document.getElementById('vibeImg3');
+  const vl1 = document.getElementById('vibeLabel1');
+  const vl2 = document.getElementById('vibeLabel2');
+  const vl3 = document.getElementById('vibeLabel3');
+  if (v1) { v1.src = standbyImg; v1.classList.add('opacity-60'); }
+  if (v2) { v2.src = standbyImg; v2.classList.add('opacity-60'); }
+  if (v3) { v3.src = standbyImg; v3.classList.add('opacity-60'); }
+  if (vl1) vl1.textContent = "Standby";
+  if (vl2) vl2.textContent = "Standby";
+  if (vl3) vl3.textContent = "Standby";
+
+  const resScoreEl = document.getElementById('resonanceScoreNumber');
+  if (resScoreEl) resScoreEl.textContent = "0%";
+  const svgPath = document.getElementById('resonanceSvgPath');
+  if (svgPath) svgPath.setAttribute('stroke-dasharray', `0, 100`);
+  const resDesc = document.getElementById('resonanceDescription');
+  if (resDesc) resDesc.textContent = "Awaiting two or more agent proxies to analyze mutual resonance and chemistry.";
+
+  const userMsg1 = document.getElementById('julianMessage1') || document.getElementById('chatMessageUser1');
+  if (userMsg1) userMsg1.textContent = '"Paste your public Instagram & LinkedIn in the deployment dock above to spawn your AI proxy and initiate live matchmaking sessions."';
+
+  const matchLabel = document.getElementById('matchAgentLabel');
+  if (matchLabel) matchLabel.textContent = "System Telemetry";
+  const matchAvatar = document.getElementById('matchAgentAvatar');
+  if (matchAvatar) matchAvatar.textContent = "✦";
+
+  const matchMsg = document.getElementById('matchMessage') || document.getElementById('chatMessageMatch');
+  if (matchMsg) matchMsg.textContent = "Date Chamber is in standby. Once candidate profiles are ingested, our neural agent swarm will autonomously run simulated 15-minute speed dates here.";
+
+  const userMsg2 = document.getElementById('julianMessage2') || document.getElementById('chatMessageUser2');
+  if (userMsg2) userMsg2.textContent = '"Ready to evaluate values, lifestyle rhythm, and deep compatibility."';
+
+  const consensusBanner = document.getElementById('consensusBanner');
+  if (consensusBanner) consensusBanner.innerHTML = `<span class="material-symbols-outlined text-purple-700 text-[16px]">hourglass_empty</span> Standby • Zero Profiles Ingested`;
 }
 
 function updateUserProxyLabels() {
@@ -226,15 +321,51 @@ function selectCandidate(idx) {
 
 // Swapping candidate directly via buttons
 function swapCandidate() {
+  if (!candidates || candidates.length === 0) {
+    showToast('Chamber standby. Ingest a profile above to begin speed dates.');
+    renderEmptyChamberState();
+    return;
+  }
+  if (candidates.length === 1) {
+    showToast('Only 1 profile in pool. Ingest another candidate above to swap profiles.');
+    return;
+  }
   const nextIdx = (currentIndex + 1) % candidates.length;
   renderCandidate(nextIdx);
   showToast(`Swapped to ${candidates[nextIdx].name} (${nextIdx + 1}/${candidates.length})`);
 }
 
 function prevCandidate() {
+  if (!candidates || candidates.length === 0) {
+    showToast('Chamber standby. Ingest a profile above to begin speed dates.');
+    renderEmptyChamberState();
+    return;
+  }
+  if (candidates.length === 1) {
+    showToast('Only 1 profile in pool. Ingest another candidate above to swap profiles.');
+    return;
+  }
   const prevIdx = (currentIndex - 1 + candidates.length) % candidates.length;
   renderCandidate(prevIdx);
   showToast(`Swapped to ${candidates[prevIdx].name} (${prevIdx + 1}/${candidates.length})`);
+}
+
+// Pass candidate: dismisses the current candidate and clears/swaps
+function passCandidate() {
+  if (!candidates || candidates.length === 0) {
+    showToast('Chamber standby. Ingest a profile above to begin speed dates.');
+    renderEmptyChamberState();
+    return;
+  }
+  const removed = candidates.splice(currentIndex, 1)[0];
+  showToast(`Passed on ${removed.name || 'candidate'}. Removed from queue.`);
+  if (candidates.length === 0) {
+    currentIndex = 0;
+    renderEmptyChamberState();
+  } else {
+    currentIndex = currentIndex % candidates.length;
+    renderCandidate(currentIndex);
+  }
 }
 
 // Presets
@@ -400,7 +531,7 @@ async function startIngestionProcess() {
               { icon: "schedule", text: "Active Tonight", color: "blue" }
             ],
             dialogue: {
-              round: `Round 1 of 26: Autonomous Speed-Date with Top Match`,
+              round: `Round 1 of ${Math.max(1, candidates.length)}: Autonomous Speed-Date Protocol`,
               turn: "Turn 6 of 8 • Active Convergence",
               userMsg1: `Reviewing your two profiles, your professional focus paired with intentional downtime shows deep balance. What is essential for you in partnership?`,
               matchAgentName: `${candidates[0]?.name || 'Candidate'}'s Proxy`,
@@ -416,7 +547,7 @@ async function startIngestionProcess() {
           candidates.unshift(newCand);
 
           try {
-            localStorage.setItem('aura_user_candidate', JSON.stringify(newCand));
+            localStorage.setItem('woven_user_candidate', JSON.stringify(newCand));
           } catch (e) {}
 
           currentUserPersona = {
@@ -541,6 +672,7 @@ function closeDossierModal() {
 // Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
   initAura();
+  initAuth();
 
   const prevBtn = document.getElementById('prevCandidateBtn');
   const nextBtn = document.getElementById('nextCandidateBtn');
@@ -550,7 +682,291 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (prevBtn) prevBtn.addEventListener('click', prevCandidate);
   if (nextBtn) nextBtn.addEventListener('click', swapCandidate);
-  if (passBtn) passBtn.addEventListener('click', swapCandidate);
+  if (passBtn) passBtn.addEventListener('click', passCandidate);
   if (swapRandomBtn) swapRandomBtn.addEventListener('click', swapCandidate);
   if (superSparkBtn) superSparkBtn.addEventListener('click', triggerSuperSparkMeetup);
 });
+
+// ==========================================
+// WOVEN AUTH & OAUTH CONTROLLER
+// ==========================================
+
+let currentUser = null;
+let currentAuthTab = 'signin'; // 'signin' | 'signup'
+
+function initAuth() {
+  // Check stored auth session
+  const storedUser = localStorage.getItem('woven_auth_user');
+  const storedToken = localStorage.getItem('woven_auth_token');
+
+  if (storedUser && storedToken) {
+    try {
+      currentUser = JSON.parse(storedUser);
+      updateAuthUI(currentUser);
+      // Validate session with backend
+      fetch('/api/auth/me', {
+        headers: { 'Authorization': `Bearer ${storedToken}` }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.user) {
+          currentUser = data.user;
+          localStorage.setItem('woven_auth_user', JSON.stringify(currentUser));
+          updateAuthUI(currentUser);
+        } else {
+          // Token expired or invalid
+          signOutUser(false);
+        }
+      })
+      .catch(() => {
+        // Network error; preserve current UI
+      });
+    } catch (e) {
+      signOutUser(false);
+    }
+  } else {
+    updateAuthUI(null);
+  }
+
+  // Listen for OAuth messages from popup
+  window.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'OAUTH_AUTH_SUCCESS') {
+      const { user, token } = event.data;
+      if (user && token) {
+        currentUser = user;
+        localStorage.setItem('woven_auth_user', JSON.stringify(user));
+        localStorage.setItem('woven_auth_token', token);
+        updateAuthUI(currentUser);
+        closeAuthModal();
+        const providerName = (user.provider || 'OAuth').charAt(0).toUpperCase() + (user.provider || 'OAuth').slice(1);
+        showToast(`🎉 Connected via ${providerName}! Welcome, ${user.name}.`);
+      }
+    }
+  });
+
+  // Close dropdown on outside click
+  document.addEventListener('click', (e) => {
+    const userWrapper = document.getElementById('navUserMenuWrapper');
+    const dropdown = document.getElementById('navUserDropdown');
+    if (dropdown && !dropdown.classList.contains('hidden')) {
+      if (userWrapper && !userWrapper.contains(e.target)) {
+        dropdown.classList.add('hidden');
+        dropdown.classList.remove('flex');
+      }
+    }
+  });
+}
+
+function updateAuthUI(user) {
+  const signInBtn = document.getElementById('navSignInBtn');
+  const createAccountBtn = document.getElementById('navCreateAccountBtn');
+  const userWrapper = document.getElementById('navUserMenuWrapper');
+  const avatarImg = document.getElementById('navUserAvatarImg');
+  const nameText = document.getElementById('navUserNameText');
+  const emailText = document.getElementById('dropdownUserEmail');
+  const badgeText = document.getElementById('dropdownProviderBadge');
+
+  if (user) {
+    if (signInBtn) signInBtn.classList.add('hidden');
+    if (createAccountBtn) {
+      createAccountBtn.classList.remove('sm:flex');
+      createAccountBtn.classList.add('hidden');
+    }
+    if (userWrapper) {
+      userWrapper.classList.remove('hidden');
+      userWrapper.classList.add('block');
+    }
+    if (avatarImg) {
+      avatarImg.src = user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=6366f1&color=fff&bold=true`;
+    }
+    if (nameText) nameText.textContent = user.name || 'Member';
+    if (emailText) emailText.textContent = user.email || '';
+    if (badgeText) badgeText.textContent = (user.provider || 'member').toUpperCase();
+  } else {
+    if (signInBtn) signInBtn.classList.remove('hidden');
+    if (createAccountBtn) {
+      createAccountBtn.classList.remove('hidden');
+      createAccountBtn.classList.add('sm:flex');
+    }
+    if (userWrapper) {
+      userWrapper.classList.add('hidden');
+      userWrapper.classList.remove('block');
+    }
+  }
+}
+
+function toggleUserDropdown() {
+  const dropdown = document.getElementById('navUserDropdown');
+  if (!dropdown) return;
+  if (dropdown.classList.contains('hidden')) {
+    dropdown.classList.remove('hidden');
+    dropdown.classList.add('flex');
+  } else {
+    dropdown.classList.add('hidden');
+    dropdown.classList.remove('flex');
+  }
+}
+
+function openAuthModal(mode = 'signin') {
+  currentAuthTab = mode;
+  const modal = document.getElementById('authModal');
+  if (!modal) return;
+
+  switchAuthTab(mode);
+  modal.classList.remove('opacity-0', 'pointer-events-none');
+}
+
+function closeAuthModal() {
+  const modal = document.getElementById('authModal');
+  if (modal) {
+    modal.classList.add('opacity-0', 'pointer-events-none');
+  }
+}
+
+function switchAuthTab(tab) {
+  currentAuthTab = tab;
+  const tabSignIn = document.getElementById('authTabSignIn');
+  const tabSignUp = document.getElementById('authTabSignUp');
+  const title = document.getElementById('authModalTitle');
+  const subtitle = document.getElementById('authModalSubtitle');
+  const nameGroup = document.getElementById('authNameFieldGroup');
+  const submitBtn = document.getElementById('authSubmitBtn');
+  const promptText = document.getElementById('authTogglePromptText');
+  const toggleBtn = document.getElementById('authToggleBtn');
+
+  if (tab === 'signup') {
+    if (tabSignUp) {
+      tabSignUp.classList.add('bg-white', 'text-slate-900', 'shadow-sm', 'font-extrabold');
+      tabSignUp.classList.remove('text-slate-500');
+    }
+    if (tabSignIn) {
+      tabSignIn.classList.remove('bg-white', 'text-slate-900', 'shadow-sm', 'font-extrabold');
+      tabSignIn.classList.add('text-slate-500');
+    }
+    if (title) title.textContent = "Create Your Account";
+    if (subtitle) subtitle.textContent = "Join Woven to deploy your autonomous proxy & access verified real dating";
+    if (nameGroup) {
+      nameGroup.classList.remove('hidden');
+      nameGroup.classList.add('flex');
+    }
+    if (submitBtn) submitBtn.textContent = "Create Account";
+    if (promptText) promptText.textContent = "Already have an account?";
+    if (toggleBtn) toggleBtn.textContent = "Sign In";
+  } else {
+    if (tabSignIn) {
+      tabSignIn.classList.add('bg-white', 'text-slate-900', 'shadow-sm', 'font-extrabold');
+      tabSignIn.classList.remove('text-slate-500');
+    }
+    if (tabSignUp) {
+      tabSignUp.classList.remove('bg-white', 'text-slate-900', 'shadow-sm', 'font-extrabold');
+      tabSignUp.classList.add('text-slate-500');
+    }
+    if (title) title.textContent = "Welcome Back";
+    if (subtitle) subtitle.textContent = "Sign in to sync your AI proxy and verified match stream";
+    if (nameGroup) {
+      nameGroup.classList.add('hidden');
+      nameGroup.classList.remove('flex');
+    }
+    if (submitBtn) submitBtn.textContent = "Sign In to Woven";
+    if (promptText) promptText.textContent = "Don't have an account?";
+    if (toggleBtn) toggleBtn.textContent = "Create account";
+  }
+}
+
+function toggleAuthMode() {
+  switchAuthTab(currentAuthTab === 'signin' ? 'signup' : 'signin');
+}
+
+async function handleEmailAuth() {
+  const emailInput = document.getElementById('authInputEmail');
+  const passwordInput = document.getElementById('authInputPassword');
+  const nameInput = document.getElementById('authInputName');
+
+  const email = emailInput ? emailInput.value.trim() : '';
+  const password = passwordInput ? passwordInput.value : '';
+  const name = nameInput ? nameInput.value.trim() : '';
+
+  if (!email || !password) {
+    showToast('Please provide email and password.');
+    return;
+  }
+
+  const endpoint = currentAuthTab === 'signup' ? '/api/auth/register' : '/api/auth/login';
+  const payload = currentAuthTab === 'signup' ? { name: name || email.split('@')[0], email, password } : { email, password };
+
+  try {
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!data.success) {
+      showToast(data.error || 'Authentication failed. Please verify credentials.');
+      return;
+    }
+
+    currentUser = data.user;
+    localStorage.setItem('woven_auth_user', JSON.stringify(data.user));
+    localStorage.setItem('woven_auth_token', data.token);
+    updateAuthUI(currentUser);
+    closeAuthModal();
+
+    // Clear inputs
+    if (emailInput) emailInput.value = '';
+    if (passwordInput) passwordInput.value = '';
+    if (nameInput) nameInput.value = '';
+
+    showToast(currentAuthTab === 'signup' ? `🎉 Welcome to Woven, ${data.user.name}!` : `✨ Welcome back, ${data.user.name}!`);
+  } catch (err) {
+    console.error('Auth error', err);
+    showToast('Authentication server error. Please try again.');
+  }
+}
+
+function loginWithOAuth(provider) {
+  const width = 500;
+  const height = 650;
+  const left = window.screenX + (window.outerWidth - width) / 2;
+  const top = window.screenY + (window.outerHeight - height) / 2;
+  
+  const popup = window.open(
+    `/auth/${provider}`,
+    `Woven_${provider}_Auth`,
+    `width=${width},height=${height},left=${left},top=${top},status=0,toolbar=0,location=0,menubar=0`
+  );
+
+  if (popup) {
+    popup.focus();
+  } else {
+    showToast('Please allow popup windows for OAuth authentication.');
+  }
+}
+
+async function signOutUser(showNotification = true) {
+  const token = localStorage.getItem('woven_auth_token');
+  try {
+    if (token) {
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+    }
+  } catch (e) {}
+
+  currentUser = null;
+  localStorage.removeItem('woven_auth_user');
+  localStorage.removeItem('woven_auth_token');
+  updateAuthUI(null);
+
+  const dropdown = document.getElementById('navUserDropdown');
+  if (dropdown) {
+    dropdown.classList.add('hidden');
+    dropdown.classList.remove('flex');
+  }
+
+  if (showNotification) {
+    showToast('Signed out of Woven.');
+  }
+}
+
