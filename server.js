@@ -488,9 +488,9 @@ app.delete('/api/aura-candidates', (req, res) => {
 
 // --- AUTH & OAUTH ENDPOINTS ---
 
-// Register with Email & Password
+// Register with Email & Password + Dating Questionnaire Profile
 app.post('/api/auth/register', (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, questionnaire } = req.body;
   if (!email || !password || !name) {
     return res.status(400).json({ success: false, error: 'Name, email, and password are required' });
   }
@@ -506,6 +506,7 @@ app.post('/api/auth/register', (req, res) => {
     password: password,
     avatar: `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(name.trim())}&backgroundColor=e0e7ff`,
     provider: 'email',
+    questionnaire: questionnaire || {},
     createdAt: new Date().toISOString()
   };
 
@@ -517,7 +518,7 @@ app.post('/api/auth/register', (req, res) => {
 
   res.json({
     success: true,
-    user: { id: newUser.id, name: newUser.name, email: newUser.email, avatar: newUser.avatar, provider: newUser.provider },
+    user: { id: newUser.id, name: newUser.name, email: newUser.email, avatar: newUser.avatar, provider: newUser.provider, questionnaire: newUser.questionnaire },
     token
   });
 });

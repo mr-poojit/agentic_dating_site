@@ -460,6 +460,17 @@ async function startIngestionProcess() {
   const explicitName = nameInput ? nameInput.value.trim() : '';
   const inferredName = explicitName || formatNameFromUrl(li) || formatNameFromUrl(ig) || "Candidate Proxy";
 
+  // Require account creation before proceeding to deploy profile
+  const userStored = localStorage.getItem('woven_auth_user');
+  if (!currentUser && !userStored) {
+    window.pendingIngestion = { li, ig, explicitName, inferredName };
+    showToast('Account required to deploy your AI proxy. Complete your profile to proceed.');
+    openAuthModal('signup');
+    const banner = document.getElementById('authRequiredBanner');
+    if (banner) banner.classList.remove('hidden');
+    return;
+  }
+
   const modal = document.getElementById('ingestionModal');
   const percentEl = document.getElementById('ingestionPercent');
   const barFill = document.getElementById('progressBarFill');
@@ -560,82 +571,27 @@ async function startIngestionProcess() {
           }
           if (barFill) barFill.style.width = '100%';
           if (percentEl) percentEl.textContent = '100%';
-          if (subStatus) subStatus.textContent = `Deployment complete! ${finalName}'s proxy is active in Date Chamber.`;
+          if (subStatus) subStatus.textContent = `Extraction complete! Review and customize your profile...`;
           if (logEl) {
             const hasRealApify = apiData?.apifyPowered;
-            logEl.innerHTML += `<div class="text-emerald-400 font-bold">> [SUCCESS] ${hasRealApify ? 'Real Instagram & LinkedIn data extracted!' : 'Profile certified!'} Speed date protocol active</div>`;
+            logEl.innerHTML += `<div class="text-emerald-400 font-bold">> [SUCCESS] ${hasRealApify ? 'Real Instagram & LinkedIn data extracted!' : 'Profile certified!'} Opening customization screen...</div>`;
             logEl.scrollTop = logEl.scrollHeight;
           }
 
-          const newCand = apiData?.auraCandidate || {
-            id: apiData?.profile?.id || `user-custom-${Date.now()}`,
-            name: finalName,
-            rank: "#1 MATCH",
-            rankPill: "⭐ YOUR PROFILE",
-            nameAge: `${finalName}, 28`,
-            role: apiData?.profile?.role || "Creative Leader & Technologist",
-            location: "San Francisco / Remote",
-            distance: "Live Proxy Active",
-            verifiedText: "Verified Real Human",
-            verification: "Verified Real Human",
-            igHandle: ig.split('/').filter(Boolean).pop()?.replace('@', '') || "active_user",
-            image: userAvatar,
-            avatar: userAvatar,
-            resonance: "96%",
-            resonanceDash: "96, 100",
-            resonanceDescription: "High harmonic alignment across intellectual drive, personal boundaries, and lifestyle aesthetics.",
-            category: "high creative",
-            linkedinUrl: li,
-            instagramUrl: ig,
-            linkedinSnippet: apiData?.profile?.linkedin_data?.career_ethos || "High drive, deep professional integrity, and boundless curiosity.",
-            instagramSnippet: apiData?.profile?.instagram_data?.aesthetic_vibe || "Weekend architectural walks, pour-over coffee, and genuine presence.",
-            hobbies: apiData?.profile?.agent_analysis?.hobbies || ["Artisan Coffee", "Mindful Travel", "Tactile Craft", "Quiet Sundays"],
-            needs: apiData?.profile?.agent_analysis?.core_needs || "Emotional maturity, mutual intellectual independence, and grounding warmth.",
-            communication_style: apiData?.profile?.agent_analysis?.qualities?.communication_style || "Direct, witty, perceptive, and attentive.",
-            vibes: [
-              { label: "Creative Flow", img: userAvatar },
-              { label: "Weekend Escapes", img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80" },
-              { label: "Pour-Over Coffee", img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80" }
-            ],
-            badges: [
-              { icon: "verified", text: "Dual Verified", color: "indigo" },
-              { icon: "psychology", text: "High EQ & Agency", color: "purple" },
-              { icon: "schedule", text: "Active Tonight", color: "blue" }
-            ],
-            dialogue: {
-              round: `Round 1 of ${Math.max(1, candidates.length)}: Autonomous Speed-Date Protocol`,
-              turn: "Turn 6 of 8 • Active Convergence",
-              userMsg1: `Reviewing your two profiles, your professional focus paired with intentional downtime shows deep balance. What is essential for you in partnership?`,
-              matchAgentName: `${candidates[0]?.name || 'Candidate'}'s Proxy`,
-              matchAvatar: (candidates[0]?.name || 'C').charAt(0),
-              matchMsg: `Authentic presence and mutual autonomy. When two people have their own passions, coming together is effortless.`,
-              userMsg2: `Complete resonance. High standards, shared laughter, zero pretense. Match confirmed.`,
-              consensus: `Both autonomous proxies agree: Electric Chemistry (96% Harmonic Sync)`
-            },
-            isUserCustom: true
-          };
-
-          candidates = candidates.filter(c => c.id !== newCand.id && c.name !== newCand.name);
-          candidates.unshift(newCand);
-
-          try {
-            localStorage.setItem('woven_user_candidate', JSON.stringify(newCand));
-          } catch (e) {}
-
-          currentUserPersona = {
-            name: finalName,
-            initial: finalName.charAt(0).toUpperCase(),
-            role: "Active User Proxy"
-          };
-
-          updateUserProxyLabels();
-          renderCandidate(0);
-
           setTimeout(() => {
             if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
-            showToast(`✨ ${finalName}'s AI Proxy is live in the Date Chamber!`);
-            const chamberEl = document.getElementById('live-speed-date-section');
-            if (chamberEl) chamberEl.scrollIntoView({ behavior: 'smooth' });
+            openConfirmProfileModal({
+              apiData,
+              inferredName,
+              userAvatar,
+              li,
+              ig,
+              finalName,
+              realRole: apiData?.auraCandidate?.role || apiData?.profile?.role || "Bachelor of Engineering | Gen AI | Full-Stack Dev | Startup Enthusiast",
+              realLocation: apiData?.auraCandidate?.location || apiData?.profile?.location || "Bengaluru, India",
+              realBio: apiData?.auraCandidate?.instagramSnippet || apiData?.profile?.instagram_data?.bio || "@poojit_n_\nNew Person, Same Old Mistakes😮‍💨",
+              realHeadline: apiData?.auraCandidate?.linkedinSnippet || apiData?.profile?.linkedin_data?.career_ethos || "I thrive where technology meets business. Electronics & Communication Engineer with expertise in AI, Python, AWS."
+            });
           }, 850);
 
         }, 700);
@@ -879,6 +835,267 @@ function toggleUserDropdown() {
   }
 }
 
+// --- CONFIRM PROFILE & CUSTOMIZE USERNAME MODAL LOGIC ---
+let pendingExtractionData = null;
+
+function openConfirmProfileModal(data) {
+  pendingExtractionData = data;
+  const modal = document.getElementById('confirmProfileModal');
+  if (!modal) return;
+
+  const avatarImg = document.getElementById('confirmAvatarImg');
+  if (avatarImg) avatarImg.src = safeImageUrl(data.userAvatar);
+
+  const previewName = document.getElementById('extractedNamePreview');
+  if (previewName) previewName.textContent = data.finalName;
+
+  const customInput = document.getElementById('inputCustomDisplayName');
+  if (customInput) customInput.value = data.finalName;
+
+  const ageInput = document.getElementById('confirmInputAge');
+  if (ageInput) ageInput.value = (data.apiData?.auraCandidate?.nameAge ? parseInt(data.apiData.auraCandidate.nameAge.split(',')[1]) : 28) || 28;
+
+  const locInput = document.getElementById('confirmInputLocation');
+  if (locInput) locInput.value = data.realLocation || "Bengaluru, India";
+
+  const roleInput = document.getElementById('confirmInputHeadline');
+  if (roleInput) roleInput.value = data.realRole || "Bachelor of Engineering | Gen AI | Full-Stack Dev";
+
+  const bioInput = document.getElementById('confirmInputBio');
+  if (bioInput) bioInput.value = data.realBio || "@poojit_n_\nNew Person, Same Old Mistakes😮‍💨";
+
+  // Reset radio to keep
+  const keepRadio = document.querySelector('input[name="nameChoice"][value="keep"]');
+  if (keepRadio) keepRadio.checked = true;
+  toggleNameCustomization(false);
+
+  modal.classList.remove('opacity-0', 'pointer-events-none');
+}
+
+function closeConfirmProfileModal() {
+  const modal = document.getElementById('confirmProfileModal');
+  if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
+}
+
+function toggleNameCustomization(isCustom) {
+  const container = document.getElementById('customNameInputContainer');
+  const labelKeep = document.getElementById('labelKeepName');
+  const labelCustom = document.getElementById('labelCustomName');
+
+  if (isCustom) {
+    if (container) container.classList.remove('hidden');
+    if (labelCustom) {
+      labelCustom.classList.add('border-indigo-500', 'bg-indigo-50/40');
+      labelCustom.classList.remove('border-slate-200', 'bg-white');
+    }
+    if (labelKeep) {
+      labelKeep.classList.remove('border-indigo-500', 'bg-indigo-50/40');
+      labelKeep.classList.add('border-slate-200', 'bg-white');
+    }
+  } else {
+    if (container) container.classList.add('hidden');
+    if (labelKeep) {
+      labelKeep.classList.add('border-indigo-500', 'bg-indigo-50/40');
+      labelKeep.classList.remove('border-slate-200', 'bg-white');
+    }
+    if (labelCustom) {
+      labelCustom.classList.remove('border-indigo-500', 'bg-indigo-50/40');
+      labelCustom.classList.add('border-slate-200', 'bg-white');
+    }
+  }
+}
+
+async function finalizeCandidateDeployment() {
+  if (!pendingExtractionData) return;
+  const data = pendingExtractionData;
+
+  const choiceRadio = document.querySelector('input[name="nameChoice"]:checked');
+  const isCustom = choiceRadio && choiceRadio.value === 'custom';
+  const customInput = document.getElementById('inputCustomDisplayName');
+  const chosenName = (isCustom && customInput && customInput.value.trim()) ? customInput.value.trim() : data.finalName;
+
+  const ageVal = document.getElementById('confirmInputAge')?.value || 28;
+  const locVal = document.getElementById('confirmInputLocation')?.value || data.realLocation;
+  const roleVal = document.getElementById('confirmInputHeadline')?.value || data.realRole;
+  const bioVal = document.getElementById('confirmInputBio')?.value || data.realBio;
+
+  // Pull dating questionnaire from currentUser if available
+  const userQ = currentUser?.questionnaire || {};
+  const userHobbies = (userQ.hobbies && userQ.hobbies.length > 0) ? userQ.hobbies : (data.apiData?.auraCandidate?.hobbies || ["Specialty Coffee", "Generative AI", "Analog 35mm", "Quiet Sundays"]);
+  const userNeeds = userQ.intent ? `Looking for: ${userQ.intent}. Valuing ${userQ.prompts?.nonNegotiable || 'mutual autonomy and high EQ'}.` : (data.apiData?.auraCandidate?.needs || "Emotional maturity, mutual independence, and genuine warmth.");
+  const userComm = userQ.commStyle || (data.apiData?.auraCandidate?.communication_style || "Direct, witty, perceptive, and attentive.");
+
+  const newCand = data.apiData?.auraCandidate ? {
+    ...data.apiData.auraCandidate,
+    name: chosenName,
+    nameAge: `${chosenName}, ${ageVal}`,
+    location: locVal,
+    role: roleVal,
+    instagramSnippet: bioVal,
+    hobbies: userHobbies,
+    needs: userNeeds,
+    communication_style: userComm,
+    verification: `Verified Real Human (${chosenName})`,
+    avatar: safeImageUrl(data.userAvatar),
+    image: safeImageUrl(data.userAvatar),
+    vibes: (data.apiData.auraCandidate.vibes || []).map(v => ({ ...v, img: safeImageUrl(v.img) }))
+  } : {
+    id: `user-custom-${Date.now()}`,
+    name: chosenName,
+    rank: "#1 MATCH",
+    rankPill: "⭐ YOUR PROFILE",
+    nameAge: `${chosenName}, ${ageVal}`,
+    role: roleVal,
+    location: locVal,
+    distance: "Live Proxy Active",
+    verifiedText: "Verified Real Human",
+    verification: `Verified Real Human (${chosenName})`,
+    statusPill: "Active Proxy",
+    statusColor: "emerald",
+    archetype: "Autonomous Visionary",
+    igHandle: `@${chosenName.toLowerCase().replace(/[^a-z0-9]/g, '')}`,
+    image: safeImageUrl(data.userAvatar),
+    avatar: safeImageUrl(data.userAvatar),
+    resonance: "96%",
+    resonanceDash: "96, 100",
+    resonanceDescription: `Harmonic alignment with ${chosenName}'s professional vector and lifestyle aesthetic.`,
+    category: "high creative",
+    linkedinUrl: data.li,
+    instagramUrl: data.ig,
+    linkedinSnippet: roleVal,
+    instagramSnippet: bioVal,
+    hobbies: userHobbies,
+    needs: userNeeds,
+    communication_style: userComm,
+    vibes: [
+      { label: "Creative Flow", img: safeImageUrl(data.userAvatar) },
+      { label: "Quiet Sundays", img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300&q=80" },
+      { label: "Pour-Over Coffee", img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=400&h=300&q=80" }
+    ],
+    badges: [
+      { icon: "verified", text: "Dual Verified Human", color: "indigo" },
+      { icon: "psychology", text: "High EQ & Agency", color: "purple" },
+      { icon: "schedule", text: "Active Tonight", color: "blue" }
+    ],
+    dialogue: {
+      round: "Round 1 of 1: Autonomous Speed-Date Protocol",
+      turn: "Turn 6 of 8 • Active Convergence",
+      userMsg1: `Reviewing your two profiles, your professional focus (${roleVal.slice(0, 40)}) paired with intentional downtime shows deep balance. What is essential for you in partnership?`,
+      matchAgentName: `Match Proxy`,
+      matchAvatar: `✦`,
+      matchMsg: `Authentic presence and mutual autonomy. When two people have their own passions, coming together is effortless.`,
+      userMsg2: `Complete resonance. High standards, shared laughter, zero pretense. Match confirmed.`,
+      consensus: `Both autonomous proxies agree: Electric Chemistry (96% Harmonic Sync)`
+    },
+    isUserCustom: true
+  };
+
+  candidates = candidates.filter(c => c.name !== newCand.name && c.id !== newCand.id);
+  candidates.unshift(newCand);
+
+  try {
+    localStorage.setItem('woven_user_candidate', JSON.stringify(newCand));
+  } catch (e) {}
+
+  currentUserPersona = {
+    name: chosenName,
+    initial: chosenName.charAt(0).toUpperCase(),
+    role: "Active User Proxy"
+  };
+
+  updateUserProxyLabels();
+  renderCandidate(0);
+  closeConfirmProfileModal();
+  showToast(`✨ ${chosenName}'s AI Proxy is live in the Date Chamber!`);
+
+  const chamberEl = document.getElementById('live-speed-date-section');
+  if (chamberEl) chamberEl.scrollIntoView({ behavior: 'smooth' });
+}
+
+// --- DATING ONBOARDING WIZARD & AUTHENTICATION LOGIC ---
+const ALL_HOBBIES = [
+  { id: 'coffee', label: '☕ Specialty Coffee' },
+  { id: 'film', label: '📸 Analog 35mm Film' },
+  { id: 'coding', label: '💻 Late-Night Coding' },
+  { id: 'genai', label: '🎨 Generative AI' },
+  { id: 'philosophy', label: '📚 Philosophy & Books' },
+  { id: 'pilates', label: '🧘 Mindfulness & Pilates' },
+  { id: 'wine', label: '🍷 Natural Wine' },
+  { id: 'vinyl', label: '🎧 Vinyl Records' },
+  { id: 'architecture', label: '🏛️ Modern Architecture' },
+  { id: 'hiking', label: '🌲 Trail Hikes' },
+  { id: 'cinema', label: '🎬 Indie Cinema (A24)' },
+  { id: 'startups', label: '🚀 Tech Startups' },
+  { id: 'travel', label: '✈️ Intentional Travel' },
+  { id: 'plants', label: '🪴 Plant Care & Botany' }
+];
+
+let selectedHobbies = ['☕ Specialty Coffee', '📸 Analog 35mm Film', '💻 Late-Night Coding', '🎨 Generative AI'];
+let currentWizardStep = 1;
+
+function initHobbyChips() {
+  const container = document.getElementById('hobbyChipsContainer');
+  if (!container) return;
+  container.innerHTML = ALL_HOBBIES.map(h => {
+    const isSelected = selectedHobbies.includes(h.label);
+    const cls = isSelected 
+      ? 'bg-indigo-600 text-white shadow-xs font-bold border-indigo-600' 
+      : 'bg-slate-100 text-slate-700 hover:bg-slate-200 font-medium border-transparent';
+    return `<button type="button" onclick="toggleHobbyChip('${h.label}')" class="px-3 py-1.5 rounded-full text-xs transition-all border cursor-pointer ${cls}">${h.label}</button>`;
+  }).join('');
+}
+
+function toggleHobbyChip(hobby) {
+  if (selectedHobbies.includes(hobby)) {
+    if (selectedHobbies.length > 2) {
+      selectedHobbies = selectedHobbies.filter(h => h !== hobby);
+    } else {
+      showToast('Please keep at least 2 hobbies selected.');
+    }
+  } else {
+    selectedHobbies.push(hobby);
+  }
+  initHobbyChips();
+}
+
+function goToWizardStep(step) {
+  if (step > 1) {
+    const name = document.getElementById('regInputName')?.value.trim();
+    const email = document.getElementById('regInputEmail')?.value.trim();
+    const pass = document.getElementById('regInputPassword')?.value;
+    if (!name || !email || !pass) {
+      showToast('Please provide your name, email, and password first.');
+      return;
+    }
+  }
+
+  currentWizardStep = step;
+  for (let i = 1; i <= 4; i++) {
+    const el = document.getElementById(`wizardStep${i}`);
+    const pill = document.getElementById(`stepPill${i}`);
+    if (el) {
+      if (i === step) {
+        el.classList.remove('hidden');
+        el.classList.add('flex');
+      } else {
+        el.classList.add('hidden');
+        el.classList.remove('flex');
+      }
+    }
+    if (pill) {
+      if (i <= step) {
+        pill.classList.remove('opacity-40');
+      } else {
+        pill.classList.add('opacity-40');
+      }
+    }
+  }
+
+  if (step === 4) {
+    initHobbyChips();
+  }
+}
+
 function openAuthModal(mode = 'signin') {
   currentAuthTab = mode;
   const modal = document.getElementById('authModal');
@@ -899,10 +1116,9 @@ function switchAuthTab(tab) {
   currentAuthTab = tab;
   const tabSignIn = document.getElementById('authTabSignIn');
   const tabSignUp = document.getElementById('authTabSignUp');
-  const title = document.getElementById('authModalTitle');
-  const subtitle = document.getElementById('authModalSubtitle');
-  const nameGroup = document.getElementById('authNameFieldGroup');
-  const submitBtn = document.getElementById('authSubmitBtn');
+  const signInCont = document.getElementById('authSignInContainer');
+  const signUpCont = document.getElementById('authSignUpContainer');
+  const banner = document.getElementById('authRequiredBanner');
   const promptText = document.getElementById('authTogglePromptText');
   const toggleBtn = document.getElementById('authToggleBtn');
 
@@ -915,13 +1131,12 @@ function switchAuthTab(tab) {
       tabSignIn.classList.remove('bg-white', 'text-slate-900', 'shadow-sm', 'font-extrabold');
       tabSignIn.classList.add('text-slate-500');
     }
-    if (title) title.textContent = "Create Your Account";
-    if (subtitle) subtitle.textContent = "Join Woven to deploy your autonomous proxy & access verified real dating";
-    if (nameGroup) {
-      nameGroup.classList.remove('hidden');
-      nameGroup.classList.add('flex');
+    if (signInCont) signInCont.classList.add('hidden');
+    if (signUpCont) {
+      signUpCont.classList.remove('hidden');
+      signUpCont.classList.add('flex');
     }
-    if (submitBtn) submitBtn.textContent = "Create Account";
+    goToWizardStep(1);
     if (promptText) promptText.textContent = "Already have an account?";
     if (toggleBtn) toggleBtn.textContent = "Sign In";
   } else {
@@ -933,15 +1148,14 @@ function switchAuthTab(tab) {
       tabSignUp.classList.remove('bg-white', 'text-slate-900', 'shadow-sm', 'font-extrabold');
       tabSignUp.classList.add('text-slate-500');
     }
-    if (title) title.textContent = "Welcome Back";
-    if (subtitle) subtitle.textContent = "Sign in to sync your AI proxy and verified match stream";
-    if (nameGroup) {
-      nameGroup.classList.add('hidden');
-      nameGroup.classList.remove('flex');
+    if (signUpCont) signUpCont.classList.add('hidden');
+    if (signInCont) {
+      signInCont.classList.remove('hidden');
+      signInCont.classList.add('flex');
     }
-    if (submitBtn) submitBtn.textContent = "Sign In to Woven";
+    if (banner) banner.classList.add('hidden');
     if (promptText) promptText.textContent = "Don't have an account?";
-    if (toggleBtn) toggleBtn.textContent = "Create account";
+    if (toggleBtn) toggleBtn.textContent = "Create account & profile";
   }
 }
 
@@ -949,32 +1163,39 @@ function toggleAuthMode() {
   switchAuthTab(currentAuthTab === 'signin' ? 'signup' : 'signin');
 }
 
-async function handleEmailAuth() {
-  const emailInput = document.getElementById('authInputEmail');
-  const passwordInput = document.getElementById('authInputPassword');
-  const nameInput = document.getElementById('authInputName');
+async function submitCompleteProfileRegistration() {
+  const name = document.getElementById('regInputName')?.value.trim() || '';
+  const email = document.getElementById('regInputEmail')?.value.trim() || '';
+  const password = document.getElementById('regInputPassword')?.value || '';
 
-  const email = emailInput ? emailInput.value.trim() : '';
-  const password = passwordInput ? passwordInput.value : '';
-  const name = nameInput ? nameInput.value.trim() : '';
-
-  if (!email || !password) {
-    showToast('Please provide email and password.');
+  if (!name || !email || !password) {
+    goToWizardStep(1);
+    showToast('Name, email, and password are required.');
     return;
   }
 
-  const endpoint = currentAuthTab === 'signup' ? '/api/auth/register' : '/api/auth/login';
-  const payload = currentAuthTab === 'signup' ? { name: name || email.split('@')[0], email, password } : { email, password };
+  const intent = document.querySelector('input[name="datingIntent"]:checked')?.value || 'Long-term depth';
+  const commStyle = document.querySelector('input[name="commStyle"]:checked')?.value || 'Direct, witty & emotionally perceptive';
+  const obsession = document.getElementById('promptObsession')?.value.trim() || 'Specialty pour-overs, GenAI builds, analog film & quiet architecture';
+  const nonNegotiable = document.getElementById('promptNonNegotiable')?.value.trim() || 'Authentic presence, high personal agency, zero pretense, and mutual autonomy';
+  const sunday = document.getElementById('promptSunday')?.value.trim() || 'Slow coffee, reading philosophy or tech papers, vinyl record playing in the background';
+
+  const questionnaire = {
+    intent,
+    commStyle,
+    prompts: { obsession, nonNegotiable, sunday },
+    hobbies: selectedHobbies
+  };
 
   try {
-    const res = await fetch(endpoint, {
+    const res = await fetch('/api/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({ name, email, password, questionnaire })
     });
     const data = await res.json();
     if (!data.success) {
-      showToast(data.error || 'Authentication failed. Please verify credentials.');
+      showToast(data.error || 'Registration failed.');
       return;
     }
 
@@ -983,16 +1204,56 @@ async function handleEmailAuth() {
     localStorage.setItem('woven_auth_token', data.token);
     updateAuthUI(currentUser);
     closeAuthModal();
+    showToast(`✨ Account created! Welcome, ${data.user.name}.`);
 
-    // Clear inputs
-    if (emailInput) emailInput.value = '';
-    if (passwordInput) passwordInput.value = '';
-    if (nameInput) nameInput.value = '';
-
-    showToast(currentAuthTab === 'signup' ? `🎉 Welcome to Woven, ${data.user.name}!` : `✨ Welcome back, ${data.user.name}!`);
+    // If user was in the middle of extracting links, resume automatically!
+    if (window.pendingIngestion) {
+      const p = window.pendingIngestion;
+      window.pendingIngestion = null;
+      const liInput = document.getElementById('inputLinkedIn');
+      const igInput = document.getElementById('inputInstagram');
+      if (liInput && !liInput.value) liInput.value = p.li;
+      if (igInput && !igInput.value) igInput.value = p.ig;
+      startIngestionProcess();
+    }
   } catch (err) {
-    console.error('Auth error', err);
-    showToast('Authentication server error. Please try again.');
+    showToast('Server connection error. Please try again.');
+  }
+}
+
+async function handleEmailSignIn() {
+  const email = document.getElementById('loginInputEmail')?.value.trim() || '';
+  const password = document.getElementById('loginInputPassword')?.value || '';
+
+  if (!email || !password) {
+    showToast('Please enter both email and password.');
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+    if (!data.success) {
+      showToast(data.error || 'Invalid credentials.');
+      return;
+    }
+
+    currentUser = data.user;
+    localStorage.setItem('woven_auth_user', JSON.stringify(data.user));
+    localStorage.setItem('woven_auth_token', data.token);
+    updateAuthUI(currentUser);
+    closeAuthModal();
+    showToast(`Welcome back, ${data.user.name}!`);
+
+    if (window.pendingIngestion) {
+      startIngestionProcess();
+    }
+  } catch (err) {
+    showToast('Login failed. Please check connection.');
   }
 }
 

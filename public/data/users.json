@@ -7,5 +7,15 @@
     "avatar": "https://api.dicebear.com/7.x/notionists/svg?seed=Alex%20Test&backgroundColor=e0e7ff",
     "provider": "email",
     "createdAt": "2026-10-15T08:41:49.058Z"
+  },
+  {
+    "id": "usr_1792057999751_xzkjux",
+    "name": "Poojit Jagadeesh",
+    "email": "test@woven.dating",
+    "password": "password123",
+    "avatar": "https://api.dicebear.com/7.x/notionists/svg?seed=Poojit%20Jagadeesh&backgroundColor=e0e7ff",
+    "provider": "email",
+    "questionnaire": {},
+    "createdAt": "2026-10-15T09:53:19.752Z"
   }
 ]
